@@ -1,6 +1,6 @@
 
 import  express, { Application, Request, Response }   from 'express';
-import { notFound } from './src/middleware/notFound';
+import { notFound } from './middleware/notFound';
 
 
 
