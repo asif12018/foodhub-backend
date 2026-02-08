@@ -44,6 +44,7 @@ export type OrderMinAggregateOutputType = {
   id: number | null
   mealId: string | null
   mealName: string | null
+  status: $Enums.OrderStatus | null
   price: number | null
   quantity: number | null
   totalPrice: number | null
@@ -53,6 +54,7 @@ export type OrderMaxAggregateOutputType = {
   id: number | null
   mealId: string | null
   mealName: string | null
+  status: $Enums.OrderStatus | null
   price: number | null
   quantity: number | null
   totalPrice: number | null
@@ -62,6 +64,7 @@ export type OrderCountAggregateOutputType = {
   id: number
   mealId: number
   mealName: number
+  status: number
   price: number
   quantity: number
   totalPrice: number
@@ -87,6 +90,7 @@ export type OrderMinAggregateInputType = {
   id?: true
   mealId?: true
   mealName?: true
+  status?: true
   price?: true
   quantity?: true
   totalPrice?: true
@@ -96,6 +100,7 @@ export type OrderMaxAggregateInputType = {
   id?: true
   mealId?: true
   mealName?: true
+  status?: true
   price?: true
   quantity?: true
   totalPrice?: true
@@ -105,6 +110,7 @@ export type OrderCountAggregateInputType = {
   id?: true
   mealId?: true
   mealName?: true
+  status?: true
   price?: true
   quantity?: true
   totalPrice?: true
@@ -201,6 +207,7 @@ export type OrderGroupByOutputType = {
   id: number
   mealId: string
   mealName: string
+  status: $Enums.OrderStatus
   price: number
   quantity: number
   totalPrice: number
@@ -233,6 +240,7 @@ export type OrderWhereInput = {
   id?: Prisma.IntFilter<"Order"> | number
   mealId?: Prisma.StringFilter<"Order"> | string
   mealName?: Prisma.StringFilter<"Order"> | string
+  status?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
   price?: Prisma.FloatFilter<"Order"> | number
   quantity?: Prisma.IntFilter<"Order"> | number
   totalPrice?: Prisma.FloatFilter<"Order"> | number
@@ -243,6 +251,7 @@ export type OrderOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   mealId?: Prisma.SortOrder
   mealName?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   price?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
@@ -256,6 +265,7 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.OrderWhereInput | Prisma.OrderWhereInput[]
   mealId?: Prisma.StringFilter<"Order"> | string
   mealName?: Prisma.StringFilter<"Order"> | string
+  status?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
   price?: Prisma.FloatFilter<"Order"> | number
   quantity?: Prisma.IntFilter<"Order"> | number
   totalPrice?: Prisma.FloatFilter<"Order"> | number
@@ -266,6 +276,7 @@ export type OrderOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   mealId?: Prisma.SortOrder
   mealName?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   price?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
@@ -283,6 +294,7 @@ export type OrderScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Order"> | number
   mealId?: Prisma.StringWithAggregatesFilter<"Order"> | string
   mealName?: Prisma.StringWithAggregatesFilter<"Order"> | string
+  status?: Prisma.EnumOrderStatusWithAggregatesFilter<"Order"> | $Enums.OrderStatus
   price?: Prisma.FloatWithAggregatesFilter<"Order"> | number
   quantity?: Prisma.IntWithAggregatesFilter<"Order"> | number
   totalPrice?: Prisma.FloatWithAggregatesFilter<"Order"> | number
@@ -290,6 +302,7 @@ export type OrderScalarWhereWithAggregatesInput = {
 
 export type OrderCreateInput = {
   mealName: string
+  status?: $Enums.OrderStatus
   price: number
   quantity: number
   totalPrice: number
@@ -300,6 +313,7 @@ export type OrderUncheckedCreateInput = {
   id?: number
   mealId: string
   mealName: string
+  status?: $Enums.OrderStatus
   price: number
   quantity: number
   totalPrice: number
@@ -307,6 +321,7 @@ export type OrderUncheckedCreateInput = {
 
 export type OrderUpdateInput = {
   mealName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -317,6 +332,7 @@ export type OrderUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   mealId?: Prisma.StringFieldUpdateOperationsInput | string
   mealName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -326,6 +342,7 @@ export type OrderCreateManyInput = {
   id?: number
   mealId: string
   mealName: string
+  status?: $Enums.OrderStatus
   price: number
   quantity: number
   totalPrice: number
@@ -333,6 +350,7 @@ export type OrderCreateManyInput = {
 
 export type OrderUpdateManyMutationInput = {
   mealName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -342,6 +360,7 @@ export type OrderUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   mealId?: Prisma.StringFieldUpdateOperationsInput | string
   mealName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -361,6 +380,7 @@ export type OrderCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   mealId?: Prisma.SortOrder
   mealName?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   price?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
@@ -377,6 +397,7 @@ export type OrderMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   mealId?: Prisma.SortOrder
   mealName?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   price?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
@@ -386,6 +407,7 @@ export type OrderMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   mealId?: Prisma.SortOrder
   mealName?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   price?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
@@ -440,6 +462,10 @@ export type OrderUncheckedUpdateManyWithoutMealNestedInput = {
   deleteMany?: Prisma.OrderScalarWhereInput | Prisma.OrderScalarWhereInput[]
 }
 
+export type EnumOrderStatusFieldUpdateOperationsInput = {
+  set?: $Enums.OrderStatus
+}
+
 export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number
@@ -450,6 +476,7 @@ export type IntFieldUpdateOperationsInput = {
 
 export type OrderCreateWithoutMealInput = {
   mealName: string
+  status?: $Enums.OrderStatus
   price: number
   quantity: number
   totalPrice: number
@@ -458,6 +485,7 @@ export type OrderCreateWithoutMealInput = {
 export type OrderUncheckedCreateWithoutMealInput = {
   id?: number
   mealName: string
+  status?: $Enums.OrderStatus
   price: number
   quantity: number
   totalPrice: number
@@ -496,6 +524,7 @@ export type OrderScalarWhereInput = {
   id?: Prisma.IntFilter<"Order"> | number
   mealId?: Prisma.StringFilter<"Order"> | string
   mealName?: Prisma.StringFilter<"Order"> | string
+  status?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
   price?: Prisma.FloatFilter<"Order"> | number
   quantity?: Prisma.IntFilter<"Order"> | number
   totalPrice?: Prisma.FloatFilter<"Order"> | number
@@ -504,6 +533,7 @@ export type OrderScalarWhereInput = {
 export type OrderCreateManyMealInput = {
   id?: number
   mealName: string
+  status?: $Enums.OrderStatus
   price: number
   quantity: number
   totalPrice: number
@@ -511,6 +541,7 @@ export type OrderCreateManyMealInput = {
 
 export type OrderUpdateWithoutMealInput = {
   mealName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -519,6 +550,7 @@ export type OrderUpdateWithoutMealInput = {
 export type OrderUncheckedUpdateWithoutMealInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   mealName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -527,6 +559,7 @@ export type OrderUncheckedUpdateWithoutMealInput = {
 export type OrderUncheckedUpdateManyWithoutMealInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   mealName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -538,6 +571,7 @@ export type OrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   id?: boolean
   mealId?: boolean
   mealName?: boolean
+  status?: boolean
   price?: boolean
   quantity?: boolean
   totalPrice?: boolean
@@ -548,6 +582,7 @@ export type OrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   mealId?: boolean
   mealName?: boolean
+  status?: boolean
   price?: boolean
   quantity?: boolean
   totalPrice?: boolean
@@ -558,6 +593,7 @@ export type OrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   mealId?: boolean
   mealName?: boolean
+  status?: boolean
   price?: boolean
   quantity?: boolean
   totalPrice?: boolean
@@ -568,12 +604,13 @@ export type OrderSelectScalar = {
   id?: boolean
   mealId?: boolean
   mealName?: boolean
+  status?: boolean
   price?: boolean
   quantity?: boolean
   totalPrice?: boolean
 }
 
-export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "mealId" | "mealName" | "price" | "quantity" | "totalPrice", ExtArgs["result"]["order"]>
+export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "mealId" | "mealName" | "status" | "price" | "quantity" | "totalPrice", ExtArgs["result"]["order"]>
 export type OrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   meal?: boolean | Prisma.MealsDefaultArgs<ExtArgs>
 }
@@ -593,6 +630,7 @@ export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     id: number
     mealId: string
     mealName: string
+    status: $Enums.OrderStatus
     price: number
     quantity: number
     totalPrice: number
@@ -1023,6 +1061,7 @@ export interface OrderFieldRefs {
   readonly id: Prisma.FieldRef<"Order", 'Int'>
   readonly mealId: Prisma.FieldRef<"Order", 'String'>
   readonly mealName: Prisma.FieldRef<"Order", 'String'>
+  readonly status: Prisma.FieldRef<"Order", 'OrderStatus'>
   readonly price: Prisma.FieldRef<"Order", 'Float'>
   readonly quantity: Prisma.FieldRef<"Order", 'Int'>
   readonly totalPrice: Prisma.FieldRef<"Order", 'Float'>

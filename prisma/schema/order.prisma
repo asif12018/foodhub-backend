@@ -2,8 +2,15 @@ model Order {
   id         Int    @id @default(autoincrement())
   mealId     String
   mealName   String
+  status OrderStatus @default(PREPARING)
   price      Float
   quantity   Int
   totalPrice Float
   meal       Meals  @relation(fields: [mealId], references: [id])
+}
+
+enum OrderStatus{
+  PREPARING
+  READY
+  CANCELLED
 }
