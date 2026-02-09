@@ -9,7 +9,6 @@ model User {
   roles         String?   @default("Customer")
   phone         String?
   status        String?   @default("activate")
-  imageUrl      String?
   sessions      Session[]
   accounts      Account[]
   customerProfile CustomerProfile?
@@ -70,8 +69,6 @@ model Verification {
 
 model ProviderProfile {
   id          String    @id
-  accountId   String
-  providerId  String
   userId      String    @unique
   user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   address     String?

@@ -385,11 +385,11 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
-  ProviderProfile: 'ProviderProfile',
-  CustomerProfile: 'CustomerProfile',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
+  ProviderProfile: 'ProviderProfile',
+  CustomerProfile: 'CustomerProfile',
   Categories: 'Categories',
   Meals: 'Meals',
   Order: 'Order',
@@ -409,7 +409,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "providerProfile" | "customerProfile" | "session" | "account" | "verification" | "categories" | "meals" | "order" | "reviews"
+    modelProps: "user" | "session" | "account" | "verification" | "providerProfile" | "customerProfile" | "categories" | "meals" | "order" | "reviews"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -484,154 +484,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserCountAggregateOutputType> | number
-        }
-      }
-    }
-    ProviderProfile: {
-      payload: Prisma.$ProviderProfilePayload<ExtArgs>
-      fields: Prisma.ProviderProfileFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.ProviderProfileFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProviderProfilePayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.ProviderProfileFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProviderProfilePayload>
-        }
-        findFirst: {
-          args: Prisma.ProviderProfileFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProviderProfilePayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.ProviderProfileFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProviderProfilePayload>
-        }
-        findMany: {
-          args: Prisma.ProviderProfileFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProviderProfilePayload>[]
-        }
-        create: {
-          args: Prisma.ProviderProfileCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProviderProfilePayload>
-        }
-        createMany: {
-          args: Prisma.ProviderProfileCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.ProviderProfileCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProviderProfilePayload>[]
-        }
-        delete: {
-          args: Prisma.ProviderProfileDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProviderProfilePayload>
-        }
-        update: {
-          args: Prisma.ProviderProfileUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProviderProfilePayload>
-        }
-        deleteMany: {
-          args: Prisma.ProviderProfileDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.ProviderProfileUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.ProviderProfileUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProviderProfilePayload>[]
-        }
-        upsert: {
-          args: Prisma.ProviderProfileUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProviderProfilePayload>
-        }
-        aggregate: {
-          args: Prisma.ProviderProfileAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateProviderProfile>
-        }
-        groupBy: {
-          args: Prisma.ProviderProfileGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ProviderProfileGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.ProviderProfileCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ProviderProfileCountAggregateOutputType> | number
-        }
-      }
-    }
-    CustomerProfile: {
-      payload: Prisma.$CustomerProfilePayload<ExtArgs>
-      fields: Prisma.CustomerProfileFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.CustomerProfileFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerProfilePayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.CustomerProfileFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerProfilePayload>
-        }
-        findFirst: {
-          args: Prisma.CustomerProfileFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerProfilePayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.CustomerProfileFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerProfilePayload>
-        }
-        findMany: {
-          args: Prisma.CustomerProfileFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerProfilePayload>[]
-        }
-        create: {
-          args: Prisma.CustomerProfileCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerProfilePayload>
-        }
-        createMany: {
-          args: Prisma.CustomerProfileCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.CustomerProfileCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerProfilePayload>[]
-        }
-        delete: {
-          args: Prisma.CustomerProfileDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerProfilePayload>
-        }
-        update: {
-          args: Prisma.CustomerProfileUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerProfilePayload>
-        }
-        deleteMany: {
-          args: Prisma.CustomerProfileDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.CustomerProfileUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.CustomerProfileUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerProfilePayload>[]
-        }
-        upsert: {
-          args: Prisma.CustomerProfileUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerProfilePayload>
-        }
-        aggregate: {
-          args: Prisma.CustomerProfileAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateCustomerProfile>
-        }
-        groupBy: {
-          args: Prisma.CustomerProfileGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.CustomerProfileGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.CustomerProfileCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.CustomerProfileCountAggregateOutputType> | number
         }
       }
     }
@@ -854,6 +706,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.VerificationCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.VerificationCountAggregateOutputType> | number
+        }
+      }
+    }
+    ProviderProfile: {
+      payload: Prisma.$ProviderProfilePayload<ExtArgs>
+      fields: Prisma.ProviderProfileFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProviderProfileFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProviderProfilePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProviderProfileFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProviderProfilePayload>
+        }
+        findFirst: {
+          args: Prisma.ProviderProfileFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProviderProfilePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProviderProfileFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProviderProfilePayload>
+        }
+        findMany: {
+          args: Prisma.ProviderProfileFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProviderProfilePayload>[]
+        }
+        create: {
+          args: Prisma.ProviderProfileCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProviderProfilePayload>
+        }
+        createMany: {
+          args: Prisma.ProviderProfileCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProviderProfileCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProviderProfilePayload>[]
+        }
+        delete: {
+          args: Prisma.ProviderProfileDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProviderProfilePayload>
+        }
+        update: {
+          args: Prisma.ProviderProfileUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProviderProfilePayload>
+        }
+        deleteMany: {
+          args: Prisma.ProviderProfileDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProviderProfileUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProviderProfileUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProviderProfilePayload>[]
+        }
+        upsert: {
+          args: Prisma.ProviderProfileUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProviderProfilePayload>
+        }
+        aggregate: {
+          args: Prisma.ProviderProfileAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProviderProfile>
+        }
+        groupBy: {
+          args: Prisma.ProviderProfileGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProviderProfileGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProviderProfileCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProviderProfileCountAggregateOutputType> | number
+        }
+      }
+    }
+    CustomerProfile: {
+      payload: Prisma.$CustomerProfilePayload<ExtArgs>
+      fields: Prisma.CustomerProfileFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CustomerProfileFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerProfilePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CustomerProfileFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerProfilePayload>
+        }
+        findFirst: {
+          args: Prisma.CustomerProfileFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerProfilePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CustomerProfileFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerProfilePayload>
+        }
+        findMany: {
+          args: Prisma.CustomerProfileFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerProfilePayload>[]
+        }
+        create: {
+          args: Prisma.CustomerProfileCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerProfilePayload>
+        }
+        createMany: {
+          args: Prisma.CustomerProfileCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CustomerProfileCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerProfilePayload>[]
+        }
+        delete: {
+          args: Prisma.CustomerProfileDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerProfilePayload>
+        }
+        update: {
+          args: Prisma.CustomerProfileUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerProfilePayload>
+        }
+        deleteMany: {
+          args: Prisma.CustomerProfileDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CustomerProfileUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CustomerProfileUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerProfilePayload>[]
+        }
+        upsert: {
+          args: Prisma.CustomerProfileUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerProfilePayload>
+        }
+        aggregate: {
+          args: Prisma.CustomerProfileAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCustomerProfile>
+        }
+        groupBy: {
+          args: Prisma.CustomerProfileGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CustomerProfileGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CustomerProfileCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CustomerProfileCountAggregateOutputType> | number
         }
       }
     }
@@ -1196,42 +1196,16 @@ export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
-  role: 'role',
+  emailVerified: 'emailVerified',
+  image: 'image',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  roles: 'roles',
   phone: 'phone',
-  status: 'status',
-  imageUrl: 'imageUrl'
+  status: 'status'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
-
-export const ProviderProfileScalarFieldEnum = {
-  id: 'id',
-  accountId: 'accountId',
-  providerId: 'providerId',
-  userId: 'userId',
-  address: 'address',
-  city: 'city',
-  isOpen: 'isOpen',
-  openingTime: 'openingTime',
-  closingTime: 'closingTime',
-  ratingAvg: 'ratingAvg',
-  ratingCount: 'ratingCount',
-  createdAt: 'createdAt',
-  updateAt: 'updateAt'
-} as const
-
-export type ProviderProfileScalarFieldEnum = (typeof ProviderProfileScalarFieldEnum)[keyof typeof ProviderProfileScalarFieldEnum]
-
-
-export const CustomerProfileScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  address: 'address',
-  city: 'city'
-} as const
-
-export type CustomerProfileScalarFieldEnum = (typeof CustomerProfileScalarFieldEnum)[keyof typeof CustomerProfileScalarFieldEnum]
 
 
 export const SessionScalarFieldEnum = {
@@ -1277,6 +1251,33 @@ export const VerificationScalarFieldEnum = {
 } as const
 
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
+
+
+export const ProviderProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  address: 'address',
+  city: 'city',
+  isOpen: 'isOpen',
+  openingTime: 'openingTime',
+  closingTime: 'closingTime',
+  ratingAvg: 'ratingAvg',
+  ratingCount: 'ratingCount',
+  createdAt: 'createdAt',
+  updateAt: 'updateAt'
+} as const
+
+export type ProviderProfileScalarFieldEnum = (typeof ProviderProfileScalarFieldEnum)[keyof typeof ProviderProfileScalarFieldEnum]
+
+
+export const CustomerProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  address: 'address',
+  city: 'city'
+} as const
+
+export type CustomerProfileScalarFieldEnum = (typeof CustomerProfileScalarFieldEnum)[keyof typeof CustomerProfileScalarFieldEnum]
 
 
 export const CategoriesScalarFieldEnum = {
@@ -1540,11 +1541,11 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
-  providerProfile?: Prisma.ProviderProfileOmit
-  customerProfile?: Prisma.CustomerProfileOmit
   session?: Prisma.SessionOmit
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit
+  providerProfile?: Prisma.ProviderProfileOmit
+  customerProfile?: Prisma.CustomerProfileOmit
   categories?: Prisma.CategoriesOmit
   meals?: Prisma.MealsOmit
   order?: Prisma.OrderOmit

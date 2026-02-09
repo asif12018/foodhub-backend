@@ -45,16 +45,6 @@ export { Prisma }
  */
 export type User = Prisma.UserModel
 /**
- * Model ProviderProfile
- * 
- */
-export type ProviderProfile = Prisma.ProviderProfileModel
-/**
- * Model CustomerProfile
- * 
- */
-export type CustomerProfile = Prisma.CustomerProfileModel
-/**
  * Model Session
  * 
  */
@@ -69,6 +59,16 @@ export type Account = Prisma.AccountModel
  * 
  */
 export type Verification = Prisma.VerificationModel
+/**
+ * Model ProviderProfile
+ * 
+ */
+export type ProviderProfile = Prisma.ProviderProfileModel
+/**
+ * Model CustomerProfile
+ * 
+ */
+export type CustomerProfile = Prisma.CustomerProfileModel
 /**
  * Model Categories
  * 

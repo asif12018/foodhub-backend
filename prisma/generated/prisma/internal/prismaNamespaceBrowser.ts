@@ -52,11 +52,11 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  ProviderProfile: 'ProviderProfile',
-  CustomerProfile: 'CustomerProfile',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
+  ProviderProfile: 'ProviderProfile',
+  CustomerProfile: 'CustomerProfile',
   Categories: 'Categories',
   Meals: 'Meals',
   Order: 'Order',
@@ -83,42 +83,16 @@ export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
-  role: 'role',
+  emailVerified: 'emailVerified',
+  image: 'image',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  roles: 'roles',
   phone: 'phone',
-  status: 'status',
-  imageUrl: 'imageUrl'
+  status: 'status'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
-
-export const ProviderProfileScalarFieldEnum = {
-  id: 'id',
-  accountId: 'accountId',
-  providerId: 'providerId',
-  userId: 'userId',
-  address: 'address',
-  city: 'city',
-  isOpen: 'isOpen',
-  openingTime: 'openingTime',
-  closingTime: 'closingTime',
-  ratingAvg: 'ratingAvg',
-  ratingCount: 'ratingCount',
-  createdAt: 'createdAt',
-  updateAt: 'updateAt'
-} as const
-
-export type ProviderProfileScalarFieldEnum = (typeof ProviderProfileScalarFieldEnum)[keyof typeof ProviderProfileScalarFieldEnum]
-
-
-export const CustomerProfileScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  address: 'address',
-  city: 'city'
-} as const
-
-export type CustomerProfileScalarFieldEnum = (typeof CustomerProfileScalarFieldEnum)[keyof typeof CustomerProfileScalarFieldEnum]
 
 
 export const SessionScalarFieldEnum = {
@@ -164,6 +138,33 @@ export const VerificationScalarFieldEnum = {
 } as const
 
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
+
+
+export const ProviderProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  address: 'address',
+  city: 'city',
+  isOpen: 'isOpen',
+  openingTime: 'openingTime',
+  closingTime: 'closingTime',
+  ratingAvg: 'ratingAvg',
+  ratingCount: 'ratingCount',
+  createdAt: 'createdAt',
+  updateAt: 'updateAt'
+} as const
+
+export type ProviderProfileScalarFieldEnum = (typeof ProviderProfileScalarFieldEnum)[keyof typeof ProviderProfileScalarFieldEnum]
+
+
+export const CustomerProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  address: 'address',
+  city: 'city'
+} as const
+
+export type CustomerProfileScalarFieldEnum = (typeof CustomerProfileScalarFieldEnum)[keyof typeof CustomerProfileScalarFieldEnum]
 
 
 export const CategoriesScalarFieldEnum = {
