@@ -1,20 +1,78 @@
 model User {
-  id       String  @id
-  name     String
-  email    String
-  role     String? @default("Customer")
-  phone    String
-  status   String? @default("activate")
-  imageUrl String?
+  id            String    @id
+  name          String
+  email         String
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  roles         String?   @default("Customer")
+  phone         String?
+  status        String?   @default("activate")
+  imageUrl      String?
+  sessions      Session[]
+  accounts      Account[]
+  customerProfile CustomerProfile?
+  providerProfile ProviderProfile?
 
-  profiles Profile[]
+  @@unique([email])
+  @@map("user")
 }
 
-model Profile {
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+
+model ProviderProfile {
   id          String    @id
   accountId   String
   providerId  String
-  userId      String
+  userId      String    @unique
   user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   address     String?
   city        String?
@@ -27,4 +85,12 @@ model Profile {
   order       Order[]
   createdAt   DateTime  @default(now())
   updateAt    DateTime  @updatedAt
+}
+
+model CustomerProfile {
+  id      String  @id
+  userId  String  @unique
+  user    User    @relation(fields: [userId], references: [id])
+  address String?
+  city    String?
 }

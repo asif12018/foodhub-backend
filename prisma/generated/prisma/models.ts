@@ -8,6 +8,12 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/User.js'
+export type * from './models/ProviderProfile.js'
+export type * from './models/CustomerProfile.js'
+export type * from './models/Session.js'
+export type * from './models/Account.js'
+export type * from './models/Verification.js'
 export type * from './models/Categories.js'
 export type * from './models/Meals.js'
 export type * from './models/Order.js'

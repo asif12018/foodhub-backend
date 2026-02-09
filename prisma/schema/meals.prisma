@@ -18,6 +18,6 @@ model Meals {
   reviews Reviews[]
 
   orders    Order[]
-  profile   Profile? @relation(fields: [profileId], references: [id])
+  profile   ProviderProfile? @relation(fields: [profileId], references: [id])
   profileId String?
 }

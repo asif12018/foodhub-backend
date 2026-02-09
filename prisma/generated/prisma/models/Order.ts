@@ -48,6 +48,7 @@ export type OrderMinAggregateOutputType = {
   price: number | null
   quantity: number | null
   totalPrice: number | null
+  profileId: string | null
 }
 
 export type OrderMaxAggregateOutputType = {
@@ -58,6 +59,7 @@ export type OrderMaxAggregateOutputType = {
   price: number | null
   quantity: number | null
   totalPrice: number | null
+  profileId: string | null
 }
 
 export type OrderCountAggregateOutputType = {
@@ -68,6 +70,7 @@ export type OrderCountAggregateOutputType = {
   price: number
   quantity: number
   totalPrice: number
+  profileId: number
   _all: number
 }
 
@@ -94,6 +97,7 @@ export type OrderMinAggregateInputType = {
   price?: true
   quantity?: true
   totalPrice?: true
+  profileId?: true
 }
 
 export type OrderMaxAggregateInputType = {
@@ -104,6 +108,7 @@ export type OrderMaxAggregateInputType = {
   price?: true
   quantity?: true
   totalPrice?: true
+  profileId?: true
 }
 
 export type OrderCountAggregateInputType = {
@@ -114,6 +119,7 @@ export type OrderCountAggregateInputType = {
   price?: true
   quantity?: true
   totalPrice?: true
+  profileId?: true
   _all?: true
 }
 
@@ -211,6 +217,7 @@ export type OrderGroupByOutputType = {
   price: number
   quantity: number
   totalPrice: number
+  profileId: string | null
   _count: OrderCountAggregateOutputType | null
   _avg: OrderAvgAggregateOutputType | null
   _sum: OrderSumAggregateOutputType | null
@@ -244,7 +251,9 @@ export type OrderWhereInput = {
   price?: Prisma.FloatFilter<"Order"> | number
   quantity?: Prisma.IntFilter<"Order"> | number
   totalPrice?: Prisma.FloatFilter<"Order"> | number
+  profileId?: Prisma.StringNullableFilter<"Order"> | string | null
   meal?: Prisma.XOR<Prisma.MealsScalarRelationFilter, Prisma.MealsWhereInput>
+  profile?: Prisma.XOR<Prisma.ProviderProfileNullableScalarRelationFilter, Prisma.ProviderProfileWhereInput> | null
 }
 
 export type OrderOrderByWithRelationInput = {
@@ -255,7 +264,9 @@ export type OrderOrderByWithRelationInput = {
   price?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
+  profileId?: Prisma.SortOrderInput | Prisma.SortOrder
   meal?: Prisma.MealsOrderByWithRelationInput
+  profile?: Prisma.ProviderProfileOrderByWithRelationInput
 }
 
 export type OrderWhereUniqueInput = Prisma.AtLeast<{
@@ -269,7 +280,9 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
   price?: Prisma.FloatFilter<"Order"> | number
   quantity?: Prisma.IntFilter<"Order"> | number
   totalPrice?: Prisma.FloatFilter<"Order"> | number
+  profileId?: Prisma.StringNullableFilter<"Order"> | string | null
   meal?: Prisma.XOR<Prisma.MealsScalarRelationFilter, Prisma.MealsWhereInput>
+  profile?: Prisma.XOR<Prisma.ProviderProfileNullableScalarRelationFilter, Prisma.ProviderProfileWhereInput> | null
 }, "id">
 
 export type OrderOrderByWithAggregationInput = {
@@ -280,6 +293,7 @@ export type OrderOrderByWithAggregationInput = {
   price?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
+  profileId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.OrderCountOrderByAggregateInput
   _avg?: Prisma.OrderAvgOrderByAggregateInput
   _max?: Prisma.OrderMaxOrderByAggregateInput
@@ -298,6 +312,7 @@ export type OrderScalarWhereWithAggregatesInput = {
   price?: Prisma.FloatWithAggregatesFilter<"Order"> | number
   quantity?: Prisma.IntWithAggregatesFilter<"Order"> | number
   totalPrice?: Prisma.FloatWithAggregatesFilter<"Order"> | number
+  profileId?: Prisma.StringNullableWithAggregatesFilter<"Order"> | string | null
 }
 
 export type OrderCreateInput = {
@@ -307,6 +322,7 @@ export type OrderCreateInput = {
   quantity: number
   totalPrice: number
   meal: Prisma.MealsCreateNestedOneWithoutOrdersInput
+  profile?: Prisma.ProviderProfileCreateNestedOneWithoutOrderInput
 }
 
 export type OrderUncheckedCreateInput = {
@@ -317,6 +333,7 @@ export type OrderUncheckedCreateInput = {
   price: number
   quantity: number
   totalPrice: number
+  profileId?: string | null
 }
 
 export type OrderUpdateInput = {
@@ -326,6 +343,7 @@ export type OrderUpdateInput = {
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   meal?: Prisma.MealsUpdateOneRequiredWithoutOrdersNestedInput
+  profile?: Prisma.ProviderProfileUpdateOneWithoutOrderNestedInput
 }
 
 export type OrderUncheckedUpdateInput = {
@@ -336,6 +354,7 @@ export type OrderUncheckedUpdateInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  profileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type OrderCreateManyInput = {
@@ -346,6 +365,7 @@ export type OrderCreateManyInput = {
   price: number
   quantity: number
   totalPrice: number
+  profileId?: string | null
 }
 
 export type OrderUpdateManyMutationInput = {
@@ -364,6 +384,7 @@ export type OrderUncheckedUpdateManyInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  profileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type OrderListRelationFilter = {
@@ -384,6 +405,7 @@ export type OrderCountOrderByAggregateInput = {
   price?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
+  profileId?: Prisma.SortOrder
 }
 
 export type OrderAvgOrderByAggregateInput = {
@@ -401,6 +423,7 @@ export type OrderMaxOrderByAggregateInput = {
   price?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
+  profileId?: Prisma.SortOrder
 }
 
 export type OrderMinOrderByAggregateInput = {
@@ -411,6 +434,7 @@ export type OrderMinOrderByAggregateInput = {
   price?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
+  profileId?: Prisma.SortOrder
 }
 
 export type OrderSumOrderByAggregateInput = {
@@ -418,6 +442,48 @@ export type OrderSumOrderByAggregateInput = {
   price?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
+}
+
+export type OrderCreateNestedManyWithoutProfileInput = {
+  create?: Prisma.XOR<Prisma.OrderCreateWithoutProfileInput, Prisma.OrderUncheckedCreateWithoutProfileInput> | Prisma.OrderCreateWithoutProfileInput[] | Prisma.OrderUncheckedCreateWithoutProfileInput[]
+  connectOrCreate?: Prisma.OrderCreateOrConnectWithoutProfileInput | Prisma.OrderCreateOrConnectWithoutProfileInput[]
+  createMany?: Prisma.OrderCreateManyProfileInputEnvelope
+  connect?: Prisma.OrderWhereUniqueInput | Prisma.OrderWhereUniqueInput[]
+}
+
+export type OrderUncheckedCreateNestedManyWithoutProfileInput = {
+  create?: Prisma.XOR<Prisma.OrderCreateWithoutProfileInput, Prisma.OrderUncheckedCreateWithoutProfileInput> | Prisma.OrderCreateWithoutProfileInput[] | Prisma.OrderUncheckedCreateWithoutProfileInput[]
+  connectOrCreate?: Prisma.OrderCreateOrConnectWithoutProfileInput | Prisma.OrderCreateOrConnectWithoutProfileInput[]
+  createMany?: Prisma.OrderCreateManyProfileInputEnvelope
+  connect?: Prisma.OrderWhereUniqueInput | Prisma.OrderWhereUniqueInput[]
+}
+
+export type OrderUpdateManyWithoutProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.OrderCreateWithoutProfileInput, Prisma.OrderUncheckedCreateWithoutProfileInput> | Prisma.OrderCreateWithoutProfileInput[] | Prisma.OrderUncheckedCreateWithoutProfileInput[]
+  connectOrCreate?: Prisma.OrderCreateOrConnectWithoutProfileInput | Prisma.OrderCreateOrConnectWithoutProfileInput[]
+  upsert?: Prisma.OrderUpsertWithWhereUniqueWithoutProfileInput | Prisma.OrderUpsertWithWhereUniqueWithoutProfileInput[]
+  createMany?: Prisma.OrderCreateManyProfileInputEnvelope
+  set?: Prisma.OrderWhereUniqueInput | Prisma.OrderWhereUniqueInput[]
+  disconnect?: Prisma.OrderWhereUniqueInput | Prisma.OrderWhereUniqueInput[]
+  delete?: Prisma.OrderWhereUniqueInput | Prisma.OrderWhereUniqueInput[]
+  connect?: Prisma.OrderWhereUniqueInput | Prisma.OrderWhereUniqueInput[]
+  update?: Prisma.OrderUpdateWithWhereUniqueWithoutProfileInput | Prisma.OrderUpdateWithWhereUniqueWithoutProfileInput[]
+  updateMany?: Prisma.OrderUpdateManyWithWhereWithoutProfileInput | Prisma.OrderUpdateManyWithWhereWithoutProfileInput[]
+  deleteMany?: Prisma.OrderScalarWhereInput | Prisma.OrderScalarWhereInput[]
+}
+
+export type OrderUncheckedUpdateManyWithoutProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.OrderCreateWithoutProfileInput, Prisma.OrderUncheckedCreateWithoutProfileInput> | Prisma.OrderCreateWithoutProfileInput[] | Prisma.OrderUncheckedCreateWithoutProfileInput[]
+  connectOrCreate?: Prisma.OrderCreateOrConnectWithoutProfileInput | Prisma.OrderCreateOrConnectWithoutProfileInput[]
+  upsert?: Prisma.OrderUpsertWithWhereUniqueWithoutProfileInput | Prisma.OrderUpsertWithWhereUniqueWithoutProfileInput[]
+  createMany?: Prisma.OrderCreateManyProfileInputEnvelope
+  set?: Prisma.OrderWhereUniqueInput | Prisma.OrderWhereUniqueInput[]
+  disconnect?: Prisma.OrderWhereUniqueInput | Prisma.OrderWhereUniqueInput[]
+  delete?: Prisma.OrderWhereUniqueInput | Prisma.OrderWhereUniqueInput[]
+  connect?: Prisma.OrderWhereUniqueInput | Prisma.OrderWhereUniqueInput[]
+  update?: Prisma.OrderUpdateWithWhereUniqueWithoutProfileInput | Prisma.OrderUpdateWithWhereUniqueWithoutProfileInput[]
+  updateMany?: Prisma.OrderUpdateManyWithWhereWithoutProfileInput | Prisma.OrderUpdateManyWithWhereWithoutProfileInput[]
+  deleteMany?: Prisma.OrderScalarWhereInput | Prisma.OrderScalarWhereInput[]
 }
 
 export type OrderCreateNestedManyWithoutMealInput = {
@@ -474,12 +540,72 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type OrderCreateWithoutProfileInput = {
+  mealName: string
+  status?: $Enums.OrderStatus
+  price: number
+  quantity: number
+  totalPrice: number
+  meal: Prisma.MealsCreateNestedOneWithoutOrdersInput
+}
+
+export type OrderUncheckedCreateWithoutProfileInput = {
+  id?: number
+  mealId: string
+  mealName: string
+  status?: $Enums.OrderStatus
+  price: number
+  quantity: number
+  totalPrice: number
+}
+
+export type OrderCreateOrConnectWithoutProfileInput = {
+  where: Prisma.OrderWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrderCreateWithoutProfileInput, Prisma.OrderUncheckedCreateWithoutProfileInput>
+}
+
+export type OrderCreateManyProfileInputEnvelope = {
+  data: Prisma.OrderCreateManyProfileInput | Prisma.OrderCreateManyProfileInput[]
+  skipDuplicates?: boolean
+}
+
+export type OrderUpsertWithWhereUniqueWithoutProfileInput = {
+  where: Prisma.OrderWhereUniqueInput
+  update: Prisma.XOR<Prisma.OrderUpdateWithoutProfileInput, Prisma.OrderUncheckedUpdateWithoutProfileInput>
+  create: Prisma.XOR<Prisma.OrderCreateWithoutProfileInput, Prisma.OrderUncheckedCreateWithoutProfileInput>
+}
+
+export type OrderUpdateWithWhereUniqueWithoutProfileInput = {
+  where: Prisma.OrderWhereUniqueInput
+  data: Prisma.XOR<Prisma.OrderUpdateWithoutProfileInput, Prisma.OrderUncheckedUpdateWithoutProfileInput>
+}
+
+export type OrderUpdateManyWithWhereWithoutProfileInput = {
+  where: Prisma.OrderScalarWhereInput
+  data: Prisma.XOR<Prisma.OrderUpdateManyMutationInput, Prisma.OrderUncheckedUpdateManyWithoutProfileInput>
+}
+
+export type OrderScalarWhereInput = {
+  AND?: Prisma.OrderScalarWhereInput | Prisma.OrderScalarWhereInput[]
+  OR?: Prisma.OrderScalarWhereInput[]
+  NOT?: Prisma.OrderScalarWhereInput | Prisma.OrderScalarWhereInput[]
+  id?: Prisma.IntFilter<"Order"> | number
+  mealId?: Prisma.StringFilter<"Order"> | string
+  mealName?: Prisma.StringFilter<"Order"> | string
+  status?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
+  price?: Prisma.FloatFilter<"Order"> | number
+  quantity?: Prisma.IntFilter<"Order"> | number
+  totalPrice?: Prisma.FloatFilter<"Order"> | number
+  profileId?: Prisma.StringNullableFilter<"Order"> | string | null
+}
+
 export type OrderCreateWithoutMealInput = {
   mealName: string
   status?: $Enums.OrderStatus
   price: number
   quantity: number
   totalPrice: number
+  profile?: Prisma.ProviderProfileCreateNestedOneWithoutOrderInput
 }
 
 export type OrderUncheckedCreateWithoutMealInput = {
@@ -489,6 +615,7 @@ export type OrderUncheckedCreateWithoutMealInput = {
   price: number
   quantity: number
   totalPrice: number
+  profileId?: string | null
 }
 
 export type OrderCreateOrConnectWithoutMealInput = {
@@ -517,17 +644,43 @@ export type OrderUpdateManyWithWhereWithoutMealInput = {
   data: Prisma.XOR<Prisma.OrderUpdateManyMutationInput, Prisma.OrderUncheckedUpdateManyWithoutMealInput>
 }
 
-export type OrderScalarWhereInput = {
-  AND?: Prisma.OrderScalarWhereInput | Prisma.OrderScalarWhereInput[]
-  OR?: Prisma.OrderScalarWhereInput[]
-  NOT?: Prisma.OrderScalarWhereInput | Prisma.OrderScalarWhereInput[]
-  id?: Prisma.IntFilter<"Order"> | number
-  mealId?: Prisma.StringFilter<"Order"> | string
-  mealName?: Prisma.StringFilter<"Order"> | string
-  status?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
-  price?: Prisma.FloatFilter<"Order"> | number
-  quantity?: Prisma.IntFilter<"Order"> | number
-  totalPrice?: Prisma.FloatFilter<"Order"> | number
+export type OrderCreateManyProfileInput = {
+  id?: number
+  mealId: string
+  mealName: string
+  status?: $Enums.OrderStatus
+  price: number
+  quantity: number
+  totalPrice: number
+}
+
+export type OrderUpdateWithoutProfileInput = {
+  mealName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  meal?: Prisma.MealsUpdateOneRequiredWithoutOrdersNestedInput
+}
+
+export type OrderUncheckedUpdateWithoutProfileInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  mealId?: Prisma.StringFieldUpdateOperationsInput | string
+  mealName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+}
+
+export type OrderUncheckedUpdateManyWithoutProfileInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  mealId?: Prisma.StringFieldUpdateOperationsInput | string
+  mealName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type OrderCreateManyMealInput = {
@@ -537,6 +690,7 @@ export type OrderCreateManyMealInput = {
   price: number
   quantity: number
   totalPrice: number
+  profileId?: string | null
 }
 
 export type OrderUpdateWithoutMealInput = {
@@ -545,6 +699,7 @@ export type OrderUpdateWithoutMealInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  profile?: Prisma.ProviderProfileUpdateOneWithoutOrderNestedInput
 }
 
 export type OrderUncheckedUpdateWithoutMealInput = {
@@ -554,6 +709,7 @@ export type OrderUncheckedUpdateWithoutMealInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  profileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type OrderUncheckedUpdateManyWithoutMealInput = {
@@ -563,6 +719,7 @@ export type OrderUncheckedUpdateManyWithoutMealInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  profileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -575,7 +732,9 @@ export type OrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   price?: boolean
   quantity?: boolean
   totalPrice?: boolean
+  profileId?: boolean
   meal?: boolean | Prisma.MealsDefaultArgs<ExtArgs>
+  profile?: boolean | Prisma.Order$profileArgs<ExtArgs>
 }, ExtArgs["result"]["order"]>
 
 export type OrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -586,7 +745,9 @@ export type OrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   price?: boolean
   quantity?: boolean
   totalPrice?: boolean
+  profileId?: boolean
   meal?: boolean | Prisma.MealsDefaultArgs<ExtArgs>
+  profile?: boolean | Prisma.Order$profileArgs<ExtArgs>
 }, ExtArgs["result"]["order"]>
 
 export type OrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -597,7 +758,9 @@ export type OrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   price?: boolean
   quantity?: boolean
   totalPrice?: boolean
+  profileId?: boolean
   meal?: boolean | Prisma.MealsDefaultArgs<ExtArgs>
+  profile?: boolean | Prisma.Order$profileArgs<ExtArgs>
 }, ExtArgs["result"]["order"]>
 
 export type OrderSelectScalar = {
@@ -608,23 +771,28 @@ export type OrderSelectScalar = {
   price?: boolean
   quantity?: boolean
   totalPrice?: boolean
+  profileId?: boolean
 }
 
-export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "mealId" | "mealName" | "status" | "price" | "quantity" | "totalPrice", ExtArgs["result"]["order"]>
+export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "mealId" | "mealName" | "status" | "price" | "quantity" | "totalPrice" | "profileId", ExtArgs["result"]["order"]>
 export type OrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   meal?: boolean | Prisma.MealsDefaultArgs<ExtArgs>
+  profile?: boolean | Prisma.Order$profileArgs<ExtArgs>
 }
 export type OrderIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   meal?: boolean | Prisma.MealsDefaultArgs<ExtArgs>
+  profile?: boolean | Prisma.Order$profileArgs<ExtArgs>
 }
 export type OrderIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   meal?: boolean | Prisma.MealsDefaultArgs<ExtArgs>
+  profile?: boolean | Prisma.Order$profileArgs<ExtArgs>
 }
 
 export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Order"
   objects: {
     meal: Prisma.$MealsPayload<ExtArgs>
+    profile: Prisma.$ProviderProfilePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -634,6 +802,7 @@ export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     price: number
     quantity: number
     totalPrice: number
+    profileId: string | null
   }, ExtArgs["result"]["order"]>
   composites: {}
 }
@@ -1029,6 +1198,7 @@ readonly fields: OrderFieldRefs;
 export interface Prisma__OrderClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   meal<T extends Prisma.MealsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MealsDefaultArgs<ExtArgs>>): Prisma.Prisma__MealsClient<runtime.Types.Result.GetResult<Prisma.$MealsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  profile<T extends Prisma.Order$profileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$profileArgs<ExtArgs>>): Prisma.Prisma__ProviderProfileClient<runtime.Types.Result.GetResult<Prisma.$ProviderProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1065,6 +1235,7 @@ export interface OrderFieldRefs {
   readonly price: Prisma.FieldRef<"Order", 'Float'>
   readonly quantity: Prisma.FieldRef<"Order", 'Int'>
   readonly totalPrice: Prisma.FieldRef<"Order", 'Float'>
+  readonly profileId: Prisma.FieldRef<"Order", 'String'>
 }
     
 
@@ -1458,6 +1629,25 @@ export type OrderDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Orders to delete.
    */
   limit?: number
+}
+
+/**
+ * Order.profile
+ */
+export type Order$profileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProviderProfile
+   */
+  select?: Prisma.ProviderProfileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProviderProfile
+   */
+  omit?: Prisma.ProviderProfileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProviderProfileInclude<ExtArgs> | null
+  where?: Prisma.ProviderProfileWhereInput
 }
 
 /**

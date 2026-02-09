@@ -52,6 +52,7 @@ export type MealsMinAggregateOutputType = {
   prepTimeMinutes: number | null
   createdAt: Date | null
   updatedAt: Date | null
+  profileId: string | null
 }
 
 export type MealsMaxAggregateOutputType = {
@@ -68,6 +69,7 @@ export type MealsMaxAggregateOutputType = {
   prepTimeMinutes: number | null
   createdAt: Date | null
   updatedAt: Date | null
+  profileId: string | null
 }
 
 export type MealsCountAggregateOutputType = {
@@ -84,6 +86,7 @@ export type MealsCountAggregateOutputType = {
   prepTimeMinutes: number
   createdAt: number
   updatedAt: number
+  profileId: number
   _all: number
 }
 
@@ -114,6 +117,7 @@ export type MealsMinAggregateInputType = {
   prepTimeMinutes?: true
   createdAt?: true
   updatedAt?: true
+  profileId?: true
 }
 
 export type MealsMaxAggregateInputType = {
@@ -130,6 +134,7 @@ export type MealsMaxAggregateInputType = {
   prepTimeMinutes?: true
   createdAt?: true
   updatedAt?: true
+  profileId?: true
 }
 
 export type MealsCountAggregateInputType = {
@@ -146,6 +151,7 @@ export type MealsCountAggregateInputType = {
   prepTimeMinutes?: true
   createdAt?: true
   updatedAt?: true
+  profileId?: true
   _all?: true
 }
 
@@ -249,6 +255,7 @@ export type MealsGroupByOutputType = {
   prepTimeMinutes: number | null
   createdAt: Date
   updatedAt: Date
+  profileId: string | null
   _count: MealsCountAggregateOutputType | null
   _avg: MealsAvgAggregateOutputType | null
   _sum: MealsSumAggregateOutputType | null
@@ -288,8 +295,10 @@ export type MealsWhereInput = {
   prepTimeMinutes?: Prisma.IntNullableFilter<"Meals"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Meals"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Meals"> | Date | string
+  profileId?: Prisma.StringNullableFilter<"Meals"> | string | null
   reviews?: Prisma.ReviewsListRelationFilter
   orders?: Prisma.OrderListRelationFilter
+  profile?: Prisma.XOR<Prisma.ProviderProfileNullableScalarRelationFilter, Prisma.ProviderProfileWhereInput> | null
 }
 
 export type MealsOrderByWithRelationInput = {
@@ -306,8 +315,10 @@ export type MealsOrderByWithRelationInput = {
   prepTimeMinutes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  profileId?: Prisma.SortOrderInput | Prisma.SortOrder
   reviews?: Prisma.ReviewsOrderByRelationAggregateInput
   orders?: Prisma.OrderOrderByRelationAggregateInput
+  profile?: Prisma.ProviderProfileOrderByWithRelationInput
 }
 
 export type MealsWhereUniqueInput = Prisma.AtLeast<{
@@ -327,8 +338,10 @@ export type MealsWhereUniqueInput = Prisma.AtLeast<{
   prepTimeMinutes?: Prisma.IntNullableFilter<"Meals"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Meals"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Meals"> | Date | string
+  profileId?: Prisma.StringNullableFilter<"Meals"> | string | null
   reviews?: Prisma.ReviewsListRelationFilter
   orders?: Prisma.OrderListRelationFilter
+  profile?: Prisma.XOR<Prisma.ProviderProfileNullableScalarRelationFilter, Prisma.ProviderProfileWhereInput> | null
 }, "id">
 
 export type MealsOrderByWithAggregationInput = {
@@ -345,6 +358,7 @@ export type MealsOrderByWithAggregationInput = {
   prepTimeMinutes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  profileId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.MealsCountOrderByAggregateInput
   _avg?: Prisma.MealsAvgOrderByAggregateInput
   _max?: Prisma.MealsMaxOrderByAggregateInput
@@ -369,6 +383,7 @@ export type MealsScalarWhereWithAggregatesInput = {
   prepTimeMinutes?: Prisma.IntNullableWithAggregatesFilter<"Meals"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Meals"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Meals"> | Date | string
+  profileId?: Prisma.StringNullableWithAggregatesFilter<"Meals"> | string | null
 }
 
 export type MealsCreateInput = {
@@ -387,6 +402,7 @@ export type MealsCreateInput = {
   updatedAt?: Date | string
   reviews?: Prisma.ReviewsCreateNestedManyWithoutMealInput
   orders?: Prisma.OrderCreateNestedManyWithoutMealInput
+  profile?: Prisma.ProviderProfileCreateNestedOneWithoutMealsInput
 }
 
 export type MealsUncheckedCreateInput = {
@@ -403,6 +419,7 @@ export type MealsUncheckedCreateInput = {
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  profileId?: string | null
   reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutMealInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutMealInput
 }
@@ -423,6 +440,7 @@ export type MealsUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviews?: Prisma.ReviewsUpdateManyWithoutMealNestedInput
   orders?: Prisma.OrderUpdateManyWithoutMealNestedInput
+  profile?: Prisma.ProviderProfileUpdateOneWithoutMealsNestedInput
 }
 
 export type MealsUncheckedUpdateInput = {
@@ -439,6 +457,7 @@ export type MealsUncheckedUpdateInput = {
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  profileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutMealNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutMealNestedInput
 }
@@ -457,6 +476,7 @@ export type MealsCreateManyInput = {
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  profileId?: string | null
 }
 
 export type MealsUpdateManyMutationInput = {
@@ -489,6 +509,17 @@ export type MealsUncheckedUpdateManyInput = {
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  profileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type MealsListRelationFilter = {
+  every?: Prisma.MealsWhereInput
+  some?: Prisma.MealsWhereInput
+  none?: Prisma.MealsWhereInput
+}
+
+export type MealsOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type MealsCountOrderByAggregateInput = {
@@ -505,6 +536,7 @@ export type MealsCountOrderByAggregateInput = {
   prepTimeMinutes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  profileId?: Prisma.SortOrder
 }
 
 export type MealsAvgOrderByAggregateInput = {
@@ -527,6 +559,7 @@ export type MealsMaxOrderByAggregateInput = {
   prepTimeMinutes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  profileId?: Prisma.SortOrder
 }
 
 export type MealsMinOrderByAggregateInput = {
@@ -543,6 +576,7 @@ export type MealsMinOrderByAggregateInput = {
   prepTimeMinutes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  profileId?: Prisma.SortOrder
 }
 
 export type MealsSumOrderByAggregateInput = {
@@ -556,24 +590,50 @@ export type MealsScalarRelationFilter = {
   isNot?: Prisma.MealsWhereInput
 }
 
+export type MealsCreateNestedManyWithoutProfileInput = {
+  create?: Prisma.XOR<Prisma.MealsCreateWithoutProfileInput, Prisma.MealsUncheckedCreateWithoutProfileInput> | Prisma.MealsCreateWithoutProfileInput[] | Prisma.MealsUncheckedCreateWithoutProfileInput[]
+  connectOrCreate?: Prisma.MealsCreateOrConnectWithoutProfileInput | Prisma.MealsCreateOrConnectWithoutProfileInput[]
+  createMany?: Prisma.MealsCreateManyProfileInputEnvelope
+  connect?: Prisma.MealsWhereUniqueInput | Prisma.MealsWhereUniqueInput[]
+}
+
+export type MealsUncheckedCreateNestedManyWithoutProfileInput = {
+  create?: Prisma.XOR<Prisma.MealsCreateWithoutProfileInput, Prisma.MealsUncheckedCreateWithoutProfileInput> | Prisma.MealsCreateWithoutProfileInput[] | Prisma.MealsUncheckedCreateWithoutProfileInput[]
+  connectOrCreate?: Prisma.MealsCreateOrConnectWithoutProfileInput | Prisma.MealsCreateOrConnectWithoutProfileInput[]
+  createMany?: Prisma.MealsCreateManyProfileInputEnvelope
+  connect?: Prisma.MealsWhereUniqueInput | Prisma.MealsWhereUniqueInput[]
+}
+
+export type MealsUpdateManyWithoutProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.MealsCreateWithoutProfileInput, Prisma.MealsUncheckedCreateWithoutProfileInput> | Prisma.MealsCreateWithoutProfileInput[] | Prisma.MealsUncheckedCreateWithoutProfileInput[]
+  connectOrCreate?: Prisma.MealsCreateOrConnectWithoutProfileInput | Prisma.MealsCreateOrConnectWithoutProfileInput[]
+  upsert?: Prisma.MealsUpsertWithWhereUniqueWithoutProfileInput | Prisma.MealsUpsertWithWhereUniqueWithoutProfileInput[]
+  createMany?: Prisma.MealsCreateManyProfileInputEnvelope
+  set?: Prisma.MealsWhereUniqueInput | Prisma.MealsWhereUniqueInput[]
+  disconnect?: Prisma.MealsWhereUniqueInput | Prisma.MealsWhereUniqueInput[]
+  delete?: Prisma.MealsWhereUniqueInput | Prisma.MealsWhereUniqueInput[]
+  connect?: Prisma.MealsWhereUniqueInput | Prisma.MealsWhereUniqueInput[]
+  update?: Prisma.MealsUpdateWithWhereUniqueWithoutProfileInput | Prisma.MealsUpdateWithWhereUniqueWithoutProfileInput[]
+  updateMany?: Prisma.MealsUpdateManyWithWhereWithoutProfileInput | Prisma.MealsUpdateManyWithWhereWithoutProfileInput[]
+  deleteMany?: Prisma.MealsScalarWhereInput | Prisma.MealsScalarWhereInput[]
+}
+
+export type MealsUncheckedUpdateManyWithoutProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.MealsCreateWithoutProfileInput, Prisma.MealsUncheckedCreateWithoutProfileInput> | Prisma.MealsCreateWithoutProfileInput[] | Prisma.MealsUncheckedCreateWithoutProfileInput[]
+  connectOrCreate?: Prisma.MealsCreateOrConnectWithoutProfileInput | Prisma.MealsCreateOrConnectWithoutProfileInput[]
+  upsert?: Prisma.MealsUpsertWithWhereUniqueWithoutProfileInput | Prisma.MealsUpsertWithWhereUniqueWithoutProfileInput[]
+  createMany?: Prisma.MealsCreateManyProfileInputEnvelope
+  set?: Prisma.MealsWhereUniqueInput | Prisma.MealsWhereUniqueInput[]
+  disconnect?: Prisma.MealsWhereUniqueInput | Prisma.MealsWhereUniqueInput[]
+  delete?: Prisma.MealsWhereUniqueInput | Prisma.MealsWhereUniqueInput[]
+  connect?: Prisma.MealsWhereUniqueInput | Prisma.MealsWhereUniqueInput[]
+  update?: Prisma.MealsUpdateWithWhereUniqueWithoutProfileInput | Prisma.MealsUpdateWithWhereUniqueWithoutProfileInput[]
+  updateMany?: Prisma.MealsUpdateManyWithWhereWithoutProfileInput | Prisma.MealsUpdateManyWithWhereWithoutProfileInput[]
+  deleteMany?: Prisma.MealsScalarWhereInput | Prisma.MealsScalarWhereInput[]
+}
+
 export type FloatFieldUpdateOperationsInput = {
   set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
-export type NullableFloatFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
   increment?: number
   decrement?: number
   multiply?: number
@@ -608,6 +668,88 @@ export type MealsUpdateOneRequiredWithoutReviewsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MealsUpdateToOneWithWhereWithoutReviewsInput, Prisma.MealsUpdateWithoutReviewsInput>, Prisma.MealsUncheckedUpdateWithoutReviewsInput>
 }
 
+export type MealsCreateWithoutProfileInput = {
+  id?: string
+  provider_id: string
+  category_id: string
+  name: string
+  description?: string | null
+  price: number
+  discountPrice?: number | null
+  imageUrl?: string | null
+  isAvailable?: boolean | null
+  isDeleted?: boolean | null
+  prepTimeMinutes?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  reviews?: Prisma.ReviewsCreateNestedManyWithoutMealInput
+  orders?: Prisma.OrderCreateNestedManyWithoutMealInput
+}
+
+export type MealsUncheckedCreateWithoutProfileInput = {
+  id?: string
+  provider_id: string
+  category_id: string
+  name: string
+  description?: string | null
+  price: number
+  discountPrice?: number | null
+  imageUrl?: string | null
+  isAvailable?: boolean | null
+  isDeleted?: boolean | null
+  prepTimeMinutes?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutMealInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutMealInput
+}
+
+export type MealsCreateOrConnectWithoutProfileInput = {
+  where: Prisma.MealsWhereUniqueInput
+  create: Prisma.XOR<Prisma.MealsCreateWithoutProfileInput, Prisma.MealsUncheckedCreateWithoutProfileInput>
+}
+
+export type MealsCreateManyProfileInputEnvelope = {
+  data: Prisma.MealsCreateManyProfileInput | Prisma.MealsCreateManyProfileInput[]
+  skipDuplicates?: boolean
+}
+
+export type MealsUpsertWithWhereUniqueWithoutProfileInput = {
+  where: Prisma.MealsWhereUniqueInput
+  update: Prisma.XOR<Prisma.MealsUpdateWithoutProfileInput, Prisma.MealsUncheckedUpdateWithoutProfileInput>
+  create: Prisma.XOR<Prisma.MealsCreateWithoutProfileInput, Prisma.MealsUncheckedCreateWithoutProfileInput>
+}
+
+export type MealsUpdateWithWhereUniqueWithoutProfileInput = {
+  where: Prisma.MealsWhereUniqueInput
+  data: Prisma.XOR<Prisma.MealsUpdateWithoutProfileInput, Prisma.MealsUncheckedUpdateWithoutProfileInput>
+}
+
+export type MealsUpdateManyWithWhereWithoutProfileInput = {
+  where: Prisma.MealsScalarWhereInput
+  data: Prisma.XOR<Prisma.MealsUpdateManyMutationInput, Prisma.MealsUncheckedUpdateManyWithoutProfileInput>
+}
+
+export type MealsScalarWhereInput = {
+  AND?: Prisma.MealsScalarWhereInput | Prisma.MealsScalarWhereInput[]
+  OR?: Prisma.MealsScalarWhereInput[]
+  NOT?: Prisma.MealsScalarWhereInput | Prisma.MealsScalarWhereInput[]
+  id?: Prisma.StringFilter<"Meals"> | string
+  provider_id?: Prisma.StringFilter<"Meals"> | string
+  category_id?: Prisma.StringFilter<"Meals"> | string
+  name?: Prisma.StringFilter<"Meals"> | string
+  description?: Prisma.StringNullableFilter<"Meals"> | string | null
+  price?: Prisma.FloatFilter<"Meals"> | number
+  discountPrice?: Prisma.FloatNullableFilter<"Meals"> | number | null
+  imageUrl?: Prisma.StringNullableFilter<"Meals"> | string | null
+  isAvailable?: Prisma.BoolNullableFilter<"Meals"> | boolean | null
+  isDeleted?: Prisma.BoolNullableFilter<"Meals"> | boolean | null
+  prepTimeMinutes?: Prisma.IntNullableFilter<"Meals"> | number | null
+  createdAt?: Prisma.DateTimeFilter<"Meals"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Meals"> | Date | string
+  profileId?: Prisma.StringNullableFilter<"Meals"> | string | null
+}
+
 export type MealsCreateWithoutOrdersInput = {
   id?: string
   provider_id: string
@@ -623,6 +765,7 @@ export type MealsCreateWithoutOrdersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   reviews?: Prisma.ReviewsCreateNestedManyWithoutMealInput
+  profile?: Prisma.ProviderProfileCreateNestedOneWithoutMealsInput
 }
 
 export type MealsUncheckedCreateWithoutOrdersInput = {
@@ -639,6 +782,7 @@ export type MealsUncheckedCreateWithoutOrdersInput = {
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  profileId?: string | null
   reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutMealInput
 }
 
@@ -673,6 +817,7 @@ export type MealsUpdateWithoutOrdersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviews?: Prisma.ReviewsUpdateManyWithoutMealNestedInput
+  profile?: Prisma.ProviderProfileUpdateOneWithoutMealsNestedInput
 }
 
 export type MealsUncheckedUpdateWithoutOrdersInput = {
@@ -689,6 +834,7 @@ export type MealsUncheckedUpdateWithoutOrdersInput = {
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  profileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutMealNestedInput
 }
 
@@ -707,6 +853,7 @@ export type MealsCreateWithoutReviewsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   orders?: Prisma.OrderCreateNestedManyWithoutMealInput
+  profile?: Prisma.ProviderProfileCreateNestedOneWithoutMealsInput
 }
 
 export type MealsUncheckedCreateWithoutReviewsInput = {
@@ -723,6 +870,7 @@ export type MealsUncheckedCreateWithoutReviewsInput = {
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  profileId?: string | null
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutMealInput
 }
 
@@ -757,6 +905,7 @@ export type MealsUpdateWithoutReviewsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUpdateManyWithoutMealNestedInput
+  profile?: Prisma.ProviderProfileUpdateOneWithoutMealsNestedInput
 }
 
 export type MealsUncheckedUpdateWithoutReviewsInput = {
@@ -773,7 +922,76 @@ export type MealsUncheckedUpdateWithoutReviewsInput = {
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  profileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.OrderUncheckedUpdateManyWithoutMealNestedInput
+}
+
+export type MealsCreateManyProfileInput = {
+  id?: string
+  provider_id: string
+  category_id: string
+  name: string
+  description?: string | null
+  price: number
+  discountPrice?: number | null
+  imageUrl?: string | null
+  isAvailable?: boolean | null
+  isDeleted?: boolean | null
+  prepTimeMinutes?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type MealsUpdateWithoutProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  provider_id?: Prisma.StringFieldUpdateOperationsInput | string
+  category_id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  discountPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reviews?: Prisma.ReviewsUpdateManyWithoutMealNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutMealNestedInput
+}
+
+export type MealsUncheckedUpdateWithoutProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  provider_id?: Prisma.StringFieldUpdateOperationsInput | string
+  category_id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  discountPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutMealNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutMealNestedInput
+}
+
+export type MealsUncheckedUpdateManyWithoutProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  provider_id?: Prisma.StringFieldUpdateOperationsInput | string
+  category_id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  discountPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -830,8 +1048,10 @@ export type MealsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   prepTimeMinutes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  profileId?: boolean
   reviews?: boolean | Prisma.Meals$reviewsArgs<ExtArgs>
   orders?: boolean | Prisma.Meals$ordersArgs<ExtArgs>
+  profile?: boolean | Prisma.Meals$profileArgs<ExtArgs>
   _count?: boolean | Prisma.MealsCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["meals"]>
 
@@ -849,6 +1069,8 @@ export type MealsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   prepTimeMinutes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  profileId?: boolean
+  profile?: boolean | Prisma.Meals$profileArgs<ExtArgs>
 }, ExtArgs["result"]["meals"]>
 
 export type MealsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -865,6 +1087,8 @@ export type MealsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   prepTimeMinutes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  profileId?: boolean
+  profile?: boolean | Prisma.Meals$profileArgs<ExtArgs>
 }, ExtArgs["result"]["meals"]>
 
 export type MealsSelectScalar = {
@@ -881,22 +1105,29 @@ export type MealsSelectScalar = {
   prepTimeMinutes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  profileId?: boolean
 }
 
-export type MealsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "provider_id" | "category_id" | "name" | "description" | "price" | "discountPrice" | "imageUrl" | "isAvailable" | "isDeleted" | "prepTimeMinutes" | "createdAt" | "updatedAt", ExtArgs["result"]["meals"]>
+export type MealsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "provider_id" | "category_id" | "name" | "description" | "price" | "discountPrice" | "imageUrl" | "isAvailable" | "isDeleted" | "prepTimeMinutes" | "createdAt" | "updatedAt" | "profileId", ExtArgs["result"]["meals"]>
 export type MealsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   reviews?: boolean | Prisma.Meals$reviewsArgs<ExtArgs>
   orders?: boolean | Prisma.Meals$ordersArgs<ExtArgs>
+  profile?: boolean | Prisma.Meals$profileArgs<ExtArgs>
   _count?: boolean | Prisma.MealsCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type MealsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type MealsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type MealsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  profile?: boolean | Prisma.Meals$profileArgs<ExtArgs>
+}
+export type MealsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  profile?: boolean | Prisma.Meals$profileArgs<ExtArgs>
+}
 
 export type $MealsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Meals"
   objects: {
     reviews: Prisma.$ReviewsPayload<ExtArgs>[]
     orders: Prisma.$OrderPayload<ExtArgs>[]
+    profile: Prisma.$ProviderProfilePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -912,6 +1143,7 @@ export type $MealsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     prepTimeMinutes: number | null
     createdAt: Date
     updatedAt: Date
+    profileId: string | null
   }, ExtArgs["result"]["meals"]>
   composites: {}
 }
@@ -1308,6 +1540,7 @@ export interface Prisma__MealsClient<T, Null = never, ExtArgs extends runtime.Ty
   readonly [Symbol.toStringTag]: "PrismaPromise"
   reviews<T extends Prisma.Meals$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Meals$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orders<T extends Prisma.Meals$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Meals$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  profile<T extends Prisma.Meals$profileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Meals$profileArgs<ExtArgs>>): Prisma.Prisma__ProviderProfileClient<runtime.Types.Result.GetResult<Prisma.$ProviderProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1350,6 +1583,7 @@ export interface MealsFieldRefs {
   readonly prepTimeMinutes: Prisma.FieldRef<"Meals", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Meals", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Meals", 'DateTime'>
+  readonly profileId: Prisma.FieldRef<"Meals", 'String'>
 }
     
 
@@ -1599,6 +1833,10 @@ export type MealsCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extension
    */
   data: Prisma.MealsCreateManyInput | Prisma.MealsCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MealsIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1669,6 +1907,10 @@ export type MealsUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extension
    * Limit how many Meals to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MealsIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1783,6 +2025,25 @@ export type Meals$ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.OrderScalarFieldEnum | Prisma.OrderScalarFieldEnum[]
+}
+
+/**
+ * Meals.profile
+ */
+export type Meals$profileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProviderProfile
+   */
+  select?: Prisma.ProviderProfileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProviderProfile
+   */
+  omit?: Prisma.ProviderProfileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProviderProfileInclude<ExtArgs> | null
+  where?: Prisma.ProviderProfileWhereInput
 }
 
 /**

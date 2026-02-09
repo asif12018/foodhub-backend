@@ -1,13 +1,13 @@
 model Order {
-  id         Int         @id @default(autoincrement())
+  id         Int              @id @default(autoincrement())
   mealId     String
   mealName   String
-  status     OrderStatus @default(PREPARING)
+  status     OrderStatus      @default(PREPARING)
   price      Float
   quantity   Int
   totalPrice Float
-  meal       Meals       @relation(fields: [mealId], references: [id])
-  profile    Profile?    @relation(fields: [profileId], references: [id])
+  meal       Meals            @relation(fields: [mealId], references: [id])
+  profile    ProviderProfile? @relation(fields: [profileId], references: [id])
   profileId  String?
 }
 
