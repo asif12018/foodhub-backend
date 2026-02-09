@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Meals" ALTER COLUMN "isAvailable" DROP NOT NULL,
+ALTER COLUMN "isDeleted" DROP NOT NULL;

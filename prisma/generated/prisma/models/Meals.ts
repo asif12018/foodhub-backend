@@ -244,8 +244,8 @@ export type MealsGroupByOutputType = {
   price: number
   discountPrice: number | null
   imageUrl: string | null
-  isAvailable: boolean
-  isDeleted: boolean
+  isAvailable: boolean | null
+  isDeleted: boolean | null
   prepTimeMinutes: number | null
   createdAt: Date
   updatedAt: Date
@@ -283,8 +283,8 @@ export type MealsWhereInput = {
   price?: Prisma.FloatFilter<"Meals"> | number
   discountPrice?: Prisma.FloatNullableFilter<"Meals"> | number | null
   imageUrl?: Prisma.StringNullableFilter<"Meals"> | string | null
-  isAvailable?: Prisma.BoolFilter<"Meals"> | boolean
-  isDeleted?: Prisma.BoolFilter<"Meals"> | boolean
+  isAvailable?: Prisma.BoolNullableFilter<"Meals"> | boolean | null
+  isDeleted?: Prisma.BoolNullableFilter<"Meals"> | boolean | null
   prepTimeMinutes?: Prisma.IntNullableFilter<"Meals"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Meals"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Meals"> | Date | string
@@ -301,8 +301,8 @@ export type MealsOrderByWithRelationInput = {
   price?: Prisma.SortOrder
   discountPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  isAvailable?: Prisma.SortOrder
-  isDeleted?: Prisma.SortOrder
+  isAvailable?: Prisma.SortOrderInput | Prisma.SortOrder
+  isDeleted?: Prisma.SortOrderInput | Prisma.SortOrder
   prepTimeMinutes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -322,8 +322,8 @@ export type MealsWhereUniqueInput = Prisma.AtLeast<{
   price?: Prisma.FloatFilter<"Meals"> | number
   discountPrice?: Prisma.FloatNullableFilter<"Meals"> | number | null
   imageUrl?: Prisma.StringNullableFilter<"Meals"> | string | null
-  isAvailable?: Prisma.BoolFilter<"Meals"> | boolean
-  isDeleted?: Prisma.BoolFilter<"Meals"> | boolean
+  isAvailable?: Prisma.BoolNullableFilter<"Meals"> | boolean | null
+  isDeleted?: Prisma.BoolNullableFilter<"Meals"> | boolean | null
   prepTimeMinutes?: Prisma.IntNullableFilter<"Meals"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Meals"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Meals"> | Date | string
@@ -340,8 +340,8 @@ export type MealsOrderByWithAggregationInput = {
   price?: Prisma.SortOrder
   discountPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  isAvailable?: Prisma.SortOrder
-  isDeleted?: Prisma.SortOrder
+  isAvailable?: Prisma.SortOrderInput | Prisma.SortOrder
+  isDeleted?: Prisma.SortOrderInput | Prisma.SortOrder
   prepTimeMinutes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -364,8 +364,8 @@ export type MealsScalarWhereWithAggregatesInput = {
   price?: Prisma.FloatWithAggregatesFilter<"Meals"> | number
   discountPrice?: Prisma.FloatNullableWithAggregatesFilter<"Meals"> | number | null
   imageUrl?: Prisma.StringNullableWithAggregatesFilter<"Meals"> | string | null
-  isAvailable?: Prisma.BoolWithAggregatesFilter<"Meals"> | boolean
-  isDeleted?: Prisma.BoolWithAggregatesFilter<"Meals"> | boolean
+  isAvailable?: Prisma.BoolNullableWithAggregatesFilter<"Meals"> | boolean | null
+  isDeleted?: Prisma.BoolNullableWithAggregatesFilter<"Meals"> | boolean | null
   prepTimeMinutes?: Prisma.IntNullableWithAggregatesFilter<"Meals"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Meals"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Meals"> | Date | string
@@ -380,8 +380,8 @@ export type MealsCreateInput = {
   price: number
   discountPrice?: number | null
   imageUrl?: string | null
-  isAvailable?: boolean
-  isDeleted?: boolean
+  isAvailable?: boolean | null
+  isDeleted?: boolean | null
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -398,8 +398,8 @@ export type MealsUncheckedCreateInput = {
   price: number
   discountPrice?: number | null
   imageUrl?: string | null
-  isAvailable?: boolean
-  isDeleted?: boolean
+  isAvailable?: boolean | null
+  isDeleted?: boolean | null
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -416,8 +416,8 @@ export type MealsUpdateInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   discountPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -434,8 +434,8 @@ export type MealsUncheckedUpdateInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   discountPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -452,8 +452,8 @@ export type MealsCreateManyInput = {
   price: number
   discountPrice?: number | null
   imageUrl?: string | null
-  isAvailable?: boolean
-  isDeleted?: boolean
+  isAvailable?: boolean | null
+  isDeleted?: boolean | null
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -468,8 +468,8 @@ export type MealsUpdateManyMutationInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   discountPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -484,8 +484,8 @@ export type MealsUncheckedUpdateManyInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   discountPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -572,10 +572,6 @@ export type NullableFloatFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type NullableIntFieldUpdateOperationsInput = {
   set?: number | null
   increment?: number
@@ -621,8 +617,8 @@ export type MealsCreateWithoutOrdersInput = {
   price: number
   discountPrice?: number | null
   imageUrl?: string | null
-  isAvailable?: boolean
-  isDeleted?: boolean
+  isAvailable?: boolean | null
+  isDeleted?: boolean | null
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -638,8 +634,8 @@ export type MealsUncheckedCreateWithoutOrdersInput = {
   price: number
   discountPrice?: number | null
   imageUrl?: string | null
-  isAvailable?: boolean
-  isDeleted?: boolean
+  isAvailable?: boolean | null
+  isDeleted?: boolean | null
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -671,8 +667,8 @@ export type MealsUpdateWithoutOrdersInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   discountPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -688,8 +684,8 @@ export type MealsUncheckedUpdateWithoutOrdersInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   discountPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -705,8 +701,8 @@ export type MealsCreateWithoutReviewsInput = {
   price: number
   discountPrice?: number | null
   imageUrl?: string | null
-  isAvailable?: boolean
-  isDeleted?: boolean
+  isAvailable?: boolean | null
+  isDeleted?: boolean | null
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -722,8 +718,8 @@ export type MealsUncheckedCreateWithoutReviewsInput = {
   price: number
   discountPrice?: number | null
   imageUrl?: string | null
-  isAvailable?: boolean
-  isDeleted?: boolean
+  isAvailable?: boolean | null
+  isDeleted?: boolean | null
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -755,8 +751,8 @@ export type MealsUpdateWithoutReviewsInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   discountPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -772,8 +768,8 @@ export type MealsUncheckedUpdateWithoutReviewsInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   discountPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -911,8 +907,8 @@ export type $MealsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     price: number
     discountPrice: number | null
     imageUrl: string | null
-    isAvailable: boolean
-    isDeleted: boolean
+    isAvailable: boolean | null
+    isDeleted: boolean | null
     prepTimeMinutes: number | null
     createdAt: Date
     updatedAt: Date

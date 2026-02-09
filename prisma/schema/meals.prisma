@@ -1,5 +1,5 @@
 model Meals {
-  id            String  @id @default(ulid())
+  id            String   @id @default(ulid())
   provider_id   String
   category_id   String
   name          String
@@ -7,8 +7,8 @@ model Meals {
   price         Float
   discountPrice Float?
   imageUrl      String?
-  isAvailable   Boolean @default(true)
-  isDeleted     Boolean @default(false)
+  isAvailable   Boolean? @default(true)
+  isDeleted     Boolean? @default(false)
 
   prepTimeMinutes Int?
 
@@ -17,5 +17,7 @@ model Meals {
 
   reviews Reviews[]
 
-  orders Order[]
+  orders    Order[]
+  profile   Profile? @relation(fields: [profileId], references: [id])
+  profileId String?
 }

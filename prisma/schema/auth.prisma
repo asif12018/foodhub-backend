@@ -1,0 +1,30 @@
+model User {
+  id       String  @id
+  name     String
+  email    String
+  role     String? @default("Customer")
+  phone    String
+  status   String? @default("activate")
+  imageUrl String?
+
+  profiles Profile[]
+}
+
+model Profile {
+  id          String    @id
+  accountId   String
+  providerId  String
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  address     String?
+  city        String?
+  isOpen      Boolean?  @default(true)
+  openingTime DateTime?
+  closingTime DateTime?
+  ratingAvg   Float?    @default(3)
+  ratingCount Int?      @default(0)
+  meals       Meals[]
+  order       Order[]
+  createdAt   DateTime  @default(now())
+  updateAt    DateTime  @updatedAt
+}
