@@ -5,6 +5,7 @@ import { categoriesRouter } from './modules/categories/categories.router';
 import {toNodeHandler} from "better-auth/node"
 import cors from "cors";
 import { auth } from './lib/auth';
+import { authRouter } from './modules/auth/auth.route';
 
 
 
@@ -26,7 +27,11 @@ app.use(
     })
 );
 
+
+app.use("/api/auth", authRouter)
 app.all("/api/auth/*splat", toNodeHandler(auth))
+
+
 
 app.get("/", (req:Request, res:Response)=>{
     res.status(200).json({

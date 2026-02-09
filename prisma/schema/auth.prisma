@@ -1,20 +1,28 @@
+
+
+enum Role {
+  Admin
+  Customer
+  Provider
+}
+
 model User {
-  id            String    @id
-  name          String
-  email         String
-  emailVerified Boolean   @default(false)
-  image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  roles         String?   @default("Customer")
-  phone         String?
-  status        String?   @default("activate")
-  sessions      Session[]
-  accounts      Account[]
+  id              String           @id @default(cuid())
+  name            String
+  email           String           @unique
+  emailVerified   Boolean          @default(false)
+  image           String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  roles            Role?            @default(Customer)
+  
+  phone           String?
+  status          String?          @default("activate")
+  sessions        Session[]
+  accounts        Account[]
   customerProfile CustomerProfile?
   providerProfile ProviderProfile?
 
-  @@unique([email])
   @@map("user")
 }
 
