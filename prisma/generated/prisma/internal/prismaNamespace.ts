@@ -1302,6 +1302,7 @@ export const MealsScalarFieldEnum = {
   discountPrice: 'discountPrice',
   imageUrl: 'imageUrl',
   isAvailable: 'isAvailable',
+  isFeatured: 'isFeatured',
   isDeleted: 'isDeleted',
   prepTimeMinutes: 'prepTimeMinutes',
   createdAt: 'createdAt',
@@ -1320,6 +1321,7 @@ export const OrderScalarFieldEnum = {
   price: 'price',
   quantity: 'quantity',
   totalPrice: 'totalPrice',
+  deliveryAddress: 'deliveryAddress',
   profileId: 'profileId'
 } as const
 

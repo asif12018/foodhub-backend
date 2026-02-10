@@ -1,15 +1,14 @@
 
 
 type IMeals = {
-    provider_id: string;
     category_id: string;
     name: string;
     description?: string;
-    price: Number;
-    discountPrice?: Number;
+    price: number;
+    discountPrice?: number;
     imageUrl?: string;
     isAvailable?: boolean;
-    prepTimeMinutes: Number;
+    prepTimeMinutes: number;
     
 }
 
