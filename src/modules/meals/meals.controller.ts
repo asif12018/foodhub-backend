@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { menuService } from "./meals.service";
 import paginationSortingHelper from "../../helper/paginationSortingHelper";
+import { UserRole } from "../../middleware/auth";
 
 
 
@@ -76,9 +77,66 @@ const getAllMenu = async(req:Request, res:Response) =>{
     }
 }
 
+//get post by id
+const getMealById = async(req:Request, res:Response) =>{
+    try{
+      const result = await menuService.getMealById(req.params.mealId as string);
+      if(!result){
+         return res.status(404).json({
+            success:false,
+            message:"Meals not exist",
+            data: {}
+         })
+      }
+      return res.status(200).json({
+        success: true,
+        message:"Menu retrieved successfully",
+        data: result
+      })
+    }catch(err:any){
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+        details:err
+      })
+    }
+}
+
+//update meals
+
+const updateMeal = async(req:Request, res:Response) =>{
+    try{
+        let isProvider = false;
+       const user = req.user;
+       if(!user){
+        throw new Error("You are not authorized")
+       };
+       if(user.roles !== UserRole.Provider){
+        throw new Error("You don't have permission to perform this action")
+       }
+       if(user.roles === UserRole.Provider){
+         isProvider = true
+       }
+       const result = await menuService.updateMeal(req.params.mealId as string,  req.body,isProvider, user.id);
+       return res.status(201).json({
+        success: true,
+        message:"Meal update successfully",
+        data: result
+       })
+    }catch(err:any){
+      return res.status(500).json({
+        success:false,
+        message:err.message,
+        details:err
+      })
+    }
+}
+
 
 export const menuController = {
     createMenu,
-    getAllMenu
+    getAllMenu,
+    getMealById,
+    updateMeal
 
 }

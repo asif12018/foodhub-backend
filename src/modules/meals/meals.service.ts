@@ -58,7 +58,7 @@ const getAllMenu = async(payload:{
         take: limit,
         skip: payload.skip,
         where:{
-            AND: andCondition
+            OR: andCondition
         },
         orderBy: {
             [payload.sortBy]: payload.sortOrder,
@@ -85,8 +85,46 @@ const getAllMenu = async(payload:{
      };
 }
 
+//get meal by id
+
+const getMealById = async(mealId: string)=>{
+    const result = await prisma.meals.findUnique({
+        where:{id:mealId}
+    });
+    return result;
+}
+
+//update post
+const updateMeal = async(mealId:string, data: Partial<IMeals>, isProvider: boolean, providerId: string)=>{
+    const mealsData = await prisma.meals.findFirstOrThrow({
+        where:{
+            id:mealId
+        },
+        select:{
+            id:true,
+            provider_id:true
+        }
+    });
+    
+    if(!isProvider && (mealsData.provider_id !== providerId)){
+       throw new Error("You are not the owner of the meals")
+    }
+
+    const result = await prisma.meals.update({
+        where:{
+            id:mealId
+        },
+        data:data
+    });
+
+    return result
+}
+
 
 export const menuService = {
     createMenu,
-    getAllMenu
+    getAllMenu,
+    getMealById,
+    updateMeal
+
 }

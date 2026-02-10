@@ -10,6 +10,7 @@ const router:Router = express.Router();
 
 router.post("/menu",authMiddleWare(UserRole.Provider),menuController.createMenu);
 router.get("/menu",menuController.getAllMenu);
-
+router.get("/menu/:mealId", menuController.getMealById);
+router.patch("/menu/:mealId",authMiddleWare(UserRole.Provider), menuController.updateMeal);
 
 export const mealsRoute = router;
