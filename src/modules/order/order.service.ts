@@ -1,4 +1,5 @@
 import { prisma } from "../../lib/prisma";
+import { UserRole } from "../../middleware/auth";
 import IOrder from "../../types/order.types";
 import IUser from "../../types/user.types";
 
@@ -80,10 +81,60 @@ const getOrderById = async(orderId:string, user:IUser)=>{
     return result
 }
 
+//get cart
+
+const getAllCart = async(customerId:string, user: IUser)=>{
+     if(user.roles !== UserRole.Customer){
+        throw new Error("You don't have permission to perform this action")
+     }
+     if(user.id !== customerId){
+        throw new Error("You don't have permission to perform this action")
+     }
+
+     const result = await prisma.order.findMany({
+        where:{
+            customer_id:customerId
+        }
+     })
+     if(result.length === 0){
+        throw new Error("You don't have any order")
+     }
+     return result
+}
+
+//checkout the cart
+
+const checkOut = async(orderId:number, user:IUser, deliveryAddress:string) =>{
+    const orderData = await prisma.order.findFirstOrThrow({
+        where: {
+            id:  orderId
+        }
+    });
+    if(user.id !== orderData.customer_id){
+        throw new Error("You don't have permission to perform this action")
+    }
+    if(user.roles !== UserRole.Customer){
+        throw new Error("You don't have permission to perform this action")
+    }
+    const result = await prisma.order.update({
+        where:{
+            id:orderData.id
+        },
+        data:{
+            deliveryAddress:deliveryAddress
+        }
+    });
+
+    return result
+    
+}
+
 
 
 export const orderService = {
     createOrder,
     getOwnCart,
-    getOrderById
+    getOrderById,
+    getAllCart,
+    checkOut
 }
