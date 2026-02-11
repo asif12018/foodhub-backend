@@ -50,7 +50,8 @@ const authMiddleWare = (...roles: UserRole[])=>{
             roles: session.user.roles as string,
             emailVerified: session.user.emailVerified
         }
-        
+       
+      
         if(roles.length && !roles.includes(req.user.roles as UserRole)){
             return res.status(403).json({
                 success:false,
@@ -61,7 +62,12 @@ const authMiddleWare = (...roles: UserRole[])=>{
         next();
 
         }catch(err:any){
-
+            console.error("middleware error:", err);
+            res.status(500).json({
+                success:false,
+                message:err.message,
+                details:err
+            })
         }
     }
 }

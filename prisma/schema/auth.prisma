@@ -22,6 +22,9 @@ model User {
   providerProfile ProviderProfile?
   meals           Meals[]
 
+  providedOrders Order[] @relation("ProviderOrders")
+  placedOrders   Order[] @relation("CustomerOrders")
+
   @@map("user")
 }
 
@@ -85,7 +88,6 @@ model ProviderProfile {
   ratingAvg   Float?    @default(3)
   ratingCount Int?      @default(0)
   meals       Meals[]
-  order       Order[]
   createdAt   DateTime  @default(now())
   updateAt    DateTime  @updatedAt
 }

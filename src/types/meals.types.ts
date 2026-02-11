@@ -2,7 +2,7 @@
 
 type IMeals = {
     category_id: string;
-    name: string;
+    name?: string;
     description?: string;
     price: number;
     discountPrice?: number;
