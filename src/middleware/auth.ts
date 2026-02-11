@@ -50,6 +50,7 @@ const authMiddleWare = (...roles: UserRole[])=>{
             roles: session.user.roles as string,
             emailVerified: session.user.emailVerified
         }
+
        
       
         if(roles.length && !roles.includes(req.user.roles as UserRole)){

@@ -9,6 +9,8 @@ import { authRouter } from './modules/auth/auth.route';
 import { mealsRoute } from './modules/meals/meals.route';
 import authMiddleWare, { UserRole } from './middleware/auth';
 import { orderRoute } from './modules/order/order.route';
+import { profileController } from './modules/profile/profile.controller';
+import { profileRoute } from './modules/profile/profile.route';
 
 
 
@@ -45,6 +47,8 @@ app.get("/", (req:Request, res:Response)=>{
         message:"hello world"
     })
 });
+
+app.use("/profile", profileRoute);
 
 app.use("/admin", categoriesRouter)
 
