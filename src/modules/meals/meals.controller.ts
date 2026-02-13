@@ -133,10 +133,34 @@ const updateMeal = async(req:Request, res:Response) =>{
 }
 
 
+// delete meal
+const deleteMeal = async(req:Request, res:Response)=>{
+  try{
+    const user = req.user;
+    if(!user){
+      throw new Error("You are not authorized")
+    }
+    const result = await menuService.deleteMeal(req.params.mealId as string, user);
+    return res.status(201).json({
+      success: true,
+      message:"Meal delete successfully",
+      data: result
+    })
+  }catch(err:any){
+    return res.status(500).json({
+      success:false,
+      message:err.message,
+      details:err
+    })
+  }
+}
+
+
 export const menuController = {
     createMenu,
     getAllMenu,
     getMealById,
-    updateMeal
+    updateMeal,
+    deleteMeal
 
 }

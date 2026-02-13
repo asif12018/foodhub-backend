@@ -1,3 +1,4 @@
+import { OrderStatus } from "../../../prisma/generated/prisma/enums";
 import { prisma } from "../../lib/prisma";
 import { UserRole } from "../../middleware/auth";
 import IOrder from "../../types/order.types";
@@ -130,11 +131,57 @@ const checkOut = async(orderId:number, user:IUser, deliveryAddress:string) =>{
 }
 
 
+//get provider all order
+const getAllOrder = async(user:IUser)=>{
+      if(user.roles !== "Provider"){
+        throw new Error("You don't have permission to perform this action")
+      }
+
+      const result = await prisma.order.findMany({
+        where:{
+            provider_id: user.id
+        }
+      });
+      if(result.length === 0){
+        throw new Error("No active order found");
+      }
+
+      return result
+}
+
+//update order status
+const updateOrderStatus = async(orderId:number, user:IUser, orderStatus:string)=>{
+      if(user.roles !== UserRole.Provider){
+        throw new Error("You don't have permission to perform this action")
+      }
+      const orderData = await prisma.order.findFirstOrThrow({
+        where:{
+            id:orderId,
+            provider_id:user.id
+        }
+      });
+
+      const result = await prisma.order.update({
+        where:{
+            id:orderData.id
+        }, 
+        data:{
+            status: orderStatus as OrderStatus
+        }
+      });
+
+      return result
+}
+
+
 
 export const orderService = {
     createOrder,
     getOwnCart,
     getOrderById,
     getAllCart,
-    checkOut
+    checkOut,
+    getAllOrder,
+    updateOrderStatus
+
 }

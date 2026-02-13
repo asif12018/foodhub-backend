@@ -1,6 +1,8 @@
 import { prisma } from "../../lib/prisma";
 import IMeals from "../../types/meals.types";
 import { Prisma } from '../../../prisma/generated/prisma/client';
+import IUser from "../../types/user.types";
+import { UserRole } from "../../middleware/auth";
 
 
 
@@ -120,11 +122,39 @@ const updateMeal = async(mealId:string, data: Partial<IMeals>, isProvider: boole
     return result
 }
 
+// delete meal
+
+const deleteMeal = async(mealId:string, user:IUser)=>{
+     const mealData = await prisma.meals.findFirstOrThrow({
+        where:{
+            id:mealId
+        }
+     });
+     if(user.id !== mealData.provider_id){
+         throw new Error("you are not the owner of the meals")
+     }
+     if(user.roles !== UserRole.Provider){
+        throw new Error("you are not the owner of the meals")
+     }
+
+     
+     const result = await prisma.meals.update({
+        where:{
+            id:mealId
+        },
+        data:{
+            isDeleted: true
+        }
+     });
+     return result;
+}
+
 
 export const menuService = {
     createMenu,
     getAllMenu,
     getMealById,
-    updateMeal
+    updateMeal,
+    deleteMeal
 
 }

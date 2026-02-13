@@ -7,9 +7,7 @@ import cors from "cors";
 import { auth } from './lib/auth';
 import { authRouter } from './modules/auth/auth.route';
 import { mealsRoute } from './modules/meals/meals.route';
-import authMiddleWare, { UserRole } from './middleware/auth';
 import { orderRoute } from './modules/order/order.route';
-import { profileController } from './modules/profile/profile.controller';
 import { profileRoute } from './modules/profile/profile.route';
 
 
@@ -37,9 +35,9 @@ app.use(
 app.use("/api/auth", authRouter)
 app.all("/api/auth/*splat", toNodeHandler(auth))
 
-app.use("/provider", mealsRoute);
+app.use("/api/provider", mealsRoute);
 
-app.use("/order", orderRoute);
+app.use("/api/order", orderRoute);
 
 app.get("/", (req:Request, res:Response)=>{
     res.status(200).json({

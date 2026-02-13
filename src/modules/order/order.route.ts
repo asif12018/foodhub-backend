@@ -14,6 +14,8 @@ router.get("/myOrder",authMiddleWare(UserRole.Customer), orderController.getOwnC
 router.get("/details/:orderId", authMiddleWare(UserRole.Provider,UserRole.Customer), orderController.getOrderById);
 router.get("/cart", authMiddleWare(UserRole.Customer), orderController.getAllCart);
 router.patch("/checkout/:orderId", authMiddleWare(UserRole.Customer), orderController.checkOut);
+router.get("/getAllOrder",authMiddleWare(UserRole.Provider), orderController.getAllOrder);
+router.patch("/update-status/:orderId", authMiddleWare(UserRole.Provider), orderController.updateOrderStatus);
 export const orderRoute = router;
 
 

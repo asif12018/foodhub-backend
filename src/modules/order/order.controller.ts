@@ -125,7 +125,55 @@ const checkOut = async(req:Request, res:Response)=>{
     }
 }
 
+//get provider all order
 
+const getAllOrder = async(req:Request, res:Response)=>{
+    try{
+       const user = req.user;
+       if(!user){
+           throw new Error("unauthorized");
+       }
+       const result = await orderService.getAllOrder(user as IUser);
+       return res.status(200).json({
+        success: true,
+        message:"All order retrieved successfully",
+        data:result
+       })
+    }catch(err:any){
+        res.status(500).json({
+            success:false,
+            message:err.message,
+            details:err
+        })
+    }
+}
+
+//update order status
+
+const updateOrderStatus = async(req:Request, res:Response)=>{
+    try{
+        const user = req.user;
+        const orderId = Number(req.params.orderId);
+        const { status } = req.body;
+
+        if(!user){
+             throw new Error("Unauthorized");
+        }
+
+        const result = await orderService.updateOrderStatus(orderId, user as IUser, status);
+        return res.status(200).json({
+            success: true,
+            message: "Order status updated successfully",
+            data: result
+        })
+    }catch(err:any){
+        return res.status(500).json({
+            success: false,
+            message: err.message,
+            details: err
+        })
+    }
+}
 
 
 export const orderController = {
@@ -133,5 +181,7 @@ export const orderController = {
     getOwnCart,
     getOrderById,
     getAllCart,
-    checkOut
+    checkOut,
+    getAllOrder,
+    updateOrderStatus
 }
