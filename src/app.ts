@@ -9,6 +9,10 @@ import { authRouter } from './modules/auth/auth.route';
 import { mealsRoute } from './modules/meals/meals.route';
 import { orderRoute } from './modules/order/order.route';
 import { profileRoute } from './modules/profile/profile.route';
+import { reviewRoute } from './modules/review/review.route';
+import { adminRoute } from './modules/admin/admin.route';
+import { providerStatsRoute } from './modules/providerStats/providerStats.route';
+import { adminStatsRoute } from './modules/adminStats/adminStats.route';
 
 
 
@@ -39,6 +43,13 @@ app.use("/api/provider", mealsRoute);
 
 app.use("/api/order", orderRoute);
 
+
+app.use("/api/review", reviewRoute);
+
+
+app.use("/api/admin", adminRoute);
+app.use("/api/provider-stats", providerStatsRoute);
+app.use("/api/admin-stats", adminStatsRoute);
 app.get("/", (req:Request, res:Response)=>{
     res.status(200).json({
         success: true,
