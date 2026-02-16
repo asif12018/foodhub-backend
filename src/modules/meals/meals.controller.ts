@@ -54,6 +54,9 @@ const getAllMenu = async(req:Request, res:Response) =>{
         const {page, limit, skip, sortBy, sortOrder} = options;
     const result = await menuService.getAllMenu({
         search: searchString,
+        minPrice: req.query.minPrice ? Number(req.query.minPrice) : undefined,
+        maxPrice: req.query.maxPrice ? Number(req.query.maxPrice) : undefined,
+        dietary_tags: [],
         isFeatured,
         isAvailable,
         page,

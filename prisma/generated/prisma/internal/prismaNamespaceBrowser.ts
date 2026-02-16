@@ -191,6 +191,7 @@ export const MealsScalarFieldEnum = {
   isAvailable: 'isAvailable',
   isFeatured: 'isFeatured',
   isDeleted: 'isDeleted',
+  dietary_tags: 'dietary_tags',
   prepTimeMinutes: 'prepTimeMinutes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',

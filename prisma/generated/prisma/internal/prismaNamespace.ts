@@ -1304,6 +1304,7 @@ export const MealsScalarFieldEnum = {
   isAvailable: 'isAvailable',
   isFeatured: 'isFeatured',
   isDeleted: 'isDeleted',
+  dietary_tags: 'dietary_tags',
   prepTimeMinutes: 'prepTimeMinutes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -1447,6 +1448,20 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'DietaryTag[]'
+ */
+export type ListEnumDietaryTagFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DietaryTag[]'>
+    
+
+
+/**
+ * Reference to a field of type 'DietaryTag'
+ */
+export type EnumDietaryTagFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DietaryTag'>
     
 
 

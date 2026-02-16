@@ -29,6 +29,7 @@ app.use(express.json())
 app.use(
     cors({
         origin: [
+            "http://localhost:3000", 
             process.env.BETTER_AUTH_URL!
         ],
         credentials: true,

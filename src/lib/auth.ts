@@ -52,9 +52,9 @@ export const auth = betterAuth({
   },
   emailAndPassword: {
     enabled: true,
-    autoSignIn: false,
+    autoSignIn: true,
     requireEmailVerification: false,
   },
-  trustedOrigins: [process.env.BETTER_AUTH_URL!, "http://localhost:5000"],
+  trustedOrigins: [process.env.BETTER_AUTH_URL!, "http://localhost:3000"],
 });
 

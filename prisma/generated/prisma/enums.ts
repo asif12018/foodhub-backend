@@ -18,6 +18,17 @@ export const Role = {
 export type Role = (typeof Role)[keyof typeof Role]
 
 
+export const DietaryTag = {
+  HALAL: 'HALAL',
+  VEG: 'VEG',
+  KETO: 'KETO',
+  GLUTEN_FREE: 'GLUTEN_FREE',
+  DAIRY_FREE: 'DAIRY_FREE'
+} as const
+
+export type DietaryTag = (typeof DietaryTag)[keyof typeof DietaryTag]
+
+
 export const OrderStatus = {
   PREPARING: 'PREPARING',
   READY: 'READY',

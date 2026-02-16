@@ -1,9 +1,10 @@
 model Categories {
-  id        String   @id @default(uuid())
-  name      String   @unique
-  icon      String?
-  isDeleted Boolean? @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  meals     Meals[]
+  id         String   @id @default(uuid())
+  name       String   @unique
+  icon       String?
+  isDeleted  Boolean? @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  meals      Meals[]
+ 
 }

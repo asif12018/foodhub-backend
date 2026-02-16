@@ -86,6 +86,7 @@ export type MealsCountAggregateOutputType = {
   isAvailable: number
   isFeatured: number
   isDeleted: number
+  dietary_tags: number
   prepTimeMinutes: number
   createdAt: number
   updatedAt: number
@@ -154,6 +155,7 @@ export type MealsCountAggregateInputType = {
   isAvailable?: true
   isFeatured?: true
   isDeleted?: true
+  dietary_tags?: true
   prepTimeMinutes?: true
   createdAt?: true
   updatedAt?: true
@@ -259,6 +261,7 @@ export type MealsGroupByOutputType = {
   isAvailable: boolean | null
   isFeatured: boolean | null
   isDeleted: boolean | null
+  dietary_tags: $Enums.DietaryTag[]
   prepTimeMinutes: number | null
   createdAt: Date
   updatedAt: Date
@@ -300,6 +303,7 @@ export type MealsWhereInput = {
   isAvailable?: Prisma.BoolNullableFilter<"Meals"> | boolean | null
   isFeatured?: Prisma.BoolNullableFilter<"Meals"> | boolean | null
   isDeleted?: Prisma.BoolNullableFilter<"Meals"> | boolean | null
+  dietary_tags?: Prisma.EnumDietaryTagNullableListFilter<"Meals">
   prepTimeMinutes?: Prisma.IntNullableFilter<"Meals"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Meals"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Meals"> | Date | string
@@ -323,6 +327,7 @@ export type MealsOrderByWithRelationInput = {
   isAvailable?: Prisma.SortOrderInput | Prisma.SortOrder
   isFeatured?: Prisma.SortOrderInput | Prisma.SortOrder
   isDeleted?: Prisma.SortOrderInput | Prisma.SortOrder
+  dietary_tags?: Prisma.SortOrder
   prepTimeMinutes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -349,6 +354,7 @@ export type MealsWhereUniqueInput = Prisma.AtLeast<{
   isAvailable?: Prisma.BoolNullableFilter<"Meals"> | boolean | null
   isFeatured?: Prisma.BoolNullableFilter<"Meals"> | boolean | null
   isDeleted?: Prisma.BoolNullableFilter<"Meals"> | boolean | null
+  dietary_tags?: Prisma.EnumDietaryTagNullableListFilter<"Meals">
   prepTimeMinutes?: Prisma.IntNullableFilter<"Meals"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Meals"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Meals"> | Date | string
@@ -372,6 +378,7 @@ export type MealsOrderByWithAggregationInput = {
   isAvailable?: Prisma.SortOrderInput | Prisma.SortOrder
   isFeatured?: Prisma.SortOrderInput | Prisma.SortOrder
   isDeleted?: Prisma.SortOrderInput | Prisma.SortOrder
+  dietary_tags?: Prisma.SortOrder
   prepTimeMinutes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -398,6 +405,7 @@ export type MealsScalarWhereWithAggregatesInput = {
   isAvailable?: Prisma.BoolNullableWithAggregatesFilter<"Meals"> | boolean | null
   isFeatured?: Prisma.BoolNullableWithAggregatesFilter<"Meals"> | boolean | null
   isDeleted?: Prisma.BoolNullableWithAggregatesFilter<"Meals"> | boolean | null
+  dietary_tags?: Prisma.EnumDietaryTagNullableListFilter<"Meals">
   prepTimeMinutes?: Prisma.IntNullableWithAggregatesFilter<"Meals"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Meals"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Meals"> | Date | string
@@ -414,6 +422,7 @@ export type MealsCreateInput = {
   isAvailable?: boolean | null
   isFeatured?: boolean | null
   isDeleted?: boolean | null
+  dietary_tags?: Prisma.MealsCreatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -436,6 +445,7 @@ export type MealsUncheckedCreateInput = {
   isAvailable?: boolean | null
   isFeatured?: boolean | null
   isDeleted?: boolean | null
+  dietary_tags?: Prisma.MealsCreatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -454,6 +464,7 @@ export type MealsUpdateInput = {
   isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dietary_tags?: Prisma.MealsUpdatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -476,6 +487,7 @@ export type MealsUncheckedUpdateInput = {
   isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dietary_tags?: Prisma.MealsUpdatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -496,6 +508,7 @@ export type MealsCreateManyInput = {
   isAvailable?: boolean | null
   isFeatured?: boolean | null
   isDeleted?: boolean | null
+  dietary_tags?: Prisma.MealsCreatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -512,6 +525,7 @@ export type MealsUpdateManyMutationInput = {
   isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dietary_tags?: Prisma.MealsUpdatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -529,6 +543,7 @@ export type MealsUncheckedUpdateManyInput = {
   isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dietary_tags?: Prisma.MealsUpdatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -545,6 +560,14 @@ export type MealsOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type EnumDietaryTagNullableListFilter<$PrismaModel = never> = {
+  equals?: $Enums.DietaryTag[] | Prisma.ListEnumDietaryTagFieldRefInput<$PrismaModel> | null
+  has?: $Enums.DietaryTag | Prisma.EnumDietaryTagFieldRefInput<$PrismaModel> | null
+  hasEvery?: $Enums.DietaryTag[] | Prisma.ListEnumDietaryTagFieldRefInput<$PrismaModel>
+  hasSome?: $Enums.DietaryTag[] | Prisma.ListEnumDietaryTagFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
+}
+
 export type MealsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   provider_id?: Prisma.SortOrder
@@ -557,6 +580,7 @@ export type MealsCountOrderByAggregateInput = {
   isAvailable?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
+  dietary_tags?: Prisma.SortOrder
   prepTimeMinutes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -742,12 +766,21 @@ export type MealsUncheckedUpdateManyWithoutCategoryNestedInput = {
   deleteMany?: Prisma.MealsScalarWhereInput | Prisma.MealsScalarWhereInput[]
 }
 
+export type MealsCreatedietary_tagsInput = {
+  set: $Enums.DietaryTag[]
+}
+
 export type FloatFieldUpdateOperationsInput = {
   set?: number
   increment?: number
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type MealsUpdatedietary_tagsInput = {
+  set?: $Enums.DietaryTag[]
+  push?: $Enums.DietaryTag | $Enums.DietaryTag[]
 }
 
 export type MealsCreateNestedOneWithoutOrdersInput = {
@@ -788,6 +821,7 @@ export type MealsCreateWithoutUserInput = {
   isAvailable?: boolean | null
   isFeatured?: boolean | null
   isDeleted?: boolean | null
+  dietary_tags?: Prisma.MealsCreatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -808,6 +842,7 @@ export type MealsUncheckedCreateWithoutUserInput = {
   isAvailable?: boolean | null
   isFeatured?: boolean | null
   isDeleted?: boolean | null
+  dietary_tags?: Prisma.MealsCreatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -857,6 +892,7 @@ export type MealsScalarWhereInput = {
   isAvailable?: Prisma.BoolNullableFilter<"Meals"> | boolean | null
   isFeatured?: Prisma.BoolNullableFilter<"Meals"> | boolean | null
   isDeleted?: Prisma.BoolNullableFilter<"Meals"> | boolean | null
+  dietary_tags?: Prisma.EnumDietaryTagNullableListFilter<"Meals">
   prepTimeMinutes?: Prisma.IntNullableFilter<"Meals"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Meals"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Meals"> | Date | string
@@ -873,6 +909,7 @@ export type MealsCreateWithoutProfileInput = {
   isAvailable?: boolean | null
   isFeatured?: boolean | null
   isDeleted?: boolean | null
+  dietary_tags?: Prisma.MealsCreatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -894,6 +931,7 @@ export type MealsUncheckedCreateWithoutProfileInput = {
   isAvailable?: boolean | null
   isFeatured?: boolean | null
   isDeleted?: boolean | null
+  dietary_tags?: Prisma.MealsCreatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -937,6 +975,7 @@ export type MealsCreateWithoutCategoryInput = {
   isAvailable?: boolean | null
   isFeatured?: boolean | null
   isDeleted?: boolean | null
+  dietary_tags?: Prisma.MealsCreatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -957,6 +996,7 @@ export type MealsUncheckedCreateWithoutCategoryInput = {
   isAvailable?: boolean | null
   isFeatured?: boolean | null
   isDeleted?: boolean | null
+  dietary_tags?: Prisma.MealsCreatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1001,6 +1041,7 @@ export type MealsCreateWithoutOrdersInput = {
   isAvailable?: boolean | null
   isFeatured?: boolean | null
   isDeleted?: boolean | null
+  dietary_tags?: Prisma.MealsCreatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1022,6 +1063,7 @@ export type MealsUncheckedCreateWithoutOrdersInput = {
   isAvailable?: boolean | null
   isFeatured?: boolean | null
   isDeleted?: boolean | null
+  dietary_tags?: Prisma.MealsCreatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1055,6 +1097,7 @@ export type MealsUpdateWithoutOrdersInput = {
   isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dietary_tags?: Prisma.MealsUpdatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1076,6 +1119,7 @@ export type MealsUncheckedUpdateWithoutOrdersInput = {
   isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dietary_tags?: Prisma.MealsUpdatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1093,6 +1137,7 @@ export type MealsCreateWithoutReviewsInput = {
   isAvailable?: boolean | null
   isFeatured?: boolean | null
   isDeleted?: boolean | null
+  dietary_tags?: Prisma.MealsCreatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1114,6 +1159,7 @@ export type MealsUncheckedCreateWithoutReviewsInput = {
   isAvailable?: boolean | null
   isFeatured?: boolean | null
   isDeleted?: boolean | null
+  dietary_tags?: Prisma.MealsCreatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1147,6 +1193,7 @@ export type MealsUpdateWithoutReviewsInput = {
   isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dietary_tags?: Prisma.MealsUpdatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1168,6 +1215,7 @@ export type MealsUncheckedUpdateWithoutReviewsInput = {
   isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dietary_tags?: Prisma.MealsUpdatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1186,6 +1234,7 @@ export type MealsCreateManyUserInput = {
   isAvailable?: boolean | null
   isFeatured?: boolean | null
   isDeleted?: boolean | null
+  dietary_tags?: Prisma.MealsCreatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1202,6 +1251,7 @@ export type MealsUpdateWithoutUserInput = {
   isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dietary_tags?: Prisma.MealsUpdatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1222,6 +1272,7 @@ export type MealsUncheckedUpdateWithoutUserInput = {
   isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dietary_tags?: Prisma.MealsUpdatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1241,6 +1292,7 @@ export type MealsUncheckedUpdateManyWithoutUserInput = {
   isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dietary_tags?: Prisma.MealsUpdatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1259,6 +1311,7 @@ export type MealsCreateManyProfileInput = {
   isAvailable?: boolean | null
   isFeatured?: boolean | null
   isDeleted?: boolean | null
+  dietary_tags?: Prisma.MealsCreatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1274,6 +1327,7 @@ export type MealsUpdateWithoutProfileInput = {
   isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dietary_tags?: Prisma.MealsUpdatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1295,6 +1349,7 @@ export type MealsUncheckedUpdateWithoutProfileInput = {
   isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dietary_tags?: Prisma.MealsUpdatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1314,6 +1369,7 @@ export type MealsUncheckedUpdateManyWithoutProfileInput = {
   isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dietary_tags?: Prisma.MealsUpdatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1330,6 +1386,7 @@ export type MealsCreateManyCategoryInput = {
   isAvailable?: boolean | null
   isFeatured?: boolean | null
   isDeleted?: boolean | null
+  dietary_tags?: Prisma.MealsCreatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1346,6 +1403,7 @@ export type MealsUpdateWithoutCategoryInput = {
   isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dietary_tags?: Prisma.MealsUpdatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1366,6 +1424,7 @@ export type MealsUncheckedUpdateWithoutCategoryInput = {
   isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dietary_tags?: Prisma.MealsUpdatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1385,6 +1444,7 @@ export type MealsUncheckedUpdateManyWithoutCategoryInput = {
   isAvailable?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isDeleted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dietary_tags?: Prisma.MealsUpdatedietary_tagsInput | $Enums.DietaryTag[]
   prepTimeMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1443,6 +1503,7 @@ export type MealsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   isAvailable?: boolean
   isFeatured?: boolean
   isDeleted?: boolean
+  dietary_tags?: boolean
   prepTimeMinutes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1467,6 +1528,7 @@ export type MealsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   isAvailable?: boolean
   isFeatured?: boolean
   isDeleted?: boolean
+  dietary_tags?: boolean
   prepTimeMinutes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1488,6 +1550,7 @@ export type MealsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   isAvailable?: boolean
   isFeatured?: boolean
   isDeleted?: boolean
+  dietary_tags?: boolean
   prepTimeMinutes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1509,13 +1572,14 @@ export type MealsSelectScalar = {
   isAvailable?: boolean
   isFeatured?: boolean
   isDeleted?: boolean
+  dietary_tags?: boolean
   prepTimeMinutes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   profileId?: boolean
 }
 
-export type MealsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "provider_id" | "category_id" | "name" | "description" | "price" | "discountPrice" | "imageUrl" | "isAvailable" | "isFeatured" | "isDeleted" | "prepTimeMinutes" | "createdAt" | "updatedAt" | "profileId", ExtArgs["result"]["meals"]>
+export type MealsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "provider_id" | "category_id" | "name" | "description" | "price" | "discountPrice" | "imageUrl" | "isAvailable" | "isFeatured" | "isDeleted" | "dietary_tags" | "prepTimeMinutes" | "createdAt" | "updatedAt" | "profileId", ExtArgs["result"]["meals"]>
 export type MealsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   category?: boolean | Prisma.CategoriesDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1556,6 +1620,7 @@ export type $MealsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     isAvailable: boolean | null
     isFeatured: boolean | null
     isDeleted: boolean | null
+    dietary_tags: $Enums.DietaryTag[]
     prepTimeMinutes: number | null
     createdAt: Date
     updatedAt: Date
@@ -1999,6 +2064,7 @@ export interface MealsFieldRefs {
   readonly isAvailable: Prisma.FieldRef<"Meals", 'Boolean'>
   readonly isFeatured: Prisma.FieldRef<"Meals", 'Boolean'>
   readonly isDeleted: Prisma.FieldRef<"Meals", 'Boolean'>
+  readonly dietary_tags: Prisma.FieldRef<"Meals", 'DietaryTag[]'>
   readonly prepTimeMinutes: Prisma.FieldRef<"Meals", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Meals", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Meals", 'DateTime'>

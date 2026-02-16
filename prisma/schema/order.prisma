@@ -4,7 +4,7 @@ model Order {
   mealName        String
   status          OrderStatus @default(PREPARING)
   price           Float
-  discountPrice Float?
+  discountPrice   Float?
   quantity        Int
   totalPrice      Float
   deliveryAddress String?
@@ -18,7 +18,7 @@ model Order {
   customer User @relation("CustomerOrders", fields: [customer_id], references: [id])
 }
 
- enum OrderStatus {
+enum OrderStatus {
   PREPARING
   READY
   CANCELLED
