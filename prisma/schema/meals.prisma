@@ -4,6 +4,7 @@ model Meals {
   category_id   String
   name          String
   description   String?
+  cuisine String?
   price         Float
   discountPrice Float?
   imageUrl      String?

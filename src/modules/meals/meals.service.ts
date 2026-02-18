@@ -7,11 +7,18 @@ import { UserRole } from "../../middleware/auth";
 //create meals
 
 const createMenu = async (payload: IMeals, userId: string) => {
+  const {category_id} = payload;
+  const categoryData = await prisma.categories.findUniqueOrThrow({
+    where:{
+      id: category_id
+    }
+  });
   const result = await prisma.meals.create({
     data: {
       ...payload,
       provider_id: userId,
       profileId: userId,
+      cuisine: categoryData.name
     },
   });
   return result;
@@ -25,6 +32,7 @@ const getAllMenu = async (payload: {
   dietary_tags: DietaryTag[] | [];
   isFeatured: boolean | undefined;
   isAvailable: boolean | undefined;
+  cuisineString: string | undefined;
   page: number;
   limit: number;
   skip: number;
@@ -67,6 +75,9 @@ const getAllMenu = async (payload: {
         hasEvery: payload.dietary_tags,
       },
     });
+  }
+  if (typeof payload.cuisineString === "string"){
+     andCondition.push({cuisine: payload.cuisineString});
   }
   if (typeof payload.isFeatured === "boolean") {
     andCondition.push({ isFeatured: payload.isFeatured });

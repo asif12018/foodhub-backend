@@ -1298,6 +1298,7 @@ export const MealsScalarFieldEnum = {
   category_id: 'category_id',
   name: 'name',
   description: 'description',
+  cuisine: 'cuisine',
   price: 'price',
   discountPrice: 'discountPrice',
   imageUrl: 'imageUrl',

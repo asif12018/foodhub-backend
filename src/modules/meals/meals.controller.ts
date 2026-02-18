@@ -50,6 +50,8 @@ const getAllMenu = async(req:Request, res:Response) =>{
         //accepting true and false
         const isFeatured = req.query.isFeatured === "true" ? true : req.query.isFeatured === "false" ? false: undefined;
         const isAvailable = req.query.isAvailable === "true" ? true : req.query.isAvailable === "false" ? false : undefined;
+        const {cuisine} = req.query;
+        const cuisineString = typeof cuisine === "string" ? cuisine : undefined;
         const options = paginationSortingHelper(req.query);
         const {page, limit, skip, sortBy, sortOrder} = options;
     const result = await menuService.getAllMenu({
@@ -59,6 +61,7 @@ const getAllMenu = async(req:Request, res:Response) =>{
         dietary_tags: [],
         isFeatured,
         isAvailable,
+        cuisineString,
         page,
         limit,
         skip,

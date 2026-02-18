@@ -1,4 +1,5 @@
 
+import { DietaryTag } from "../../prisma/generated/prisma/enums";
 
 type IMeals = {
     category_id: string;
@@ -9,7 +10,7 @@ type IMeals = {
     imageUrl?: string;
     isAvailable?: boolean;
     prepTimeMinutes: number;
-    
+    dietary_tags?: DietaryTag[];
 }
 
 
