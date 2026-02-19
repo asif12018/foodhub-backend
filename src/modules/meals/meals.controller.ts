@@ -50,6 +50,7 @@ const getAllMenu = async (req: Request, res: Response) => {
           ? false
           : undefined;
       console.log(req.query.dietary_tags)
+     // to implement search by tags logic i have to convert params into tags array
     // 1. Get the raw value (could be string, array, or undefined)
 const rawTags = req.query.dietary_tags;
 
@@ -60,7 +61,7 @@ const dietary_tags = ( typeof rawTags === "string"
     ? rawTags                                 // Already an array
     : []) as DietaryTag[];;                                     // Not present, return empty array
 
-
+        //============================================================
 
     const isAvailable =
       req.query.isAvailable === "true"
