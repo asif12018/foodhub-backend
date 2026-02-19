@@ -184,10 +184,26 @@ const deleteMeal = async (mealId: string, user: IUser) => {
   return result;
 };
 
+//find min max price
+
+const getMinMaxPrice = async()=>{
+  const aggregation = await prisma.meals.aggregate({
+    _min:{
+      price: true
+    },
+    _max:{
+      price: true
+    }
+  });
+
+  return {min: aggregation._min, max: aggregation._max}
+}
+
 export const menuService = {
   createMenu,
   getAllMenu,
   getMealById,
   updateMeal,
   deleteMeal,
+  getMinMaxPrice
 };

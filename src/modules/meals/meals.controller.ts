@@ -49,7 +49,7 @@ const getAllMenu = async (req: Request, res: Response) => {
         : req.query.isFeatured === "false"
           ? false
           : undefined;
-      console.log(req.query.dietary_tags)
+     
      // to implement search by tags logic i have to convert params into tags array
     // 1. Get the raw value (could be string, array, or undefined)
 const rawTags = req.query.dietary_tags;
@@ -186,10 +186,30 @@ const deleteMeal = async (req: Request, res: Response) => {
   }
 };
 
+//get min max price
+
+const getMinMaxPrice = async(req:Request, res:Response)=>{
+  try{
+      const result = await menuService.getMinMaxPrice();
+      return res.status(200).json({
+        success: true,
+        message: "Price retrieved successfully",
+        data: result
+      })
+  }catch(err:any){
+     return res.status(500).json({
+      success: true,
+      message: err.message,
+      details: err
+     })
+  }
+}
+
 export const menuController = {
   createMenu,
   getAllMenu,
   getMealById,
   updateMeal,
   deleteMeal,
+  getMinMaxPrice
 };

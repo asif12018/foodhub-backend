@@ -13,4 +13,5 @@ router.get("/menu",menuController.getAllMenu);
 router.get("/menu/:mealId", menuController.getMealById);
 router.patch("/menu/:mealId",authMiddleWare(UserRole.Provider), menuController.updateMeal);
 router.delete("/menu/:mealId",authMiddleWare(UserRole.Provider), menuController.deleteMeal);
+router.get("/price", menuController.getMinMaxPrice);
 export const mealsRoute = router;
