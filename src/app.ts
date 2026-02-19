@@ -58,9 +58,9 @@ app.get("/", (req:Request, res:Response)=>{
     })
 });
 
-app.use("/profile", profileRoute);
+app.use("/api/profile", profileRoute);
 
-app.use("/admin", categoriesRouter)
+app.use("/api/admin", categoriesRouter)
 
 
 app.use(notFound);
