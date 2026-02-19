@@ -9,6 +9,7 @@ const router = express.Router();
 
 
 router.post('/categories', authMiddleWare(UserRole.Admin),categoriesController.createCategories);
+router.get("/categories", categoriesController.getAllCategory);
 router.patch('/categories/:categoriesId', authMiddleWare(UserRole.Admin),categoriesController.updateCategories);
 router.delete('/categories/:categoriesId', authMiddleWare(UserRole.Admin),categoriesController.deleteCategories);
 

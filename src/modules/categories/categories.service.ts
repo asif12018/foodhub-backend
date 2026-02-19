@@ -16,6 +16,14 @@ const createCategories = async(payload: ICategories)=>{
    return result;
 }
 
+
+//get all category
+
+const getAllCategory = async()=>{
+   const result = await prisma.categories.findMany();
+   return result;
+}
+
 //update categories
 
 const updateCategories = async(id: string, data: {name: string, isDeleted?: boolean})=>{
@@ -66,5 +74,6 @@ const deleteCategories = async (id: string) =>{
 export const categoriesService = {
    createCategories,
    updateCategories,
-   deleteCategories
+   deleteCategories,
+   getAllCategory
 }

@@ -29,6 +29,29 @@ const createCategories = async (req: Request, res: Response)=>{
     }
 }
 
+
+//get all category
+
+const getAllCategory = async(req:Request, res:Response)=>{
+    try{
+
+        const result = await categoriesService.getAllCategory();
+
+        return res.status(200).json({
+            success: true,
+            message: "Category retrieved successfully",
+            data: result
+        })
+
+    }catch(err:any){
+        return res.status(500).json({
+            success:false,
+            message:err.message,
+            details:err
+        })
+    }
+}
+
 //update category
 
 const updateCategories = async (req:Request, res:Response) =>{
@@ -77,5 +100,6 @@ const deleteCategories = async(req: Request, res: Response) =>{
 export const categoriesController = {
     createCategories,
     updateCategories,
-    deleteCategories
+    deleteCategories,
+    getAllCategory
 }
