@@ -143,6 +143,7 @@ export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[k
 export const ProviderProfileScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  RestaurantName: 'RestaurantName',
   address: 'address',
   city: 'city',
   isOpen: 'isOpen',

@@ -39,6 +39,7 @@ export type ProviderProfileSumAggregateOutputType = {
 export type ProviderProfileMinAggregateOutputType = {
   id: string | null
   userId: string | null
+  RestaurantName: string | null
   address: string | null
   city: string | null
   isOpen: boolean | null
@@ -53,6 +54,7 @@ export type ProviderProfileMinAggregateOutputType = {
 export type ProviderProfileMaxAggregateOutputType = {
   id: string | null
   userId: string | null
+  RestaurantName: string | null
   address: string | null
   city: string | null
   isOpen: boolean | null
@@ -67,6 +69,7 @@ export type ProviderProfileMaxAggregateOutputType = {
 export type ProviderProfileCountAggregateOutputType = {
   id: number
   userId: number
+  RestaurantName: number
   address: number
   city: number
   isOpen: number
@@ -93,6 +96,7 @@ export type ProviderProfileSumAggregateInputType = {
 export type ProviderProfileMinAggregateInputType = {
   id?: true
   userId?: true
+  RestaurantName?: true
   address?: true
   city?: true
   isOpen?: true
@@ -107,6 +111,7 @@ export type ProviderProfileMinAggregateInputType = {
 export type ProviderProfileMaxAggregateInputType = {
   id?: true
   userId?: true
+  RestaurantName?: true
   address?: true
   city?: true
   isOpen?: true
@@ -121,6 +126,7 @@ export type ProviderProfileMaxAggregateInputType = {
 export type ProviderProfileCountAggregateInputType = {
   id?: true
   userId?: true
+  RestaurantName?: true
   address?: true
   city?: true
   isOpen?: true
@@ -222,6 +228,7 @@ export type ProviderProfileGroupByArgs<ExtArgs extends runtime.Types.Extensions.
 export type ProviderProfileGroupByOutputType = {
   id: string
   userId: string
+  RestaurantName: string | null
   address: string | null
   city: string | null
   isOpen: boolean | null
@@ -259,6 +266,7 @@ export type ProviderProfileWhereInput = {
   NOT?: Prisma.ProviderProfileWhereInput | Prisma.ProviderProfileWhereInput[]
   id?: Prisma.StringFilter<"ProviderProfile"> | string
   userId?: Prisma.StringFilter<"ProviderProfile"> | string
+  RestaurantName?: Prisma.StringNullableFilter<"ProviderProfile"> | string | null
   address?: Prisma.StringNullableFilter<"ProviderProfile"> | string | null
   city?: Prisma.StringNullableFilter<"ProviderProfile"> | string | null
   isOpen?: Prisma.BoolNullableFilter<"ProviderProfile"> | boolean | null
@@ -275,6 +283,7 @@ export type ProviderProfileWhereInput = {
 export type ProviderProfileOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  RestaurantName?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   city?: Prisma.SortOrderInput | Prisma.SortOrder
   isOpen?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -294,6 +303,7 @@ export type ProviderProfileWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ProviderProfileWhereInput | Prisma.ProviderProfileWhereInput[]
   OR?: Prisma.ProviderProfileWhereInput[]
   NOT?: Prisma.ProviderProfileWhereInput | Prisma.ProviderProfileWhereInput[]
+  RestaurantName?: Prisma.StringNullableFilter<"ProviderProfile"> | string | null
   address?: Prisma.StringNullableFilter<"ProviderProfile"> | string | null
   city?: Prisma.StringNullableFilter<"ProviderProfile"> | string | null
   isOpen?: Prisma.BoolNullableFilter<"ProviderProfile"> | boolean | null
@@ -310,6 +320,7 @@ export type ProviderProfileWhereUniqueInput = Prisma.AtLeast<{
 export type ProviderProfileOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  RestaurantName?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   city?: Prisma.SortOrderInput | Prisma.SortOrder
   isOpen?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -332,6 +343,7 @@ export type ProviderProfileScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ProviderProfileScalarWhereWithAggregatesInput | Prisma.ProviderProfileScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"ProviderProfile"> | string
   userId?: Prisma.StringWithAggregatesFilter<"ProviderProfile"> | string
+  RestaurantName?: Prisma.StringNullableWithAggregatesFilter<"ProviderProfile"> | string | null
   address?: Prisma.StringNullableWithAggregatesFilter<"ProviderProfile"> | string | null
   city?: Prisma.StringNullableWithAggregatesFilter<"ProviderProfile"> | string | null
   isOpen?: Prisma.BoolNullableWithAggregatesFilter<"ProviderProfile"> | boolean | null
@@ -345,6 +357,7 @@ export type ProviderProfileScalarWhereWithAggregatesInput = {
 
 export type ProviderProfileCreateInput = {
   id: string
+  RestaurantName?: string | null
   address?: string | null
   city?: string | null
   isOpen?: boolean | null
@@ -361,6 +374,7 @@ export type ProviderProfileCreateInput = {
 export type ProviderProfileUncheckedCreateInput = {
   id: string
   userId: string
+  RestaurantName?: string | null
   address?: string | null
   city?: string | null
   isOpen?: boolean | null
@@ -375,6 +389,7 @@ export type ProviderProfileUncheckedCreateInput = {
 
 export type ProviderProfileUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  RestaurantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -391,6 +406,7 @@ export type ProviderProfileUpdateInput = {
 export type ProviderProfileUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  RestaurantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -406,6 +422,7 @@ export type ProviderProfileUncheckedUpdateInput = {
 export type ProviderProfileCreateManyInput = {
   id: string
   userId: string
+  RestaurantName?: string | null
   address?: string | null
   city?: string | null
   isOpen?: boolean | null
@@ -419,6 +436,7 @@ export type ProviderProfileCreateManyInput = {
 
 export type ProviderProfileUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  RestaurantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -433,6 +451,7 @@ export type ProviderProfileUpdateManyMutationInput = {
 export type ProviderProfileUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  RestaurantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -452,6 +471,7 @@ export type ProviderProfileNullableScalarRelationFilter = {
 export type ProviderProfileCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  RestaurantName?: Prisma.SortOrder
   address?: Prisma.SortOrder
   city?: Prisma.SortOrder
   isOpen?: Prisma.SortOrder
@@ -471,6 +491,7 @@ export type ProviderProfileAvgOrderByAggregateInput = {
 export type ProviderProfileMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  RestaurantName?: Prisma.SortOrder
   address?: Prisma.SortOrder
   city?: Prisma.SortOrder
   isOpen?: Prisma.SortOrder
@@ -485,6 +506,7 @@ export type ProviderProfileMaxOrderByAggregateInput = {
 export type ProviderProfileMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  RestaurantName?: Prisma.SortOrder
   address?: Prisma.SortOrder
   city?: Prisma.SortOrder
   isOpen?: Prisma.SortOrder
@@ -571,6 +593,7 @@ export type ProviderProfileUpdateOneWithoutMealsNestedInput = {
 
 export type ProviderProfileCreateWithoutUserInput = {
   id: string
+  RestaurantName?: string | null
   address?: string | null
   city?: string | null
   isOpen?: boolean | null
@@ -585,6 +608,7 @@ export type ProviderProfileCreateWithoutUserInput = {
 
 export type ProviderProfileUncheckedCreateWithoutUserInput = {
   id: string
+  RestaurantName?: string | null
   address?: string | null
   city?: string | null
   isOpen?: boolean | null
@@ -615,6 +639,7 @@ export type ProviderProfileUpdateToOneWithWhereWithoutUserInput = {
 
 export type ProviderProfileUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  RestaurantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -629,6 +654,7 @@ export type ProviderProfileUpdateWithoutUserInput = {
 
 export type ProviderProfileUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  RestaurantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -643,6 +669,7 @@ export type ProviderProfileUncheckedUpdateWithoutUserInput = {
 
 export type ProviderProfileCreateWithoutMealsInput = {
   id: string
+  RestaurantName?: string | null
   address?: string | null
   city?: string | null
   isOpen?: boolean | null
@@ -658,6 +685,7 @@ export type ProviderProfileCreateWithoutMealsInput = {
 export type ProviderProfileUncheckedCreateWithoutMealsInput = {
   id: string
   userId: string
+  RestaurantName?: string | null
   address?: string | null
   city?: string | null
   isOpen?: boolean | null
@@ -687,6 +715,7 @@ export type ProviderProfileUpdateToOneWithWhereWithoutMealsInput = {
 
 export type ProviderProfileUpdateWithoutMealsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  RestaurantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -702,6 +731,7 @@ export type ProviderProfileUpdateWithoutMealsInput = {
 export type ProviderProfileUncheckedUpdateWithoutMealsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  RestaurantName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -747,6 +777,7 @@ export type ProviderProfileCountOutputTypeCountMealsArgs<ExtArgs extends runtime
 export type ProviderProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  RestaurantName?: boolean
   address?: boolean
   city?: boolean
   isOpen?: boolean
@@ -764,6 +795,7 @@ export type ProviderProfileSelect<ExtArgs extends runtime.Types.Extensions.Inter
 export type ProviderProfileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  RestaurantName?: boolean
   address?: boolean
   city?: boolean
   isOpen?: boolean
@@ -779,6 +811,7 @@ export type ProviderProfileSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
 export type ProviderProfileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  RestaurantName?: boolean
   address?: boolean
   city?: boolean
   isOpen?: boolean
@@ -794,6 +827,7 @@ export type ProviderProfileSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
 export type ProviderProfileSelectScalar = {
   id?: boolean
   userId?: boolean
+  RestaurantName?: boolean
   address?: boolean
   city?: boolean
   isOpen?: boolean
@@ -805,7 +839,7 @@ export type ProviderProfileSelectScalar = {
   updateAt?: boolean
 }
 
-export type ProviderProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "address" | "city" | "isOpen" | "openingTime" | "closingTime" | "ratingAvg" | "ratingCount" | "createdAt" | "updateAt", ExtArgs["result"]["providerProfile"]>
+export type ProviderProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "RestaurantName" | "address" | "city" | "isOpen" | "openingTime" | "closingTime" | "ratingAvg" | "ratingCount" | "createdAt" | "updateAt", ExtArgs["result"]["providerProfile"]>
 export type ProviderProfileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   meals?: boolean | Prisma.ProviderProfile$mealsArgs<ExtArgs>
@@ -827,6 +861,7 @@ export type $ProviderProfilePayload<ExtArgs extends runtime.Types.Extensions.Int
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
+    RestaurantName: string | null
     address: string | null
     city: string | null
     isOpen: boolean | null
@@ -1263,6 +1298,7 @@ export interface Prisma__ProviderProfileClient<T, Null = never, ExtArgs extends 
 export interface ProviderProfileFieldRefs {
   readonly id: Prisma.FieldRef<"ProviderProfile", 'String'>
   readonly userId: Prisma.FieldRef<"ProviderProfile", 'String'>
+  readonly RestaurantName: Prisma.FieldRef<"ProviderProfile", 'String'>
   readonly address: Prisma.FieldRef<"ProviderProfile", 'String'>
   readonly city: Prisma.FieldRef<"ProviderProfile", 'String'>
   readonly isOpen: Prisma.FieldRef<"ProviderProfile", 'Boolean'>

@@ -7,6 +7,16 @@ export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
+  //additional setting
+advanced: {
+    crossSubDomainCookies: {
+      enabled: true,
+    },
+  },
+  cookie: {
+    sameSite: "none", // Required for cross-site (Frontend -> Backend)
+    secure: true,     // Required when sameSite is "none"
+  },
   user: {
     additionalFields: {
       roles: {
@@ -55,6 +65,6 @@ export const auth = betterAuth({
     autoSignIn: true,
     requireEmailVerification: false,
   },
-  trustedOrigins: [process.env.BETTER_AUTH_URL!, "http://localhost:3000"],
+  trustedOrigins: [process.env.BETTER_AUTH_URL!, "http://localhost:3000", "https://foodhub-backend-delta.vercel.app"],
 });
 

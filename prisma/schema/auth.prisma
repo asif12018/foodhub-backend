@@ -81,6 +81,7 @@ model ProviderProfile {
   id          String    @id
   userId      String    @unique
   user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  RestaurantName String?
   address     String?
   city        String?
   isOpen      Boolean?  @default(true)

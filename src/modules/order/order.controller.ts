@@ -87,7 +87,7 @@ const getAllCart = async(req:Request, res:Response)=>{
        }
        const result = await orderService.getAllCart(customerId as string,user as IUser);
        return res.status(200).json({
-        success: false,
+        success: true,
         message:"Cart retrieved successfully",
         data:result
        })

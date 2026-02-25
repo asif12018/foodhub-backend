@@ -100,6 +100,7 @@ const getAllMenu = async (payload: {
       _count: {
         select: { reviews: true },
       },
+      profile: true
     },
   });
   const total = await prisma.meals.count({
@@ -123,6 +124,10 @@ const getAllMenu = async (payload: {
 const getMealById = async (mealId: string) => {
   const result = await prisma.meals.findUnique({
     where: { id: mealId },
+    include: {
+      profile: true,
+      reviews: true,
+    }
   });
   return result;
 };

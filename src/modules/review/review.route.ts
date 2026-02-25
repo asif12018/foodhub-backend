@@ -13,6 +13,6 @@ const router:Router = express.Router();
 
 router.post("/:mealId", authMiddleWare(UserRole.Customer), reviewController.createReview);
 
-
+router.get("/:mealId", reviewController.getReview);
 
 export const reviewRoute = router;

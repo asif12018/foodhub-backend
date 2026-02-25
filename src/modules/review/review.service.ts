@@ -46,9 +46,23 @@ const createReview = async(payload:IReview, user:IUser, mealId:string)=>{
 }
 
 
+//get review
+
+const getReview = async(mealId:string)=>{
+    const result = await prisma.reviews.findMany({
+        where:{
+            mealId:mealId
+        }
+    });
+
+    return result;
+}
+
+
 
 
 
 export const reviewService = {
-    createReview
+    createReview,
+    getReview
 }
