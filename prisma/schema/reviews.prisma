@@ -9,6 +9,8 @@ model Reviews {
   createdAt DateTime @default(now())
 
   meal Meals @relation(fields: [mealId], references: [id])
+  //extra code. if not work then remove it
+  user User  @relation(fields: [userId], references: [id])
 
   @@unique([userId, mealId])
 }

@@ -22,9 +22,9 @@ model User {
   providerProfile ProviderProfile?
   meals           Meals[]
 
-  providedOrders Order[]      @relation("ProviderOrders")
-  placedOrders   Order[]      @relation("CustomerOrders")
-
+  providedOrders Order[]   @relation("ProviderOrders")
+  placedOrders   Order[]   @relation("CustomerOrders")
+  reviews        Reviews[]
 
   @@map("user")
 }
@@ -78,20 +78,20 @@ model Verification {
 }
 
 model ProviderProfile {
-  id          String    @id
-  userId      String    @unique
-  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id             String    @id
+  userId         String    @unique
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   RestaurantName String?
-  address     String?
-  city        String?
-  isOpen      Boolean?  @default(true)
-  openingTime DateTime?
-  closingTime DateTime?
-  ratingAvg   Float?    @default(3)
-  ratingCount Int?      @default(0)
-  meals       Meals[]
-  createdAt   DateTime  @default(now())
-  updateAt    DateTime  @updatedAt
+  address        String?
+  city           String?
+  isOpen         Boolean?  @default(true)
+  openingTime    DateTime?
+  closingTime    DateTime?
+  ratingAvg      Float?    @default(3)
+  ratingCount    Int?      @default(0)
+  meals          Meals[]
+  createdAt      DateTime  @default(now())
+  updateAt       DateTime  @updatedAt
 }
 
 model CustomerProfile {

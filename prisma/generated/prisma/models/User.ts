@@ -229,6 +229,7 @@ export type UserWhereInput = {
   meals?: Prisma.MealsListRelationFilter
   providedOrders?: Prisma.OrderListRelationFilter
   placedOrders?: Prisma.OrderListRelationFilter
+  reviews?: Prisma.ReviewsListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -249,6 +250,7 @@ export type UserOrderByWithRelationInput = {
   meals?: Prisma.MealsOrderByRelationAggregateInput
   providedOrders?: Prisma.OrderOrderByRelationAggregateInput
   placedOrders?: Prisma.OrderOrderByRelationAggregateInput
+  reviews?: Prisma.ReviewsOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -272,6 +274,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   meals?: Prisma.MealsListRelationFilter
   providedOrders?: Prisma.OrderListRelationFilter
   placedOrders?: Prisma.OrderListRelationFilter
+  reviews?: Prisma.ReviewsListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -324,6 +327,7 @@ export type UserCreateInput = {
   meals?: Prisma.MealsCreateNestedManyWithoutUserInput
   providedOrders?: Prisma.OrderCreateNestedManyWithoutProviderInput
   placedOrders?: Prisma.OrderCreateNestedManyWithoutCustomerInput
+  reviews?: Prisma.ReviewsCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -344,6 +348,7 @@ export type UserUncheckedCreateInput = {
   meals?: Prisma.MealsUncheckedCreateNestedManyWithoutUserInput
   providedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutProviderInput
   placedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput
+  reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -364,6 +369,7 @@ export type UserUpdateInput = {
   meals?: Prisma.MealsUpdateManyWithoutUserNestedInput
   providedOrders?: Prisma.OrderUpdateManyWithoutProviderNestedInput
   placedOrders?: Prisma.OrderUpdateManyWithoutCustomerNestedInput
+  reviews?: Prisma.ReviewsUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -384,6 +390,7 @@ export type UserUncheckedUpdateInput = {
   meals?: Prisma.MealsUncheckedUpdateManyWithoutUserNestedInput
   providedOrders?: Prisma.OrderUncheckedUpdateManyWithoutProviderNestedInput
   placedOrders?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput
+  reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -587,6 +594,20 @@ export type UserUpdateOneRequiredWithoutPlacedOrdersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPlacedOrdersInput, Prisma.UserUpdateWithoutPlacedOrdersInput>, Prisma.UserUncheckedUpdateWithoutPlacedOrdersInput>
 }
 
+export type UserCreateNestedOneWithoutReviewsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewsInput, Prisma.UserUncheckedCreateWithoutReviewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutReviewsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewsInput, Prisma.UserUncheckedCreateWithoutReviewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewsInput
+  upsert?: Prisma.UserUpsertWithoutReviewsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReviewsInput, Prisma.UserUpdateWithoutReviewsInput>, Prisma.UserUncheckedUpdateWithoutReviewsInput>
+}
+
 export type UserCreateWithoutSessionsInput = {
   id?: string
   name: string
@@ -604,6 +625,7 @@ export type UserCreateWithoutSessionsInput = {
   meals?: Prisma.MealsCreateNestedManyWithoutUserInput
   providedOrders?: Prisma.OrderCreateNestedManyWithoutProviderInput
   placedOrders?: Prisma.OrderCreateNestedManyWithoutCustomerInput
+  reviews?: Prisma.ReviewsCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -623,6 +645,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   meals?: Prisma.MealsUncheckedCreateNestedManyWithoutUserInput
   providedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutProviderInput
   placedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput
+  reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -658,6 +681,7 @@ export type UserUpdateWithoutSessionsInput = {
   meals?: Prisma.MealsUpdateManyWithoutUserNestedInput
   providedOrders?: Prisma.OrderUpdateManyWithoutProviderNestedInput
   placedOrders?: Prisma.OrderUpdateManyWithoutCustomerNestedInput
+  reviews?: Prisma.ReviewsUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -677,6 +701,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   meals?: Prisma.MealsUncheckedUpdateManyWithoutUserNestedInput
   providedOrders?: Prisma.OrderUncheckedUpdateManyWithoutProviderNestedInput
   placedOrders?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput
+  reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -696,6 +721,7 @@ export type UserCreateWithoutAccountsInput = {
   meals?: Prisma.MealsCreateNestedManyWithoutUserInput
   providedOrders?: Prisma.OrderCreateNestedManyWithoutProviderInput
   placedOrders?: Prisma.OrderCreateNestedManyWithoutCustomerInput
+  reviews?: Prisma.ReviewsCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -715,6 +741,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   meals?: Prisma.MealsUncheckedCreateNestedManyWithoutUserInput
   providedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutProviderInput
   placedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput
+  reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -750,6 +777,7 @@ export type UserUpdateWithoutAccountsInput = {
   meals?: Prisma.MealsUpdateManyWithoutUserNestedInput
   providedOrders?: Prisma.OrderUpdateManyWithoutProviderNestedInput
   placedOrders?: Prisma.OrderUpdateManyWithoutCustomerNestedInput
+  reviews?: Prisma.ReviewsUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -769,6 +797,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   meals?: Prisma.MealsUncheckedUpdateManyWithoutUserNestedInput
   providedOrders?: Prisma.OrderUncheckedUpdateManyWithoutProviderNestedInput
   placedOrders?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput
+  reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProviderProfileInput = {
@@ -788,6 +817,7 @@ export type UserCreateWithoutProviderProfileInput = {
   meals?: Prisma.MealsCreateNestedManyWithoutUserInput
   providedOrders?: Prisma.OrderCreateNestedManyWithoutProviderInput
   placedOrders?: Prisma.OrderCreateNestedManyWithoutCustomerInput
+  reviews?: Prisma.ReviewsCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProviderProfileInput = {
@@ -807,6 +837,7 @@ export type UserUncheckedCreateWithoutProviderProfileInput = {
   meals?: Prisma.MealsUncheckedCreateNestedManyWithoutUserInput
   providedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutProviderInput
   placedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput
+  reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProviderProfileInput = {
@@ -842,6 +873,7 @@ export type UserUpdateWithoutProviderProfileInput = {
   meals?: Prisma.MealsUpdateManyWithoutUserNestedInput
   providedOrders?: Prisma.OrderUpdateManyWithoutProviderNestedInput
   placedOrders?: Prisma.OrderUpdateManyWithoutCustomerNestedInput
+  reviews?: Prisma.ReviewsUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProviderProfileInput = {
@@ -861,6 +893,7 @@ export type UserUncheckedUpdateWithoutProviderProfileInput = {
   meals?: Prisma.MealsUncheckedUpdateManyWithoutUserNestedInput
   providedOrders?: Prisma.OrderUncheckedUpdateManyWithoutProviderNestedInput
   placedOrders?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput
+  reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCustomerProfileInput = {
@@ -880,6 +913,7 @@ export type UserCreateWithoutCustomerProfileInput = {
   meals?: Prisma.MealsCreateNestedManyWithoutUserInput
   providedOrders?: Prisma.OrderCreateNestedManyWithoutProviderInput
   placedOrders?: Prisma.OrderCreateNestedManyWithoutCustomerInput
+  reviews?: Prisma.ReviewsCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCustomerProfileInput = {
@@ -899,6 +933,7 @@ export type UserUncheckedCreateWithoutCustomerProfileInput = {
   meals?: Prisma.MealsUncheckedCreateNestedManyWithoutUserInput
   providedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutProviderInput
   placedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput
+  reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCustomerProfileInput = {
@@ -934,6 +969,7 @@ export type UserUpdateWithoutCustomerProfileInput = {
   meals?: Prisma.MealsUpdateManyWithoutUserNestedInput
   providedOrders?: Prisma.OrderUpdateManyWithoutProviderNestedInput
   placedOrders?: Prisma.OrderUpdateManyWithoutCustomerNestedInput
+  reviews?: Prisma.ReviewsUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCustomerProfileInput = {
@@ -953,6 +989,7 @@ export type UserUncheckedUpdateWithoutCustomerProfileInput = {
   meals?: Prisma.MealsUncheckedUpdateManyWithoutUserNestedInput
   providedOrders?: Prisma.OrderUncheckedUpdateManyWithoutProviderNestedInput
   placedOrders?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput
+  reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMealsInput = {
@@ -972,6 +1009,7 @@ export type UserCreateWithoutMealsInput = {
   providerProfile?: Prisma.ProviderProfileCreateNestedOneWithoutUserInput
   providedOrders?: Prisma.OrderCreateNestedManyWithoutProviderInput
   placedOrders?: Prisma.OrderCreateNestedManyWithoutCustomerInput
+  reviews?: Prisma.ReviewsCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMealsInput = {
@@ -991,6 +1029,7 @@ export type UserUncheckedCreateWithoutMealsInput = {
   providerProfile?: Prisma.ProviderProfileUncheckedCreateNestedOneWithoutUserInput
   providedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutProviderInput
   placedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput
+  reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMealsInput = {
@@ -1026,6 +1065,7 @@ export type UserUpdateWithoutMealsInput = {
   providerProfile?: Prisma.ProviderProfileUpdateOneWithoutUserNestedInput
   providedOrders?: Prisma.OrderUpdateManyWithoutProviderNestedInput
   placedOrders?: Prisma.OrderUpdateManyWithoutCustomerNestedInput
+  reviews?: Prisma.ReviewsUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMealsInput = {
@@ -1045,6 +1085,7 @@ export type UserUncheckedUpdateWithoutMealsInput = {
   providerProfile?: Prisma.ProviderProfileUncheckedUpdateOneWithoutUserNestedInput
   providedOrders?: Prisma.OrderUncheckedUpdateManyWithoutProviderNestedInput
   placedOrders?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput
+  reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProvidedOrdersInput = {
@@ -1064,6 +1105,7 @@ export type UserCreateWithoutProvidedOrdersInput = {
   providerProfile?: Prisma.ProviderProfileCreateNestedOneWithoutUserInput
   meals?: Prisma.MealsCreateNestedManyWithoutUserInput
   placedOrders?: Prisma.OrderCreateNestedManyWithoutCustomerInput
+  reviews?: Prisma.ReviewsCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProvidedOrdersInput = {
@@ -1083,6 +1125,7 @@ export type UserUncheckedCreateWithoutProvidedOrdersInput = {
   providerProfile?: Prisma.ProviderProfileUncheckedCreateNestedOneWithoutUserInput
   meals?: Prisma.MealsUncheckedCreateNestedManyWithoutUserInput
   placedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput
+  reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProvidedOrdersInput = {
@@ -1107,6 +1150,7 @@ export type UserCreateWithoutPlacedOrdersInput = {
   providerProfile?: Prisma.ProviderProfileCreateNestedOneWithoutUserInput
   meals?: Prisma.MealsCreateNestedManyWithoutUserInput
   providedOrders?: Prisma.OrderCreateNestedManyWithoutProviderInput
+  reviews?: Prisma.ReviewsCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPlacedOrdersInput = {
@@ -1126,6 +1170,7 @@ export type UserUncheckedCreateWithoutPlacedOrdersInput = {
   providerProfile?: Prisma.ProviderProfileUncheckedCreateNestedOneWithoutUserInput
   meals?: Prisma.MealsUncheckedCreateNestedManyWithoutUserInput
   providedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutProviderInput
+  reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPlacedOrdersInput = {
@@ -1161,6 +1206,7 @@ export type UserUpdateWithoutProvidedOrdersInput = {
   providerProfile?: Prisma.ProviderProfileUpdateOneWithoutUserNestedInput
   meals?: Prisma.MealsUpdateManyWithoutUserNestedInput
   placedOrders?: Prisma.OrderUpdateManyWithoutCustomerNestedInput
+  reviews?: Prisma.ReviewsUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProvidedOrdersInput = {
@@ -1180,6 +1226,7 @@ export type UserUncheckedUpdateWithoutProvidedOrdersInput = {
   providerProfile?: Prisma.ProviderProfileUncheckedUpdateOneWithoutUserNestedInput
   meals?: Prisma.MealsUncheckedUpdateManyWithoutUserNestedInput
   placedOrders?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput
+  reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutPlacedOrdersInput = {
@@ -1210,6 +1257,7 @@ export type UserUpdateWithoutPlacedOrdersInput = {
   providerProfile?: Prisma.ProviderProfileUpdateOneWithoutUserNestedInput
   meals?: Prisma.MealsUpdateManyWithoutUserNestedInput
   providedOrders?: Prisma.OrderUpdateManyWithoutProviderNestedInput
+  reviews?: Prisma.ReviewsUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPlacedOrdersInput = {
@@ -1229,6 +1277,103 @@ export type UserUncheckedUpdateWithoutPlacedOrdersInput = {
   providerProfile?: Prisma.ProviderProfileUncheckedUpdateOneWithoutUserNestedInput
   meals?: Prisma.MealsUncheckedUpdateManyWithoutUserNestedInput
   providedOrders?: Prisma.OrderUncheckedUpdateManyWithoutProviderNestedInput
+  reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutReviewsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roles?: $Enums.Role | null
+  phone?: string | null
+  status?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  customerProfile?: Prisma.CustomerProfileCreateNestedOneWithoutUserInput
+  providerProfile?: Prisma.ProviderProfileCreateNestedOneWithoutUserInput
+  meals?: Prisma.MealsCreateNestedManyWithoutUserInput
+  providedOrders?: Prisma.OrderCreateNestedManyWithoutProviderInput
+  placedOrders?: Prisma.OrderCreateNestedManyWithoutCustomerInput
+}
+
+export type UserUncheckedCreateWithoutReviewsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roles?: $Enums.Role | null
+  phone?: string | null
+  status?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  customerProfile?: Prisma.CustomerProfileUncheckedCreateNestedOneWithoutUserInput
+  providerProfile?: Prisma.ProviderProfileUncheckedCreateNestedOneWithoutUserInput
+  meals?: Prisma.MealsUncheckedCreateNestedManyWithoutUserInput
+  providedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutProviderInput
+  placedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput
+}
+
+export type UserCreateOrConnectWithoutReviewsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewsInput, Prisma.UserUncheckedCreateWithoutReviewsInput>
+}
+
+export type UserUpsertWithoutReviewsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReviewsInput, Prisma.UserUncheckedUpdateWithoutReviewsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewsInput, Prisma.UserUncheckedCreateWithoutReviewsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReviewsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReviewsInput, Prisma.UserUncheckedUpdateWithoutReviewsInput>
+}
+
+export type UserUpdateWithoutReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roles?: Prisma.NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  customerProfile?: Prisma.CustomerProfileUpdateOneWithoutUserNestedInput
+  providerProfile?: Prisma.ProviderProfileUpdateOneWithoutUserNestedInput
+  meals?: Prisma.MealsUpdateManyWithoutUserNestedInput
+  providedOrders?: Prisma.OrderUpdateManyWithoutProviderNestedInput
+  placedOrders?: Prisma.OrderUpdateManyWithoutCustomerNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roles?: Prisma.NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  customerProfile?: Prisma.CustomerProfileUncheckedUpdateOneWithoutUserNestedInput
+  providerProfile?: Prisma.ProviderProfileUncheckedUpdateOneWithoutUserNestedInput
+  meals?: Prisma.MealsUncheckedUpdateManyWithoutUserNestedInput
+  providedOrders?: Prisma.OrderUncheckedUpdateManyWithoutProviderNestedInput
+  placedOrders?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 
@@ -1242,6 +1387,7 @@ export type UserCountOutputType = {
   meals: number
   providedOrders: number
   placedOrders: number
+  reviews: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1250,6 +1396,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   meals?: boolean | UserCountOutputTypeCountMealsArgs
   providedOrders?: boolean | UserCountOutputTypeCountProvidedOrdersArgs
   placedOrders?: boolean | UserCountOutputTypeCountPlacedOrdersArgs
+  reviews?: boolean | UserCountOutputTypeCountReviewsArgs
 }
 
 /**
@@ -1297,6 +1444,13 @@ export type UserCountOutputTypeCountPlacedOrdersArgs<ExtArgs extends runtime.Typ
   where?: Prisma.OrderWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReviewsWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1316,6 +1470,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   meals?: boolean | Prisma.User$mealsArgs<ExtArgs>
   providedOrders?: boolean | Prisma.User$providedOrdersArgs<ExtArgs>
   placedOrders?: boolean | Prisma.User$placedOrdersArgs<ExtArgs>
+  reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1367,6 +1522,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   meals?: boolean | Prisma.User$mealsArgs<ExtArgs>
   providedOrders?: boolean | Prisma.User$providedOrdersArgs<ExtArgs>
   placedOrders?: boolean | Prisma.User$placedOrdersArgs<ExtArgs>
+  reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1382,6 +1538,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     meals: Prisma.$MealsPayload<ExtArgs>[]
     providedOrders: Prisma.$OrderPayload<ExtArgs>[]
     placedOrders: Prisma.$OrderPayload<ExtArgs>[]
+    reviews: Prisma.$ReviewsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1795,6 +1952,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   meals<T extends Prisma.User$mealsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$mealsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MealsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   providedOrders<T extends Prisma.User$providedOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$providedOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   placedOrders<T extends Prisma.User$placedOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$placedOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reviews<T extends Prisma.User$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2377,6 +2535,30 @@ export type User$placedOrdersArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.OrderScalarFieldEnum | Prisma.OrderScalarFieldEnum[]
+}
+
+/**
+ * User.reviews
+ */
+export type User$reviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Reviews
+   */
+  select?: Prisma.ReviewsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Reviews
+   */
+  omit?: Prisma.ReviewsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReviewsInclude<ExtArgs> | null
+  where?: Prisma.ReviewsWhereInput
+  orderBy?: Prisma.ReviewsOrderByWithRelationInput | Prisma.ReviewsOrderByWithRelationInput[]
+  cursor?: Prisma.ReviewsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReviewsScalarFieldEnum | Prisma.ReviewsScalarFieldEnum[]
 }
 
 /**

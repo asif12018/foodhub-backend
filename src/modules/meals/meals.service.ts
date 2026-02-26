@@ -126,7 +126,11 @@ const getMealById = async (mealId: string) => {
     where: { id: mealId },
     include: {
       profile: true,
-      reviews: true,
+      reviews: {
+        include: {
+          user: true
+        }
+      },
     }
   });
   return result;

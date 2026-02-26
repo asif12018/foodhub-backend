@@ -4,7 +4,7 @@ model Meals {
   category_id   String
   name          String
   description   String?
-  cuisine String?
+  cuisine       String?
   price         Float
   discountPrice Float?
   imageUrl      String?
@@ -28,12 +28,10 @@ model Meals {
   profile   ProviderProfile? @relation(fields: [profileId], references: [userId])
 }
 
- enum DietaryTag {
+enum DietaryTag {
   HALAL
   VEG
   KETO
   GLUTEN_FREE
   DAIRY_FREE
 }
-
-

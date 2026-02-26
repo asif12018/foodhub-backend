@@ -52,6 +52,9 @@ const getReview = async(mealId:string)=>{
     const result = await prisma.reviews.findMany({
         where:{
             mealId:mealId
+        },
+        include:{
+            user: true
         }
     });
 
