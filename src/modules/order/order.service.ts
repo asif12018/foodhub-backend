@@ -174,6 +174,20 @@ const updateOrderStatus = async(orderId:number, user:IUser, orderStatus:string)=
 }
 
 
+//get order by userid and meal id
+
+const getOrderDataByUserIdAndMealId = async(mealId: string, userId: string)=>{
+      const result = await prisma.order.findMany({
+        where: {
+            mealId: mealId,
+            customer_id: userId
+        }
+      })
+
+      return result
+}
+
+
 
 export const orderService = {
     createOrder,
@@ -182,6 +196,7 @@ export const orderService = {
     getAllCart,
     checkOut,
     getAllOrder,
-    updateOrderStatus
+    updateOrderStatus,
+    getOrderDataByUserIdAndMealId
 
 }

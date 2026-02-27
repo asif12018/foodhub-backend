@@ -223,9 +223,9 @@ var auth = betterAuth({
   }),
   //additional setting
   advanced: {
-    crossSubDomainCookies: {
-      enabled: true
-    }
+    // crossSubDomainCookies: {
+    //   enabled: true,
+    // },
   },
   cookie: {
     sameSite: "none",
@@ -867,6 +867,15 @@ var updateOrderStatus = async (orderId, user, orderStatus) => {
   });
   return result;
 };
+var getOrderDataByUserIdAndMealId = async (mealId, userId) => {
+  const result = await prisma.order.findMany({
+    where: {
+      mealId,
+      customer_id: userId
+    }
+  });
+  return result;
+};
 var orderService = {
   createOrder,
   getOwnCart,
@@ -874,7 +883,8 @@ var orderService = {
   getAllCart,
   checkOut,
   getAllOrder,
-  updateOrderStatus
+  updateOrderStatus,
+  getOrderDataByUserIdAndMealId
 };
 
 // src/modules/order/order.controller.ts
@@ -1020,6 +1030,27 @@ var updateOrderStatus2 = async (req, res) => {
     });
   }
 };
+var getOrderDataByUserIdAndMealId2 = async (req, res) => {
+  try {
+    const user = req?.user;
+    if (!user) {
+      throw new Error("unauthorized");
+    }
+    const result = await orderService.getOrderDataByUserIdAndMealId(req.params.mealId, user.id);
+    console.log("meal data from server", result);
+    return res.status(200).json({
+      success: true,
+      message: "Order data retrieved",
+      data: result
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+      details: err
+    });
+  }
+};
 var orderController = {
   createOrder: createOrder2,
   getOwnCart: getOwnCart2,
@@ -1027,7 +1058,8 @@ var orderController = {
   getAllCart: getAllCart2,
   checkOut: checkOut2,
   getAllOrder: getAllOrder2,
-  updateOrderStatus: updateOrderStatus2
+  updateOrderStatus: updateOrderStatus2,
+  getOrderDataByUserIdAndMealId: getOrderDataByUserIdAndMealId2
 };
 
 // src/modules/order/order.route.ts
@@ -1036,6 +1068,7 @@ router4.post("/:mealId", auth_default("Customer" /* Customer */), orderControlle
 router4.get("/myOrder", auth_default("Customer" /* Customer */), orderController.getOwnCart);
 router4.get("/details/:orderId", auth_default("Provider" /* Provider */, "Customer" /* Customer */), orderController.getOrderById);
 router4.get("/cart", auth_default("Customer" /* Customer */), orderController.getAllCart);
+router4.get("/mealData/:mealId", auth_default("Customer" /* Customer */), orderController.getOrderDataByUserIdAndMealId);
 router4.patch("/checkout/:orderId", auth_default("Customer" /* Customer */), orderController.checkOut);
 router4.get("/getAllOrder", auth_default("Provider" /* Provider */), orderController.getAllOrder);
 router4.patch("/update-status/:orderId", auth_default("Provider" /* Provider */), orderController.updateOrderStatus);
@@ -1122,10 +1155,11 @@ var createReview = async (payload, user, mealId) => {
   });
   return result;
 };
-var getReview = async (mealId) => {
+var getReview = async (mealId, userId) => {
   const result = await prisma.reviews.findMany({
     where: {
-      mealId
+      mealId,
+      userId
     },
     include: {
       user: true
@@ -1162,7 +1196,11 @@ var createReview2 = async (req, res) => {
 var getReview2 = async (req, res) => {
   try {
     const mealId = req.params.mealId;
-    const result = await reviewService.getReview(mealId);
+    const user = req.user;
+    if (!user) {
+      throw new Error("unauthorized");
+    }
+    const result = await reviewService.getReview(mealId, user.id);
     return res.status(200).json({
       success: true,
       message: "Review retrieved successfully",
@@ -1184,7 +1222,7 @@ var reviewController = {
 // src/modules/review/review.route.ts
 var router6 = express6.Router();
 router6.post("/:mealId", auth_default("Customer" /* Customer */), reviewController.createReview);
-router6.get("/:mealId", reviewController.getReview);
+router6.get("/:mealId", auth_default("Customer" /* Customer */, "Provider" /* Provider */), reviewController.getReview);
 var reviewRoute = router6;
 
 // src/modules/admin/admin.route.ts

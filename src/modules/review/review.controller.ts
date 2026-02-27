@@ -31,7 +31,13 @@ const getReview = async(req: Request, res:Response)=>{
 
     const mealId = req.params.mealId
 
-    const result = await reviewService.getReview(mealId as string)
+    const user = req.user;
+
+    if(!user){
+       throw new Error("unauthorized");
+    }
+
+    const result = await reviewService.getReview(mealId as string, user.id as string)
 
     return res.status(200).json({
         success: true,

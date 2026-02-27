@@ -48,10 +48,13 @@ const createReview = async(payload:IReview, user:IUser, mealId:string)=>{
 
 //get review
 
-const getReview = async(mealId:string)=>{
+const getReview = async(mealId:string, userId:string)=>{
+
+    
     const result = await prisma.reviews.findMany({
         where:{
-            mealId:mealId
+            mealId:mealId,
+            userId: userId
         },
         include:{
             user: true
@@ -60,6 +63,10 @@ const getReview = async(mealId:string)=>{
 
     return result;
 }
+
+
+
+
 
 
 

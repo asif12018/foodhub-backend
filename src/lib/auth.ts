@@ -9,13 +9,14 @@ export const auth = betterAuth({
   }),
   //additional setting
 advanced: {
-    crossSubDomainCookies: {
-      enabled: true,
-    },
+    // crossSubDomainCookies: {
+    //   enabled: true,
+    // },
   },
   cookie: {
     sameSite: "none", // Required for cross-site (Frontend -> Backend)
-    secure: true,     // Required when sameSite is "none"
+    secure: true
+       // Required when sameSite is "none"
   },
   user: {
     additionalFields: {

@@ -176,6 +176,36 @@ const updateOrderStatus = async(req:Request, res:Response)=>{
 }
 
 
+//get order by userid and meal id
+
+const getOrderDataByUserIdAndMealId = async(req:Request, res:Response)=>{
+  try{
+
+    const user = req?.user;
+
+    if(!user){
+        throw new Error("unauthorized");
+    }
+
+    const result = await orderService.getOrderDataByUserIdAndMealId(req.params.mealId as string, user.id as string);
+
+
+    return res.status(200).json({
+        success: true,
+        message:"Order data retrieved",
+        data: result
+    })
+
+  }catch(err:any){
+     return res.status(500).json({
+        success: false,
+        message: err.message,
+        details:err
+     })
+  }
+}
+
+
 export const orderController = {
     createOrder,
     getOwnCart,
@@ -183,5 +213,6 @@ export const orderController = {
     getAllCart,
     checkOut,
     getAllOrder,
-    updateOrderStatus
+    updateOrderStatus,
+    getOrderDataByUserIdAndMealId
 }

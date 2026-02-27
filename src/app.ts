@@ -38,6 +38,8 @@ app.use(
 );
 
 
+
+
 app.use("/api/auth", authRouter)
 app.all("/api/auth/*splat", toNodeHandler(auth))
 
