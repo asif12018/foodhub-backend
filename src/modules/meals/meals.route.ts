@@ -11,6 +11,7 @@ const router:Router = express.Router();
 router.post("/menu",authMiddleWare(UserRole.Provider),menuController.createMenu);
 router.get("/menu",menuController.getAllMenu);
 router.get("/menu/:mealId", menuController.getMealById);
+router.get("/my-menu/me", authMiddleWare(UserRole.Provider), menuController.getProviderOwnMeal);
 router.patch("/menu/:mealId",authMiddleWare(UserRole.Provider), menuController.updateMeal);
 router.delete("/menu/:mealId",authMiddleWare(UserRole.Provider), menuController.deleteMeal);
 router.get("/price", menuController.getMinMaxPrice);

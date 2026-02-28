@@ -40,6 +40,8 @@ const getAllMenu = async (payload: {
   sortOrder: string;
 }) => {
   const andCondition: Prisma.MealsWhereInput[] = [];
+
+  //for minimum price search price
   const minPrice =
     payload.minPrice !== undefined && !isNaN(Number(payload.minPrice))
       ? Number(payload.minPrice)
@@ -48,6 +50,8 @@ const getAllMenu = async (payload: {
     payload.maxPrice !== undefined && !isNaN(Number(payload.maxPrice))
       ? Number(payload.maxPrice)
       : undefined;
+
+      //for search feature
   if (payload.search) {
     andCondition.push({
       OR: [
@@ -68,7 +72,8 @@ const getAllMenu = async (payload: {
       },
     });
   }
-
+  
+  //dietary tag
   if (payload.dietary_tags?.length > 0) {
     andCondition.push({
       dietary_tags: {
@@ -136,7 +141,7 @@ const getMealById = async (mealId: string) => {
   return result;
 };
 
-//update post
+//update meal
 const updateMeal = async (
   mealId: string,
   data: Partial<IMeals>,
@@ -193,6 +198,47 @@ const deleteMeal = async (mealId: string, user: IUser) => {
   return result;
 };
 
+//get provider own meal by id
+
+const getProviderOwnMeal = async (userId: string, payload:{
+  page:number;
+  limit: number;
+  skip:number;
+})=>{
+  const page = payload.page;
+  const skip = payload.skip;
+  const limit = payload.limit;
+  const result = await prisma.meals.findMany({
+    take:limit,
+    skip: skip,
+    where:{
+      provider_id: userId,
+      isDeleted: false,
+    },
+    include:{
+      category: true
+    }
+  });
+
+  const total = await prisma.meals.count({
+    where:{
+      profileId:userId
+    }
+  });
+
+
+
+  return {
+    data: result,
+    pagination:{
+      total,
+      page,
+      limit,
+      totalPage: Math.ceil(total / limit)
+    }
+  }
+}
+
 //find min max price
 
 const getMinMaxPrice = async()=>{
@@ -214,5 +260,6 @@ export const menuService = {
   getMealById,
   updateMeal,
   deleteMeal,
-  getMinMaxPrice
+  getMinMaxPrice,
+  getProviderOwnMeal
 };

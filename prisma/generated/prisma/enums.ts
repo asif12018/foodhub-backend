@@ -32,7 +32,8 @@ export type DietaryTag = (typeof DietaryTag)[keyof typeof DietaryTag]
 export const OrderStatus = {
   PREPARING: 'PREPARING',
   READY: 'READY',
-  CANCELLED: 'CANCELLED'
+  CANCELLED: 'CANCELLED',
+  DELIVERED: 'DELIVERED'
 } as const
 
 export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]

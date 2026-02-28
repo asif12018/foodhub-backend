@@ -29,7 +29,7 @@ var config = {
   "clientVersion": "7.3.0",
   "engineVersion": "9d6ad21cbbceab97458517b147a6a09ff43aa735",
   "activeProvider": "postgresql",
-  "inlineSchema": 'enum Role {\n  Admin\n  Customer\n  Provider\n}\n\nmodel User {\n  id            String   @id @default(cuid())\n  name          String\n  email         String   @unique\n  emailVerified Boolean  @default(false)\n  image         String?\n  createdAt     DateTime @default(now())\n  updatedAt     DateTime @updatedAt\n  roles         Role?    @default(Customer)\n\n  phone           String?\n  status          String?          @default("activate")\n  sessions        Session[]\n  accounts        Account[]\n  customerProfile CustomerProfile?\n  providerProfile ProviderProfile?\n  meals           Meals[]\n\n  providedOrders Order[]   @relation("ProviderOrders")\n  placedOrders   Order[]   @relation("CustomerOrders")\n  reviews        Reviews[]\n\n  @@map("user")\n}\n\nmodel Session {\n  id        String   @id\n  expiresAt DateTime\n  token     String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  ipAddress String?\n  userAgent String?\n  userId    String\n  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@unique([token])\n  @@index([userId])\n  @@map("session")\n}\n\nmodel Account {\n  id                    String    @id\n  accountId             String\n  providerId            String\n  userId                String\n  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)\n  accessToken           String?\n  refreshToken          String?\n  idToken               String?\n  accessTokenExpiresAt  DateTime?\n  refreshTokenExpiresAt DateTime?\n  scope                 String?\n  password              String?\n  createdAt             DateTime  @default(now())\n  updatedAt             DateTime  @updatedAt\n\n  @@index([userId])\n  @@map("account")\n}\n\nmodel Verification {\n  id         String   @id\n  identifier String\n  value      String\n  expiresAt  DateTime\n  createdAt  DateTime @default(now())\n  updatedAt  DateTime @updatedAt\n\n  @@index([identifier])\n  @@map("verification")\n}\n\nmodel ProviderProfile {\n  id             String    @id\n  userId         String    @unique\n  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)\n  RestaurantName String?\n  address        String?\n  city           String?\n  isOpen         Boolean?  @default(true)\n  openingTime    DateTime?\n  closingTime    DateTime?\n  ratingAvg      Float?    @default(3)\n  ratingCount    Int?      @default(0)\n  meals          Meals[]\n  createdAt      DateTime  @default(now())\n  updateAt       DateTime  @updatedAt\n}\n\nmodel CustomerProfile {\n  id      String  @id\n  userId  String  @unique\n  user    User    @relation(fields: [userId], references: [id])\n  address String?\n  city    String?\n}\n\nmodel Categories {\n  id        String   @id @default(uuid())\n  name      String   @unique\n  icon      String?\n  isDeleted Boolean? @default(false)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  meals     Meals[]\n}\n\nmodel Meals {\n  id            String       @id @default(ulid())\n  provider_id   String\n  category_id   String\n  name          String\n  description   String?\n  cuisine       String?\n  price         Float\n  discountPrice Float?\n  imageUrl      String?\n  isAvailable   Boolean?     @default(true)\n  isFeatured    Boolean?     @default(false)\n  isDeleted     Boolean?     @default(false)\n  category      Categories   @relation(fields: [category_id], references: [id])\n  dietary_tags  DietaryTag[]\n\n  user User @relation(fields: [provider_id], references: [id])\n\n  prepTimeMinutes Int?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  reviews Reviews[]\n\n  orders    Order[]\n  profileId String?\n  profile   ProviderProfile? @relation(fields: [profileId], references: [userId])\n}\n\nenum DietaryTag {\n  HALAL\n  VEG\n  KETO\n  GLUTEN_FREE\n  DAIRY_FREE\n}\n\nmodel Order {\n  id              Int         @id @default(autoincrement())\n  mealId          String\n  mealName        String\n  status          OrderStatus @default(PREPARING)\n  price           Float\n  discountPrice   Float?\n  quantity        Int\n  totalPrice      Float\n  deliveryAddress String?\n\n  meal Meals @relation(fields: [mealId], references: [id])\n\n  provider_id String\n  customer_id String\n\n  provider User @relation("ProviderOrders", fields: [provider_id], references: [id])\n  customer User @relation("CustomerOrders", fields: [customer_id], references: [id])\n}\n\nenum OrderStatus {\n  PREPARING\n  READY\n  CANCELLED\n}\n\nmodel Reviews {\n  id         String  @id @default(uuid())\n  userId     String\n  mealId     String\n  providerId String\n  rating     Int\n  comment    String?\n\n  createdAt DateTime @default(now())\n\n  meal Meals @relation(fields: [mealId], references: [id])\n  //extra code. if not work then remove it\n  user User  @relation(fields: [userId], references: [id])\n\n  @@unique([userId, mealId])\n}\n\n// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = "prisma-client"\n  output   = "../generated/prisma"\n}\n\ndatasource db {\n  provider = "postgresql"\n}\n',
+  "inlineSchema": 'enum Role {\n  Admin\n  Customer\n  Provider\n}\n\nmodel User {\n  id            String   @id @default(cuid())\n  name          String\n  email         String   @unique\n  emailVerified Boolean  @default(false)\n  image         String?\n  createdAt     DateTime @default(now())\n  updatedAt     DateTime @updatedAt\n  roles         Role?    @default(Customer)\n\n  phone           String?\n  status          String?          @default("activate")\n  sessions        Session[]\n  accounts        Account[]\n  customerProfile CustomerProfile?\n  providerProfile ProviderProfile?\n  meals           Meals[]\n\n  providedOrders Order[]   @relation("ProviderOrders")\n  placedOrders   Order[]   @relation("CustomerOrders")\n  reviews        Reviews[]\n\n  @@map("user")\n}\n\nmodel Session {\n  id        String   @id\n  expiresAt DateTime\n  token     String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  ipAddress String?\n  userAgent String?\n  userId    String\n  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@unique([token])\n  @@index([userId])\n  @@map("session")\n}\n\nmodel Account {\n  id                    String    @id\n  accountId             String\n  providerId            String\n  userId                String\n  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)\n  accessToken           String?\n  refreshToken          String?\n  idToken               String?\n  accessTokenExpiresAt  DateTime?\n  refreshTokenExpiresAt DateTime?\n  scope                 String?\n  password              String?\n  createdAt             DateTime  @default(now())\n  updatedAt             DateTime  @updatedAt\n\n  @@index([userId])\n  @@map("account")\n}\n\nmodel Verification {\n  id         String   @id\n  identifier String\n  value      String\n  expiresAt  DateTime\n  createdAt  DateTime @default(now())\n  updatedAt  DateTime @updatedAt\n\n  @@index([identifier])\n  @@map("verification")\n}\n\nmodel ProviderProfile {\n  id             String    @id\n  userId         String    @unique\n  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)\n  RestaurantName String?\n  address        String?\n  city           String?\n  isOpen         Boolean?  @default(true)\n  openingTime    DateTime?\n  closingTime    DateTime?\n  ratingAvg      Float?    @default(3)\n  ratingCount    Int?      @default(0)\n  meals          Meals[]\n  createdAt      DateTime  @default(now())\n  updateAt       DateTime  @updatedAt\n}\n\nmodel CustomerProfile {\n  id      String  @id\n  userId  String  @unique\n  user    User    @relation(fields: [userId], references: [id])\n  address String?\n  city    String?\n}\n\nmodel Categories {\n  id        String   @id @default(uuid())\n  name      String   @unique\n  icon      String?\n  isDeleted Boolean? @default(false)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  meals     Meals[]\n}\n\nmodel Meals {\n  id            String       @id @default(ulid())\n  provider_id   String\n  category_id   String\n  name          String\n  description   String?\n  cuisine       String?\n  price         Float\n  discountPrice Float?\n  imageUrl      String?\n  isAvailable   Boolean?     @default(true)\n  isFeatured    Boolean?     @default(false)\n  isDeleted     Boolean?     @default(false)\n  category      Categories   @relation(fields: [category_id], references: [id])\n  dietary_tags  DietaryTag[]\n\n  user User @relation(fields: [provider_id], references: [id])\n\n  prepTimeMinutes Int?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  reviews Reviews[]\n\n  orders    Order[]\n  profileId String?\n  profile   ProviderProfile? @relation(fields: [profileId], references: [userId])\n}\n\nenum DietaryTag {\n  HALAL\n  VEG\n  KETO\n  GLUTEN_FREE\n  DAIRY_FREE\n}\n\nmodel Order {\n  id              Int         @id @default(autoincrement())\n  mealId          String\n  mealName        String\n  status          OrderStatus @default(PREPARING)\n  price           Float\n  discountPrice   Float?\n  quantity        Int\n  totalPrice      Float\n  deliveryAddress String?\n\n  meal Meals @relation(fields: [mealId], references: [id])\n\n  provider_id String\n  customer_id String\n\n  provider User @relation("ProviderOrders", fields: [provider_id], references: [id])\n  customer User @relation("CustomerOrders", fields: [customer_id], references: [id])\n}\n\nenum OrderStatus {\n  PREPARING\n  READY\n  CANCELLED\n  DELIVERED\n}\n\nmodel Reviews {\n  id         String  @id @default(uuid())\n  userId     String\n  mealId     String\n  providerId String\n  rating     Int\n  comment    String?\n\n  createdAt DateTime @default(now())\n\n  meal Meals @relation(fields: [mealId], references: [id])\n  //extra code. if not work then remove it\n  user User  @relation(fields: [userId], references: [id])\n\n  @@unique([userId, mealId])\n}\n\n// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = "prisma-client"\n  output   = "../generated/prisma"\n}\n\ndatasource db {\n  provider = "postgresql"\n}\n',
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -74,7 +74,8 @@ var defineExtension = runtime2.Extensions.defineExtension;
 var OrderStatus = {
   PREPARING: "PREPARING",
   READY: "READY",
-  CANCELLED: "CANCELLED"
+  CANCELLED: "CANCELLED",
+  DELIVERED: "DELIVERED"
 };
 
 // prisma/generated/prisma/client.ts
@@ -510,6 +511,36 @@ var deleteMeal = async (mealId, user) => {
   });
   return result;
 };
+var getProviderOwnMeal = async (userId, payload) => {
+  const page = payload.page;
+  const skip = payload.skip;
+  const limit = payload.limit;
+  const result = await prisma.meals.findMany({
+    take: limit,
+    skip,
+    where: {
+      provider_id: userId,
+      isDeleted: false
+    },
+    include: {
+      category: true
+    }
+  });
+  const total = await prisma.meals.count({
+    where: {
+      profileId: userId
+    }
+  });
+  return {
+    data: result,
+    pagination: {
+      total,
+      page,
+      limit,
+      totalPage: Math.ceil(total / limit)
+    }
+  };
+};
 var getMinMaxPrice = async () => {
   const aggregation = await prisma.meals.aggregate({
     _min: {
@@ -527,7 +558,8 @@ var menuService = {
   getMealById,
   updateMeal,
   deleteMeal,
-  getMinMaxPrice
+  getMinMaxPrice,
+  getProviderOwnMeal
 };
 
 // src/helper/paginationSortingHelper.ts
@@ -696,6 +728,28 @@ var deleteMeal2 = async (req, res) => {
     });
   }
 };
+var getProviderOwnMeal2 = async (req, res) => {
+  try {
+    const user = req?.user;
+    if (!user) {
+      throw new Error("unauthorized");
+    }
+    const options = paginationSortingHelper_default(req.query);
+    const { page, limit, skip } = options;
+    const result = await menuService.getProviderOwnMeal(user.id, { page, limit, skip });
+    return res.status(200).json({
+      success: true,
+      message: "provider menu retrieved successfully",
+      data: result
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+      details: err
+    });
+  }
+};
 var getMinMaxPrice2 = async (req, res) => {
   try {
     const result = await menuService.getMinMaxPrice();
@@ -718,7 +772,8 @@ var menuController = {
   getMealById: getMealById2,
   updateMeal: updateMeal2,
   deleteMeal: deleteMeal2,
-  getMinMaxPrice: getMinMaxPrice2
+  getMinMaxPrice: getMinMaxPrice2,
+  getProviderOwnMeal: getProviderOwnMeal2
 };
 
 // src/modules/meals/meals.route.ts
@@ -726,6 +781,7 @@ var router3 = express3.Router();
 router3.post("/menu", auth_default("Provider" /* Provider */), menuController.createMenu);
 router3.get("/menu", menuController.getAllMenu);
 router3.get("/menu/:mealId", menuController.getMealById);
+router3.get("/my-menu/me", auth_default("Provider" /* Provider */), menuController.getProviderOwnMeal);
 router3.patch("/menu/:mealId", auth_default("Provider" /* Provider */), menuController.updateMeal);
 router3.delete("/menu/:mealId", auth_default("Provider" /* Provider */), menuController.deleteMeal);
 router3.get("/price", menuController.getMinMaxPrice);
@@ -1037,7 +1093,6 @@ var getOrderDataByUserIdAndMealId2 = async (req, res) => {
       throw new Error("unauthorized");
     }
     const result = await orderService.getOrderDataByUserIdAndMealId(req.params.mealId, user.id);
-    console.log("meal data from server", result);
     return res.status(200).json({
       success: true,
       message: "Order data retrieved",

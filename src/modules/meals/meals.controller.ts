@@ -186,6 +186,34 @@ const deleteMeal = async (req: Request, res: Response) => {
   }
 };
 
+//get provider own menu
+
+const getProviderOwnMeal = async (req:Request, res:Response)=>{
+   try{
+      const user = req?.user;
+      if(!user){
+        throw new Error("unauthorized")
+      }
+
+      const options = paginationSortingHelper(req.query);
+
+      const {page, limit, skip} = options;
+
+      const result = await menuService.getProviderOwnMeal(user.id as string, {page, limit, skip});
+      return res.status(200).json({
+        success: true,
+        message:"provider menu retrieved successfully",
+        data: result
+      })
+   }catch(err:any){
+       return res.status(500).json({
+        success: false,
+        message: err.message,
+        details: err
+       })
+   }
+}
+
 //get min max price
 
 const getMinMaxPrice = async(req:Request, res:Response)=>{
@@ -211,5 +239,6 @@ export const menuController = {
   getMealById,
   updateMeal,
   deleteMeal,
-  getMinMaxPrice
+  getMinMaxPrice,
+  getProviderOwnMeal
 };
