@@ -97,9 +97,56 @@ const deleteCategories = async(req: Request, res: Response) =>{
     }
 }
 
+//get categories admin
+
+const getAllCategoriesAdmin = async (req:Request, res:Response)=>{
+    try{
+
+        const result = await categoriesService.getAllCategoriesAdmin();
+
+        return res.status(200).json({
+            success: true,
+            message:"Categories retrieve successfully",
+            data: result
+        })
+
+    }catch(err:any){
+        return res.status(500).json({
+            success: false,
+            message: err.message,
+            details: err
+        })
+    }
+}
+
+//restore deleted category
+
+const restoreDeletedCategory = async(req:Request, res:Response)=>{
+  try{
+
+    
+    const result = await categoriesService.restoreDeletedCategory(req.params.categoriesId as string);
+
+    return res.status(200).json({
+        success: true,
+        message:"Restored the deleted categories successful",
+        data: result
+    })
+
+  }catch(err:any){
+     return res.status(500).json({
+        success: false,
+        message:err.message,
+        details:err
+     })
+  }
+}
+
 export const categoriesController = {
     createCategories,
     updateCategories,
     deleteCategories,
-    getAllCategory
+    getAllCategory,
+    getAllCategoriesAdmin,
+    restoreDeletedCategory
 }

@@ -20,8 +20,19 @@ const createCategories = async(payload: ICategories)=>{
 //get all category
 
 const getAllCategory = async()=>{
-   const result = await prisma.categories.findMany();
+   const result = await prisma.categories.findMany({
+      where:{
+         isDeleted: false
+      }
+   });
    return result;
+}
+
+//get all categories admin
+
+const getAllCategoriesAdmin = async()=>{
+   const result = await prisma.categories.findMany();
+   return result
 }
 
 //update categories
@@ -71,9 +82,35 @@ const deleteCategories = async (id: string) =>{
     return result
 }
 
+//restore deleted category
+
+const restoreDeletedCategory = async(id:string)=>{
+   const deleteData = await prisma.categories.findFirst({
+      where:{
+         id:id
+      }
+   });
+   if(!deleteData){
+      throw new Error("you provided input for categories is invalid")
+   }
+
+   const result = await  prisma.categories.update({
+      where:{
+         id:id
+      },
+      data:{
+         isDeleted: false
+      }
+   });
+
+   return result
+}
+
 export const categoriesService = {
    createCategories,
    updateCategories,
    deleteCategories,
-   getAllCategory
+   getAllCategory,
+   getAllCategoriesAdmin,
+   restoreDeletedCategory
 }

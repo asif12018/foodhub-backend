@@ -51,7 +51,7 @@ app.use("/api/order", orderRoute);
 app.use("/api/review", reviewRoute);
 
 
-app.use("/api/admin", adminRoute);
+app.use("/api/access/", adminRoute);
 app.use("/api/provider-stats", providerStatsRoute);
 app.use("/api/admin-stats", adminStatsRoute);
 app.get("/", (req:Request, res:Response)=>{

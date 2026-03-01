@@ -72,8 +72,61 @@ const activeUser = async(req:Request, res:Response)=>{
     }
 }
 
+
+const getAdminStats = async(req:Request, res:Response)=>{
+    try{
+    const user = req?.user;
+    if(!user){
+        throw new Error("unauthorized")
+    }
+
+    const result = await adminService.getAdminStats(user);
+
+    return res.status(200).json({
+        success: true,
+        message:"admin stats manage successfully",
+        data: result
+    })
+
+    }catch(err:any){
+       return res.status(500).json({
+        success: false,
+        message: err.message,
+        details:err
+       })
+    }
+}
+
+//get all order
+
+const getAllOrder = async(req:Request, res:Response)=>{
+  try{
+    const user = req?.user;
+    
+    if(!user){
+        throw new Error("unauthorized")
+    }
+
+    const result = await adminService.getAllOrder(user);
+    return res.status(200).json({
+        success: true,
+        message:"order data retrieved successfully",
+        data: result
+    })
+
+  }catch(err:any){
+      return res.status(500).json({
+        success: false,
+        message:err.message,
+        details: err
+      })
+  }
+}
+
 export const adminController = {
     getAllUser,
     suspendUser,
-    activeUser
+    activeUser,
+    getAdminStats,
+    getAllOrder
 }

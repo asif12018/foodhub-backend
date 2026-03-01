@@ -6,10 +6,16 @@ import { adminController } from "./admin.controller";
 const router = express.Router();
 
 
-router.get("/", authMiddleWare(UserRole.Admin), adminController.getAllUser);
+router.get("/users", authMiddleWare(UserRole.Admin), adminController.getAllUser);
+
+router.get("/adminStats", authMiddleWare(UserRole.Admin),adminController.getAdminStats);
+
+router.get("/order/", authMiddleWare(UserRole.Admin), adminController.getAllOrder);
 
 router.patch("/suspend/:id", authMiddleWare(UserRole.Admin), adminController.suspendUser);
 
-router.patch("/active/:userId", authMiddleWare(UserRole.Admin), adminController.activeUser);
+router.patch("/activate/:userId", authMiddleWare(UserRole.Admin), adminController.activeUser);
+
+
 
 export const adminRoute = router;

@@ -133,7 +133,11 @@ const getMealById = async (mealId: string) => {
       profile: true,
       reviews: {
         include: {
-          user: true
+          user: {
+            include:{
+              providerProfile: true
+            }
+          }
         }
       },
     }

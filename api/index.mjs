@@ -95,6 +95,14 @@ var createCategories = async (payload) => {
   return result;
 };
 var getAllCategory = async () => {
+  const result = await prisma.categories.findMany({
+    where: {
+      isDeleted: false
+    }
+  });
+  return result;
+};
+var getAllCategoriesAdmin = async () => {
   const result = await prisma.categories.findMany();
   return result;
 };
@@ -134,11 +142,32 @@ var deleteCategories = async (id) => {
   });
   return result;
 };
+var restoreDeletedCategory = async (id) => {
+  const deleteData = await prisma.categories.findFirst({
+    where: {
+      id
+    }
+  });
+  if (!deleteData) {
+    throw new Error("you provided input for categories is invalid");
+  }
+  const result = await prisma.categories.update({
+    where: {
+      id
+    },
+    data: {
+      isDeleted: false
+    }
+  });
+  return result;
+};
 var categoriesService = {
   createCategories,
   updateCategories,
   deleteCategories,
-  getAllCategory
+  getAllCategory,
+  getAllCategoriesAdmin,
+  restoreDeletedCategory
 };
 
 // src/modules/categories/categories.controller.ts
@@ -208,11 +237,45 @@ var deleteCategories2 = async (req, res) => {
     });
   }
 };
+var getAllCategoriesAdmin2 = async (req, res) => {
+  try {
+    const result = await categoriesService.getAllCategoriesAdmin();
+    return res.status(200).json({
+      success: true,
+      message: "Categories retrieve successfully",
+      data: result
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+      details: err
+    });
+  }
+};
+var restoreDeletedCategory2 = async (req, res) => {
+  try {
+    const result = await categoriesService.restoreDeletedCategory(req.params.categoriesId);
+    return res.status(200).json({
+      success: true,
+      message: "Restored the deleted categories successful",
+      data: result
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+      details: err
+    });
+  }
+};
 var categoriesController = {
   createCategories: createCategories2,
   updateCategories: updateCategories2,
   deleteCategories: deleteCategories2,
-  getAllCategory: getAllCategory2
+  getAllCategory: getAllCategory2,
+  getAllCategoriesAdmin: getAllCategoriesAdmin2,
+  restoreDeletedCategory: restoreDeletedCategory2
 };
 
 // src/lib/auth.ts
@@ -255,7 +318,7 @@ var auth = betterAuth({
   databaseHooks: {
     user: {
       create: {
-        after: async (user) => {
+        after: async (user, ctx) => {
           const role = user.roles;
           if (role === "Customer") {
             await prisma.customerProfile.create({
@@ -265,10 +328,20 @@ var auth = betterAuth({
               }
             });
           } else if (role === "Provider") {
+            const headers = ctx?.headers;
+            const getHeader = (key) => {
+              if (!headers) return null;
+              if (typeof headers.get === "function") return headers.get(key);
+              return headers[key] || null;
+            };
             await prisma.providerProfile.create({
               data: {
                 id: crypto.randomUUID(),
-                userId: user.id
+                userId: user.id,
+                //extra code
+                RestaurantName: getHeader("x-restaurant-name"),
+                address: getHeader("x-restaurant-address"),
+                city: getHeader("x-restaurant-city")
               }
             });
           }
@@ -281,7 +354,11 @@ var auth = betterAuth({
     autoSignIn: true,
     requireEmailVerification: false
   },
-  trustedOrigins: [process.env.BETTER_AUTH_URL, "http://localhost:3000", "https://foodhub-backend-delta.vercel.app"]
+  trustedOrigins: [
+    process.env.BETTER_AUTH_URL,
+    "http://localhost:3000",
+    "https://foodhub-backend-delta.vercel.app"
+  ]
 });
 
 // src/middleware/auth.ts
@@ -325,8 +402,10 @@ var auth_default = authMiddleWare;
 var router = express.Router();
 router.post("/categories", auth_default("Admin" /* Admin */), categoriesController.createCategories);
 router.get("/categories", categoriesController.getAllCategory);
+router.get("/categories/admin", categoriesController.getAllCategoriesAdmin);
 router.patch("/categories/:categoriesId", auth_default("Admin" /* Admin */), categoriesController.updateCategories);
 router.delete("/categories/:categoriesId", auth_default("Admin" /* Admin */), categoriesController.deleteCategories);
+router.patch("/categories/restore/:categoriesId", auth_default("Admin" /* Admin */), categoriesController.restoreDeletedCategory);
 var categoriesRouter = router;
 
 // src/app.ts
@@ -461,7 +540,11 @@ var getMealById = async (mealId) => {
       profile: true,
       reviews: {
         include: {
-          user: true
+          user: {
+            include: {
+              providerProfile: true
+            }
+          }
         }
       }
     }
@@ -1144,8 +1227,43 @@ var getProfileInfo = async (user) => {
   }
   return profileData;
 };
+var editProfile = async (userId, payLoad, userData) => {
+  const cleanPayload = Object.fromEntries(
+    Object.entries(payLoad).filter(([_, v]) => v !== void 0)
+  );
+  const profileUpdate = await prisma.customerProfile.update({
+    where: { userId },
+    data: cleanPayload
+  });
+  if (userData) {
+    const cleanUserData = Object.fromEntries(
+      Object.entries(userData).filter(([_, v]) => v !== void 0)
+    );
+    if (Object.keys(cleanUserData).length > 0) {
+      await prisma.user.update({
+        where: { id: userId },
+        data: cleanUserData
+      });
+    }
+  }
+  return profileUpdate;
+};
+var getProviderProfile = async (providerId) => {
+  const providerProfileData = await prisma.providerProfile.findFirstOrThrow({
+    where: {
+      id: providerId
+    },
+    include: {
+      user: true,
+      meals: true
+    }
+  });
+  return providerProfileData;
+};
 var profileService = {
-  getProfileInfo
+  getProfileInfo,
+  editProfile,
+  getProviderProfile
 };
 
 // src/modules/profile/profile.controller.ts
@@ -1169,8 +1287,46 @@ var getProfileInfo2 = async (req, res) => {
     });
   }
 };
+var editProfile2 = async (req, res) => {
+  try {
+    const user = req?.user;
+    if (!user) {
+      throw new Error("unauthorized");
+    }
+    const result = await profileService.editProfile(user.id, req.body.data, req.body.name);
+    return res.status(201).json({
+      success: true,
+      message: "Profile updated",
+      data: result
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+      details: err
+    });
+  }
+};
+var getProviderProfile2 = async (req, res) => {
+  try {
+    const result = await profileService.getProviderProfile(req.params.providerId);
+    return res.status(200).json({
+      success: true,
+      message: "Provider data retrieve successfully",
+      data: result
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+      details: err
+    });
+  }
+};
 var profileController = {
-  getProfileInfo: getProfileInfo2
+  getProfileInfo: getProfileInfo2,
+  editProfile: editProfile2,
+  getProviderProfile: getProviderProfile2
 };
 
 // src/modules/profile/profile.route.ts
@@ -1180,6 +1336,8 @@ router5.get(
   auth_default("Customer" /* Customer */, "Provider" /* Provider */),
   profileController.getProfileInfo
 );
+router5.patch("/update", auth_default("Customer" /* Customer */), profileController.editProfile);
+router5.get("/provider-profile/:providerId", profileController.getProviderProfile);
 var profileRoute = router5;
 
 // src/modules/review/review.route.ts
@@ -1320,15 +1478,73 @@ var activeUser = async (admin, userId) => {
       id: userId
     },
     data: {
-      status: "active"
+      status: "activate"
     }
   });
+  return result;
+};
+var getAdminStats = async (admin) => {
+  if (admin.roles !== "Admin" /* Admin */) {
+    throw new Error("unauthorized");
+  }
+  const totalPreparingOrder = await prisma.order.count({
+    where: {
+      status: "PREPARING"
+    }
+  });
+  const totalCancelledOrder = await prisma.order.count({
+    where: {
+      status: "CANCELLED"
+    }
+  });
+  const totalDeliveredOrder = await prisma.order.count({
+    where: {
+      status: "DELIVERED"
+    }
+  });
+  const totalReadyOrder = await prisma.order.count({
+    where: {
+      status: "READY"
+    }
+  });
+  const totalUser = await prisma.user.findMany();
+  const totalActiveUser = await prisma.user.findMany({
+    where: {
+      status: "activate"
+    }
+  });
+  const totalDisableUser = await prisma.user.findMany({
+    where: {
+      status: "suspend"
+    }
+  });
+  const totalMenu = await prisma.meals.count();
+  const totalCategories = await prisma.categories.count();
+  return {
+    totalPreparingOrder,
+    totalCancelledOrder,
+    totalDeliveredOrder,
+    totalReadyOrder,
+    totalUser,
+    totalActiveUser,
+    totalDisableUser,
+    totalMenu,
+    totalCategories
+  };
+};
+var getAllOrder3 = async (admin) => {
+  if (admin?.roles !== "Admin" /* Admin */) {
+    throw new Error("unauthorized");
+  }
+  const result = await prisma.order.findMany();
   return result;
 };
 var adminService = {
   getAllUser,
   suspendUser,
-  activeUser
+  activeUser,
+  getAdminStats,
+  getAllOrder: getAllOrder3
 };
 
 // src/modules/admin/admin.controller.ts
@@ -1392,17 +1608,61 @@ var activeUser2 = async (req, res) => {
     });
   }
 };
+var getAdminStats2 = async (req, res) => {
+  try {
+    const user = req?.user;
+    if (!user) {
+      throw new Error("unauthorized");
+    }
+    const result = await adminService.getAdminStats(user);
+    return res.status(200).json({
+      success: true,
+      message: "admin stats manage successfully",
+      data: result
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+      details: err
+    });
+  }
+};
+var getAllOrder4 = async (req, res) => {
+  try {
+    const user = req?.user;
+    if (!user) {
+      throw new Error("unauthorized");
+    }
+    const result = await adminService.getAllOrder(user);
+    return res.status(200).json({
+      success: true,
+      message: "order data retrieved successfully",
+      data: result
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+      details: err
+    });
+  }
+};
 var adminController = {
   getAllUser: getAllUser2,
   suspendUser: suspendUser2,
-  activeUser: activeUser2
+  activeUser: activeUser2,
+  getAdminStats: getAdminStats2,
+  getAllOrder: getAllOrder4
 };
 
 // src/modules/admin/admin.route.ts
 var router7 = express7.Router();
-router7.get("/", auth_default("Admin" /* Admin */), adminController.getAllUser);
+router7.get("/users", auth_default("Admin" /* Admin */), adminController.getAllUser);
+router7.get("/adminStats", auth_default("Admin" /* Admin */), adminController.getAdminStats);
+router7.get("/order/", auth_default("Admin" /* Admin */), adminController.getAllOrder);
 router7.patch("/suspend/:id", auth_default("Admin" /* Admin */), adminController.suspendUser);
-router7.patch("/active/:userId", auth_default("Admin" /* Admin */), adminController.activeUser);
+router7.patch("/activate/:userId", auth_default("Admin" /* Admin */), adminController.activeUser);
 var adminRoute = router7;
 
 // src/modules/providerStats/providerStats.route.ts
@@ -1468,8 +1728,22 @@ var getProviderStats = async (user) => {
     totalReview
   };
 };
+var getProviderInformation = async (providerId) => {
+  const res = await prisma.user.findFirst({
+    where: {
+      id: providerId,
+      roles: "Provider" /* Provider */
+    },
+    include: {
+      providerProfile: true,
+      meals: true
+    }
+  });
+  return res;
+};
 var providerStatsService = {
-  getProviderStats
+  getProviderStats,
+  getProviderInformation
 };
 
 // src/modules/providerStats/providerStats.controller.ts
@@ -1493,20 +1767,38 @@ var getProviderStats2 = async (req, res) => {
     });
   }
 };
+var getProviderInformation2 = async (req, res) => {
+  try {
+    const result = await providerStatsService.getProviderInformation(req.params.providerId);
+    return res.status(200).json({
+      success: true,
+      message: "Provider Data retrieved successfully",
+      data: result
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+      details: err
+    });
+  }
+};
 var providerStatsController = {
-  getProviderStats: getProviderStats2
+  getProviderStats: getProviderStats2,
+  getProviderInformation: getProviderInformation2
 };
 
 // src/modules/providerStats/providerStats.route.ts
 var router8 = Router7();
 router8.get("/", auth_default("Provider" /* Provider */), providerStatsController.getProviderStats);
+router8.get("/:providerId", providerStatsController.getProviderInformation);
 var providerStatsRoute = router8;
 
 // src/modules/adminStats/adminStats.route.ts
 import express8 from "express";
 
 // src/modules/adminStats/adminStats.service.ts
-var getAdminStats = async (user) => {
+var getAdminStats3 = async (user) => {
   if (user.roles !== "Admin" /* Admin */) {
     throw new Error("unauthorized");
   }
@@ -1554,7 +1846,7 @@ var getAdminStats = async (user) => {
   };
 };
 var AdminStatsService = {
-  getAdminStats
+  getAdminStats: getAdminStats3
 };
 
 // src/modules/adminStats/adminStats.controller.ts
@@ -1605,7 +1897,7 @@ app.all("/api/auth/*splat", toNodeHandler(auth));
 app.use("/api/provider", mealsRoute);
 app.use("/api/order", orderRoute);
 app.use("/api/review", reviewRoute);
-app.use("/api/admin", adminRoute);
+app.use("/api/access/", adminRoute);
 app.use("/api/provider-stats", providerStatsRoute);
 app.use("/api/admin-stats", adminStatsRoute);
 app.get("/", (req, res) => {

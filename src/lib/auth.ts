@@ -8,15 +8,15 @@ export const auth = betterAuth({
     provider: "postgresql",
   }),
   //additional setting
-advanced: {
+  advanced: {
     // crossSubDomainCookies: {
     //   enabled: true,
     // },
   },
   cookie: {
     sameSite: "none", // Required for cross-site (Frontend -> Backend)
-    secure: true
-       // Required when sameSite is "none"
+    secure: true,
+    // Required when sameSite is "none"
   },
   user: {
     additionalFields: {
@@ -39,7 +39,7 @@ advanced: {
   databaseHooks: {
     user: {
       create: {
-        after: async (user) => {
+        after: async (user, ctx) => {
           const role = user.roles;
 
           if (role === "Customer") {
@@ -50,10 +50,22 @@ advanced: {
               },
             });
           } else if (role === "Provider") {
+            const headers = ctx?.headers;
+
+            const getHeader = (key: string) => {
+              if (!headers) return null;
+              if (typeof headers.get === "function") return headers.get(key);
+              return (headers as any)[key] || null;
+            };
+
             await prisma.providerProfile.create({
               data: {
                 id: crypto.randomUUID(),
-                userId: user.id
+                userId: user.id,
+                //extra code
+                RestaurantName: getHeader("x-restaurant-name"),
+                address: getHeader("x-restaurant-address"),
+                city: getHeader("x-restaurant-city"),
               },
             });
           }
@@ -66,6 +78,9 @@ advanced: {
     autoSignIn: true,
     requireEmailVerification: false,
   },
-  trustedOrigins: [process.env.BETTER_AUTH_URL!, "http://localhost:3000", "https://foodhub-backend-delta.vercel.app"],
+  trustedOrigins: [
+    process.env.BETTER_AUTH_URL!,
+    "http://localhost:3000",
+    "https://foodhub-backend-delta.vercel.app",
+  ],
 });
-

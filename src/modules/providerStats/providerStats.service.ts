@@ -66,6 +66,8 @@ const getProviderStats = async (user: IUser) => {
         }
     });
 
+   
+
     return {
         totalMeals,
         totalOrders,
@@ -77,6 +79,31 @@ const getProviderStats = async (user: IUser) => {
     };
 };
 
+ //get provider all information
+
+    const getProviderInformation = async(providerId:string)=>{
+     
+        const res = await prisma.user.findFirst({
+            where:{
+                id:providerId,
+                roles:UserRole.Provider
+            },
+            include:{
+                providerProfile:true,
+                meals: true
+            }
+        });
+
+        return res;
+
+      
+    }
+
+
+
+
+
 export const providerStatsService = {
-    getProviderStats
+    getProviderStats,
+    getProviderInformation
 };
