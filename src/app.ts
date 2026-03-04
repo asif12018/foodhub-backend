@@ -13,6 +13,7 @@ import { reviewRoute } from './modules/review/review.route';
 import { adminRoute } from './modules/admin/admin.route';
 import { providerStatsRoute } from './modules/providerStats/providerStats.route';
 import { adminStatsRoute } from './modules/adminStats/adminStats.route';
+import { userStatusUser } from './modules/userProfileStatus/userProfileStatus.route';
 
 
 
@@ -31,7 +32,8 @@ app.use(
         origin: [
             "http://localhost:3000", 
             process.env.BETTER_AUTH_URL!,
-            "https://foodhub-backend-delta.vercel.app"
+            "https://foodhub-backend-delta.vercel.app",
+            "https://foodhub-frontend-omega.vercel.app"
         ],
         credentials: true,
     })
@@ -63,7 +65,9 @@ app.get("/", (req:Request, res:Response)=>{
 
 app.use("/api/profile", profileRoute);
 
-app.use("/api/admin", categoriesRouter)
+app.use("/api/admin", categoriesRouter);
+
+app.use("/api/userStatus", userStatusUser);
 
 
 app.use(notFound);

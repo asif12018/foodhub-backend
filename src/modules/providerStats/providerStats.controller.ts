@@ -43,7 +43,10 @@ const getProviderInformation = async(req:Request, res:Response)=>{
     }
 }
 
+
+
 export const providerStatsController = {
     getProviderStats,
-    getProviderInformation
+    getProviderInformation,
+
 };

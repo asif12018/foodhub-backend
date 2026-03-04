@@ -82,5 +82,6 @@ export const auth = betterAuth({
     process.env.BETTER_AUTH_URL!,
     "http://localhost:3000",
     "https://foodhub-backend-delta.vercel.app",
+    "https://foodhub-frontend-omega.vercel.app"
   ],
 });

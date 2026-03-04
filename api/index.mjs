@@ -1,5 +1,5 @@
 // src/app.ts
-import express9 from "express";
+import express10 from "express";
 
 // src/middleware/notFound.ts
 function notFound(req, res) {
@@ -357,7 +357,8 @@ var auth = betterAuth({
   trustedOrigins: [
     process.env.BETTER_AUTH_URL,
     "http://localhost:3000",
-    "https://foodhub-backend-delta.vercel.app"
+    "https://foodhub-backend-delta.vercel.app",
+    "https://foodhub-frontend-omega.vercel.app"
   ]
 });
 
@@ -1220,6 +1221,9 @@ var getProfileInfo = async (user) => {
   const profileData = await prisma.user.findFirstOrThrow({
     where: {
       id: user.id
+    },
+    include: {
+      customerProfile: true
     }
   });
   if (user.id !== profileData.id) {
@@ -1229,15 +1233,18 @@ var getProfileInfo = async (user) => {
 };
 var editProfile = async (userId, payLoad, userData) => {
   const cleanPayload = Object.fromEntries(
-    Object.entries(payLoad).filter(([_, v]) => v !== void 0)
+    Object.entries(payLoad || {}).filter(([_, v]) => v !== void 0)
   );
-  const profileUpdate = await prisma.customerProfile.update({
-    where: { userId },
-    data: cleanPayload
-  });
+  let profileUpdate = null;
+  if (Object.keys(cleanPayload).length > 0) {
+    profileUpdate = await prisma.customerProfile.update({
+      where: { userId },
+      data: cleanPayload
+    });
+  }
   if (userData) {
     const cleanUserData = Object.fromEntries(
-      Object.entries(userData).filter(([_, v]) => v !== void 0)
+      Object.entries(userData || {}).filter(([_, v]) => v !== void 0)
     );
     if (Object.keys(cleanUserData).length > 0) {
       await prisma.user.update({
@@ -1260,10 +1267,23 @@ var getProviderProfile = async (providerId) => {
   });
   return providerProfileData;
 };
+var getAllProvider = async () => {
+  const res = await prisma.user.findMany({
+    where: {
+      roles: "Provider" /* Provider */
+    },
+    include: {
+      providerProfile: true,
+      meals: true
+    }
+  });
+  return res;
+};
 var profileService = {
   getProfileInfo,
   editProfile,
-  getProviderProfile
+  getProviderProfile,
+  getAllProvider
 };
 
 // src/modules/profile/profile.controller.ts
@@ -1323,10 +1343,27 @@ var getProviderProfile2 = async (req, res) => {
     });
   }
 };
+var getAllProvider2 = async (req, res) => {
+  try {
+    const result = await profileService.getAllProvider();
+    return res.status(200).json({
+      success: true,
+      message: "All Provider data retrieved successfully",
+      data: result
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+      details: err
+    });
+  }
+};
 var profileController = {
   getProfileInfo: getProfileInfo2,
   editProfile: editProfile2,
-  getProviderProfile: getProviderProfile2
+  getProviderProfile: getProviderProfile2,
+  getAllProvider: getAllProvider2
 };
 
 // src/modules/profile/profile.route.ts
@@ -1337,7 +1374,8 @@ router5.get(
   profileController.getProfileInfo
 );
 router5.patch("/update", auth_default("Customer" /* Customer */), profileController.editProfile);
-router5.get("/provider-profile/:providerId", profileController.getProviderProfile);
+router5.get("/provider-profile/allProvider", profileController.getAllProvider);
+router5.get("/provider-profile/allProvider/:providerId", profileController.getProviderProfile);
 var profileRoute = router5;
 
 // src/modules/review/review.route.ts
@@ -1879,15 +1917,80 @@ var router9 = express8.Router();
 router9.get("/", auth_default("Admin" /* Admin */), adminStatsController.adminStats);
 var adminStatsRoute = router9;
 
+// src/modules/userProfileStatus/userProfileStatus.route.ts
+import express9 from "express";
+
+// src/modules/userProfileStatus/userProfileStatus.service.ts
+var getUserProfileStatus = async (indentifier) => {
+  const res = await prisma.user.findFirst({
+    where: {
+      OR: [
+        { id: indentifier },
+        { email: indentifier }
+      ]
+    }
+  });
+  return res;
+};
+var userProfileStatusService = {
+  getUserProfileStatus
+};
+
+// src/modules/userProfileStatus/userProfileStatus.controller.ts
+var getUserProfileStatus2 = async (req, res) => {
+  try {
+    const result = await userProfileStatusService.getUserProfileStatus(req.params.identifier);
+    return res.status(200).json({
+      success: true,
+      message: "User profile status retrieve successful",
+      data: result
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+      details: err
+    });
+  }
+};
+var getUserProfileStatusAuto = async (req, res) => {
+  try {
+    const user = req.user;
+    const result = await userProfileStatusService.getUserProfileStatus(user?.id);
+    return res.status(200).json({
+      success: true,
+      message: "User profile status retrieve successful",
+      data: result
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+      details: err
+    });
+  }
+};
+var userProfileController = {
+  getUserProfileStatus: getUserProfileStatus2,
+  getUserProfileStatusAuto
+};
+
+// src/modules/userProfileStatus/userProfileStatus.route.ts
+var router10 = express9.Router();
+router10.get("/", auth_default("Customer" /* Customer */, "Provider" /* Provider */), userProfileController.getUserProfileStatusAuto);
+router10.get("/:identifier", userProfileController.getUserProfileStatus);
+var userStatusUser = router10;
+
 // src/app.ts
-var app = express9();
-app.use(express9.json());
+var app = express10();
+app.use(express10.json());
 app.use(
   cors({
     origin: [
       "http://localhost:3000",
       process.env.BETTER_AUTH_URL,
-      "https://foodhub-backend-delta.vercel.app"
+      "https://foodhub-backend-delta.vercel.app",
+      "https://foodhub-frontend-omega.vercel.app"
     ],
     credentials: true
   })
@@ -1908,6 +2011,7 @@ app.get("/", (req, res) => {
 });
 app.use("/api/profile", profileRoute);
 app.use("/api/admin", categoriesRouter);
+app.use("/api/userStatus", userStatusUser);
 app.use(notFound);
 var app_default = app;
 

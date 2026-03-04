@@ -8,4 +8,5 @@ router.get("/", authMiddleWare(UserRole.Provider), providerStatsController.getPr
 
 router.get("/:providerId", providerStatsController.getProviderInformation);
 
+
 export const providerStatsRoute = router;

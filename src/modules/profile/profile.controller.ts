@@ -77,9 +77,30 @@ const getProviderProfile = async(req:Request, res:Response)=>{
     }
 }
 
+//get all provider
+
+const getAllProvider = async(req:Request, res:Response)=>{
+    try{
+        const result = await profileService.getAllProvider();
+        return res.status(200).json({
+            success: true,
+            message: "All Provider data retrieved successfully",
+            data: result
+        })
+        
+    }catch(err:any){
+            return res.status(500).json({
+                success: false,
+                message:err.message,
+                details: err
+            })
+    }
+}
+
 
 export const profileController = {
     getProfileInfo,
     editProfile,
-    getProviderProfile
+    getProviderProfile,
+    getAllProvider
 }

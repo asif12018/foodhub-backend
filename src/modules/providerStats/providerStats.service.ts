@@ -103,7 +103,9 @@ const getProviderStats = async (user: IUser) => {
 
 
 
+
+
 export const providerStatsService = {
     getProviderStats,
-    getProviderInformation
+    getProviderInformation,
 };

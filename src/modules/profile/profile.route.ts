@@ -19,9 +19,12 @@ router.get(
 
 router.patch("/update", authMiddleWare(UserRole.Customer), profileController.editProfile);
 
+//get all provider
+router.get("/provider-profile/allProvider", profileController.getAllProvider);
+
 //get provider profile
 
-router.get("/provider-profile/:providerId", profileController.getProviderProfile);
+router.get("/provider-profile/allProvider/:providerId", profileController.getProviderProfile);
 
 
 export const profileRoute = router;
